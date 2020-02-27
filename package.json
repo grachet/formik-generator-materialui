@@ -1,6 +1,6 @@
 {
   "name": "formik-generator-materialui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": " A form generator who use React, Material UI and Formik as dependenties",
   "author": "grachet",
   "license": "MIT",
@@ -12,6 +12,13 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "keywords": [
+    "material-ui",
+    "react",
+    "formik",
+    "form",
+    "generator"
+  ],
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
