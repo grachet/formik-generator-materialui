@@ -91,6 +91,7 @@ class Example extends Component {
 ## To publish to github pages :
 
 - npm run deploy
+- go to https://grachet.github.io/formik-generator-materialui
 
 ## To publish to NPM :
 
