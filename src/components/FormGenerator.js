@@ -5,10 +5,12 @@ import FieldGen from './FieldGenerator';
 import { addValues, getInitialValues, getValidationSchema } from '../functions/formHelper'
 import FormikWithRef from './FormikWithRef';
 
-export default function FormikFormGenerator({ data, fields, onSubmit, readOnly, isDialogue, formRef }) {
+export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly, formRef }) {
 
-  const initialValues = fields && getInitialValues(fields, data);
+  const initialValues = fields && getInitialValues(fields, defaultValue);
   const validationSchema = fields && getValidationSchema(fields);
+
+  console.log(validationSchema, initialValues)
 
   return (
     <FormikWithRef
@@ -31,7 +33,8 @@ export default function FormikFormGenerator({ data, fields, onSubmit, readOnly, 
             <FieldGen
               disabled={readOnly}
               formFunction={formFunction}
-              field={addValues(field, values)} />
+              field={addValues(field, values)}
+            />
           </div>)}
         </Form>
       )}

@@ -10,8 +10,8 @@
     "formik": "^2.1.4",
     "formik-generator-materialui": "file:..",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "^1.1.4",
     "react-syntax-highlighter": "^12.2.1",
     "yup": "^0.28.1"
