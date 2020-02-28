@@ -1,0 +1,27 @@
+.flexGrow{
+flex-grow: 1;
+}
+
+.flex{
+display: flex;
+}
+
+.warningColor{
+  background-color: #EB962C;
+  color: #fff;
+}
+
+.warningColor:hover{
+  background-color: #ce8128;
+}
+
+.leftButtonHint{
+margin-left: 10;
+display: inline-block;
+}
+
+.buttonHint  {
+  margin-right: 10;
+display: inline-block;
+}
+

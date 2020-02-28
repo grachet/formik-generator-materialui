@@ -5,6 +5,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import * as Yup from "yup"
 import FormGenerator, { FieldGenerator } from 'formik-generator-materialui'
+import jsxToString from 'jsx-to-string';
 
 export default function App() {
 
@@ -33,13 +34,31 @@ export default function App() {
         formRef.current.submitForm(); //.isSubmitting() .setFieldTouched() ...
       }}>Validate</Button>
     </div>,
-    <FieldGenerator text='1' />
+    <FormGenerator
+      fields={[
+        {
+          warning: "Warning text",
+          hint: "Hint text",
+          title: "Hint Warning",
+          typeField: "textfield",
+          path: ["hint"]
+        },
+      ]}
+    />
   ]
+  const code = comps.map(c => jsxToString(c));
 
-  const code = [
-    "<FormGenerator  text='1'  number={2} />",
-    "<FieldGenerator text='1' />"
-  ]
+  console.log(code)
+  // const code = [
+  //   "<FormGenerator  text='1'  number={2} />",
+  //   "fields={[ { " +
+  //   "  title: 'Hint Warning'," +
+  //   "   warning: 'Warning text'," +
+  //   "  hint: 'Hint text'," +
+  //   "  ..." +
+  //   "   }," +
+  //   "  ]}"
+  // ]
 
   return (
     <div className="root">

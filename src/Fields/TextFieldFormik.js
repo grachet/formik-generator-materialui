@@ -1,46 +1,41 @@
 import React from 'react';
-import styles from './styles/formStyle';
-import HintWarning from "./HintWarning";
+import HintWarning from "../UI/HintWarning";
 import {
-    TextField,
-    makeStyles,
+  TextField,
 } from "@material-ui/core";
 import { useField } from 'formik';
+import { last } from '../functions/formHelper';
+import classes from '../index.css'
 
-import { last } from "lodash";
-
-const useStyles = makeStyles(styles);
 export default function TextFieldFormik({ fieldData }) {
-    const classes = useStyles();
-    let name = last(fieldData.path);
-    const [field, meta] = useField(name);
 
-    let error = meta.touched && meta.error ? meta.error : "";
+  let name = last(fieldData.path);
+  const [field, meta] = useField(name);
 
-    return (
-        <div className={classes.flex} key={fieldData.title}>
-            <HintWarning hint={fieldData.warning} isLeft isWarning />
-            <TextField
+  let error = meta.touched && meta.error ? meta.error : "";
 
-                name={field.name}
-                value={field.value || ''}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-
-                error={!!error}
-                helperText={error}
-                required={fieldData.required}
-                className={classes.flexGrow}
-                margin={"dense"}
-                multiline={fieldData.multiline}
-                variant={fieldData.disabled ? "filled" : "outlined"}
-                label={fieldData.title}
-                InputProps={{
-                    readOnly: fieldData.disabled
-                }}
-            />
-            {fieldData.link && <HintWarning hint={fieldData.value} isLink />}
-            <HintWarning hint={fieldData.hint} />
-        </div>
-    )
+  return (
+    <div className={classes.flex} key={fieldData.title}>
+      <HintWarning hint={fieldData.warning} isLeft isWarning />
+      <TextField
+        name={field.name}
+        value={field.value || ''}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
+        error={!!error}
+        helperText={error}
+        required={fieldData.required}
+        className={classes.flexGrow}
+        margin={"dense"}
+        multiline={fieldData.multiline}
+        variant={fieldData.disabled ? "filled" : "outlined"}
+        label={fieldData.title}
+        InputProps={{
+          readOnly: fieldData.disabled
+        }}
+      />
+      {fieldData.link && <HintWarning hint={fieldData.value} isLink />}
+      <HintWarning hint={fieldData.hint} />
+    </div>
+  )
 };

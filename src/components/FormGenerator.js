@@ -1,11 +1,15 @@
 import React from 'react';
 import { Form } from 'formik';
 import * as Yup from 'yup';
-import FieldGen from './FieldGenerator';
+import FieldGenerator from './FieldGenerator';
 import { addValues, getInitialValues, getValidationSchema } from '../functions/formHelper'
 import FormikWithRef from './FormikWithRef';
 
 export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly, formRef }) {
+
+  //  static propTypes = {
+  //   text: PropTypes.string
+  // }
 
   const initialValues = fields && getInitialValues(fields, defaultValue);
   const validationSchema = fields && getValidationSchema(fields);
@@ -30,7 +34,7 @@ export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly
       {({ values, ...formFunction }) => (
         <Form>
           {fields && fields.map((field, i) => <div key={i}>
-            <FieldGen
+            <FieldGenerator
               disabled={readOnly}
               formFunction={formFunction}
               field={addValues(field, values)}
