@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import {
+  Paper,
+} from '@material-ui/core';
 
 export default class FormGenerator extends Component {
   static propTypes = {
@@ -9,6 +12,6 @@ export default class FormGenerator extends Component {
   render() {
     const { text } = this.props;
 
-    return <div>Form sfdfdstest: {text}</div>;
+    return <Paper>{text}</Paper>;
   }
 }

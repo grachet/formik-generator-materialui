@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {
+  Button,
+} from '@material-ui/core';
 
 export default class FieldGenerator extends Component {
   static propTypes = {
@@ -13,7 +16,7 @@ export default class FieldGenerator extends Component {
 
     return (
       <div >
-        Field tesfdst : {text}
+        <Button variant={"outlined"}>test {text} </Button>
       </div>
     )
   }
