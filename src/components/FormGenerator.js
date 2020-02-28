@@ -1,17 +1,42 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import {
-  Paper,
-} from '@material-ui/core';
+import React from 'react';
+import { Form } from 'formik';
+import * as Yup from 'yup';
+import FieldGen from './FieldGenerator';
+import { addValues, getInitialValues, getValidationSchema } from '../functions/formHelper'
+import FormikWithRef from './FormikWithRef';
 
-export default class FormGenerator extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  };
+export default function FormikFormGenerator({ data, fields, onSubmit, readOnly, isDialogue, formRef }) {
 
-  render() {
-    const { text } = this.props;
+  const initialValues = fields && getInitialValues(fields, data);
+  const validationSchema = fields && getValidationSchema(fields);
 
-    return <Paper>{text}</Paper>;
-  }
+  return (
+    <FormikWithRef
+      ref={formRef}
+      validateOnBlur={false}
+      validateOnChange={false}
+      enableReinitialize
+      initialValues={initialValues}
+      onSubmit={(values, { setSubmitting }) => {
+        onSubmit(values);
+        setSubmitting(false);
+      }}
+      validationSchema={Yup.object().shape(
+        validationSchema
+      )}
+    >
+      {({ values, ...formFunction }) => (
+        <Form>
+          {fields && fields.map((field, i) => <div key={i}>
+            <FieldGen
+              disabled={readOnly}
+              formFunction={formFunction}
+              field={addValues(field, values)} />
+          </div>)}
+        </Form>
+      )}
+    </FormikWithRef>
+  );
 }
+
+

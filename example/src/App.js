@@ -3,13 +3,8 @@ import { Grid, Typography, Paper } from "@material-ui/core"
 import "./app.css";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import jsxToString from 'jsx-to-string';
 
-// export {
-//   default as atomOneDark
-// } from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
-
-import FormGenerator2, { FormGenerator, FieldGenerator } from 'formik-generator-materialui'
+import FormGenerator, { FieldGenerator } from 'formik-generator-materialui'
 
 const comps = [
   <FormGenerator

@@ -7,13 +7,14 @@
   "dependencies": {
     "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
+    "formik": "^2.1.4",
     "formik-generator-materialui": "file:..",
-    "jsx-to-string": "^1.4.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-syntax-highlighter": "^12.2.1"
+    "react-syntax-highlighter": "^12.2.1",
+    "yup": "^0.28.1"
   },
   "scripts": {
     "start": "react-scripts start",
