@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/formik-generator-materialui.svg)](https://www.npmjs.com/package/formik-generator-materialui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## DEMO
+
+https://grachet.github.io/formik-generator-materialui
+
 ## Install
 
 ```bash
@@ -51,14 +55,14 @@ class Example extends Component {
 }
 ```
 
-## Props List : 
+## Props List :
 - data
 - fields
 - onSubmit
 - readOnly
 - formRef
 
-## Fields Type : 
+## Fields Type :
 
 "group"
 
@@ -69,7 +73,7 @@ class Example extends Component {
 "select"
 
 "dateTime"
- 
+
 "richTextEditor"
 
 "switch"
@@ -79,7 +83,7 @@ class Example extends Component {
 "arrayField"
 
 "autocompleteField"
- 
+
 "asyncAutocompleteField"
 
 ## To run in localhost :
