@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
+export default class FormGenerator extends Component {
   static propTypes = {
     text: PropTypes.string
   }
@@ -14,8 +12,26 @@ export default class ExampleComponent extends Component {
     } = this.props
 
     return (
-      <div className={styles.test}>
-        Example Component: {text}
+      <div>
+        Form: {text}
+      </div>
+    )
+  }
+}
+
+export class FieldGenerator extends Component {
+  static propTypes = {
+    text: PropTypes.string
+  }
+
+  render() {
+    const {
+      text
+    } = this.props
+
+    return (
+      <div >
+        Field: {text}
       </div>
     )
   }

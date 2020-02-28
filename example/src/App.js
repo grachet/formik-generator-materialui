@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'formik-generator-materialui'
+import FormGenerator, { FieldGenerator } from 'formik-generator-materialui'
 
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <FormGenerator text='1' />
+        <FieldGenerator text='2' />
       </div>
     )
   }
