@@ -2,6 +2,16 @@
   padding: 30px;
 }
 
+.padding {
+  padding: 20px;
+}
+
+.paper {
+  background-color:#272822 !important;
+  color: white !important;
+}
+
+
 .title {
   text-align: center;
 }

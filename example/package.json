@@ -9,12 +9,11 @@
     "@material-ui/icons": "^4.9.1",
     "formik": "^2.1.4",
     "formik-generator-materialui": "file:..",
-    "jsx-to-string": "^1.4.0",
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
+    "react-json-view": "^1.19.1",
     "react-scripts": "^1.1.4",
-    "react-syntax-highlighter": "^12.2.1",
     "yup": "^0.28.1"
   },
   "scripts": {

@@ -1,64 +1,68 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Grid, Typography, Button, Paper } from "@material-ui/core"
 import "./app.css";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomOneDark as style } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import * as Yup from "yup"
-import FormGenerator, { FieldGenerator } from 'formik-generator-materialui'
-import jsxToString from 'jsx-to-string';
+import { FormGenerator, FieldGenerator } from 'formik-generator-materialui'
+import ReactJson from 'react-json-view'
 
-export default function App() {
+function Rows({ fields }) {
 
   const formRef = useRef(null);
 
-  const comps = [
-    <div>
-      <FormGenerator
-        formRef={formRef}
-        defaultValue={{
-          fullname: "john"
-        }}
-        onSubmit={(values) => {
-          console.log(values) // {fullname : "john", ...}
-        }}
-        fields={[
-          {
-            title: "Full Name",
-            path: ["fullname"],
-            typeField: "textfield",
-            yup: Yup.string().required(),
-          },
-        ]}
-      />
-      <Button style={{ marginTop: 20 }} variant={"outlined"} onClick={() => {
-        formRef.current.submitForm(); //.isSubmitting() .setFieldTouched() ...
-      }}>Validate</Button>
-    </div>,
-    <FormGenerator
-      fields={[
-        {
-          warning: "Warning text",
-          hint: "Hint text",
-          title: "Hint Warning",
-          typeField: "textfield",
-          path: ["hint"]
-        },
-      ]}
-    />
-  ]
-  const code = comps.map(c => jsxToString(c));
+  let [result, setResult] = useState(null)
 
-  console.log(code)
-  // const code = [
-  //   "<FormGenerator  text='1'  number={2} />",
-  //   "fields={[ { " +
-  //   "  title: 'Hint Warning'," +
-  //   "   warning: 'Warning text'," +
-  //   "  hint: 'Hint text'," +
-  //   "  ..." +
-  //   "   }," +
-  //   "  ]}"
-  // ]
+  return <div>
+    <FormGenerator
+      formRef={formRef}
+      defaultValue={{
+        name: "john"
+      }}
+      onSubmit={(values) => {
+        setResult(values)
+      }}
+      fields={fields}
+    />
+    <Button style={{ marginTop: 20 }} variant={"outlined"} onClick={() => {
+      formRef.current.submitForm(); //.isSubmitting() .setFieldTouched() ...
+    }}>Validate</Button>
+    {result && <div style={{ marginTop: 20 }} >
+      <ReactJson name={false} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={result} />
+    </div>}
+  </div>
+}
+
+export default function App() {
+
+
+  const fieldsArray = [
+    [
+      {
+        title: "Name",
+        path: ["name"],
+        typeField: "textfield",
+      },
+      {
+        title: "Disabled name",
+        path: ["name"],
+        typeField: "textfield",
+        disabled: true
+      }
+    ],
+    [
+      {
+        hint: "Hint text",
+        title: "Hint",
+        typeField: "textfield",
+        path: ["hint"]
+      },
+      {
+        warning: "Warning text",
+        title: "Warning",
+        typeField: "textfield",
+        path: ["warning"]
+      },
+    ]
+  ]
 
   return (
     <div className="root">
@@ -66,15 +70,19 @@ export default function App() {
         formik-generator-materialui
         </Typography>
       <Grid container spacing={6}>
-        {comps.map((c, i) => [<Grid key={i + "1"} item xs={12} md={6}>
-          <Paper className="root">
-            {c}
+        {fieldsArray.map((fields, i) => [<Grid key={i + "1"} item xs={12} md={6}>
+          <Paper className="padding">
+            <Rows fields={fields} />
           </Paper>
         </Grid>,
         <Grid key={i + "2"} item xs={12} md={6}>
-          <SyntaxHighlighter language="jsx" style={style} >
-            {"(" + code[i] + ")"}
-          </SyntaxHighlighter>
+          <Paper className="paper padding">
+            {"< FormGenerator"}
+            <br />
+            {"fields = {"}
+            <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={fields} />
+            {"} />"}
+          </Paper>
         </Grid>
         ])
         }
@@ -83,3 +91,5 @@ export default function App() {
   )
 
 }
+
+
