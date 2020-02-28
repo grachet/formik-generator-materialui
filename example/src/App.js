@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import FormGenerator, { FieldGenerator } from 'formik-generator-materialui'
+import FormGenerator2, { FormGenerator, FieldGenerator } from 'formik-generator-materialui'
 
 export default class App extends Component {
   render() {
@@ -8,6 +8,7 @@ export default class App extends Component {
       <div>
         <FormGenerator text='1' />
         <FieldGenerator text='2' />
+        <FormGenerator2 text='32' />
       </div>
     )
   }

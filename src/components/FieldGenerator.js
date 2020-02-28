@@ -1,5 +1,5 @@
-import React, { Component } from './node_modules/react'
-import PropTypes from './node_modules/prop-types'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class FieldGenerator extends Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export default class FieldGenerator extends Component {
 
     return (
       <div >
-        Field test : {text}
+        Field tesfdst : {text}
       </div>
     )
   }

@@ -1,5 +1,5 @@
-import React, { Component } from "./node_modules/react";
-import PropTypes from "./node_modules/prop-types";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export default class FormGenerator extends Component {
   static propTypes = {
@@ -9,6 +9,6 @@ export default class FormGenerator extends Component {
   render() {
     const { text } = this.props;
 
-    return <div>Form : {text}</div>;
+    return <div>Form sfdfdstest: {text}</div>;
   }
 }
