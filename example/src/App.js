@@ -37,38 +37,43 @@ export default function App() {
   const fieldsArray = [
     [
       {
-        title: "Name",
-        path: ["name"],
+        title: "Text",
+        path: ["text"],
         typeField: "text",
       },
       {
-        title: "Multiline",
-        path: ["name"],
+        title: "Same Text",
+        path: ["text"],
+        typeField: "text",
+      },
+      {
+        title: "Multiline text",
+        path: ["multiline"],
         typeField: "text",
         multiline: true,
       },
       {
-        title: "Disabled name",
-        path: ["name"],
+        title: "Disabled text",
+        path: ["disabledText"],
         typeField: "text",
         disabled: true
       }
     ],
     [
       {
-        title: "Is Rich ?",
-        path: ["isRich"],
+        title: "Is checkbox ?",
+        path: ["isCheckbox"],
         typeField: "checkbox",
       },
       {
-        title: "Is disabled ?",
-        path: ["isDisabled"],
+        title: "Is checkbox disabled ?",
+        path: ["isCheckboxDisabled"],
         typeField: "checkbox",
         disabled: true
       },
       {
-        title: "Have an Iphone ?",
-        path: ["haveIphone"],
+        title: "Is switch ?",
+        path: ["isSwitch"],
         typeField: "switch",
       },
       {
@@ -77,6 +82,71 @@ export default function App() {
         typeField: "switch",
         disabled: true
       }
+    ],
+    [
+      {
+        title: "Select (value === displayed)",
+        typeField: "select",
+        path: ["color"],
+        choice: ["#003fff", "#5dff00", "#ff0000"]
+      },
+      {
+        title: "Select (value !== displayed)",
+        typeField: "select",
+        path: ["colorNamed"],
+        choice: ["#003fff", "#5dff00", "#ff0000"],
+        titleChoice: ["blue", "green", "red"]
+      },
+      {
+        title: "Select disabled hint",
+        typeField: "select",
+        path: ["colorNamed"],
+        choice: ["#003fff", "#5dff00", "#ff0000"],
+        titleChoice: ["blue", "green", "red"],
+        disabled: true
+      }
+    ],
+    [
+      {
+        title: "Hint select",
+        typeField: "select",
+        path: ["hintText"],
+        choice: ["Yes", "No"],
+        hint: "Hint text",
+      },
+      {
+        warning: "Warning text",
+        title: "Warning text",
+        typeField: "text",
+        path: ["warningText"]
+      },
+      {
+        title: "Hint checkbox",
+        typeField: "checkbox",
+        path: ["hintCheckbox"],
+        hint: "Hint text",
+      }
+    ],
+    [
+      {
+        title: "Group",
+        typeField: "group",
+        hint: "Group hint",
+        subfields: [
+          {
+            title: "Group.name",
+            typeField: "text",
+            path: ["group", "name"],
+            hint: "Field hint",
+          },
+          {
+            title: "Value not in group object",
+            typeField: "select",
+            path: ["notInGroup"],
+            choice: ["Me", "You"]
+          },
+        ],
+      },
     ],
     [
       {
@@ -103,59 +173,9 @@ export default function App() {
         emptyAddText: "Add adress"
       }
     ],
+
+
     [
-      {
-        hint: "Hint text",
-        title: "Hint",
-        typeField: "text",
-        path: ["hint"]
-      },
-      {
-        warning: "Warning text",
-        title: "Warning",
-        typeField: "text",
-        path: ["warning"]
-      },
-    ],
-    [
-      {
-        title: "Color hexa",
-        typeField: "select",
-        path: ["color"],
-        choice: ["#003fff", "#5dff00", "#ff0000"]
-      },
-      {
-        title: "Color hexa with name",
-        typeField: "select",
-        path: ["colorNamed"],
-        choice: ["#003fff", "#5dff00", "#ff0000"],
-        titleChoice: ["blue", "green", "red"]
-      },
-    ],
-    [
-      {
-        title: "Group",
-        typeField: "group",
-        hint: "Group hint",
-        subfields: [
-          {
-            title: "Name",
-            typeField: "text",
-            path: ["group", "name"]
-          },
-          {
-            title: "Adress",
-            typeField: "text",
-            path: ["group", "adress"]
-          },
-          {
-            title: "Not in group object",
-            typeField: "text",
-            path: ["obj"]
-          },
-        ],
-      },
-    ], [
       {
         title: "First",
         typeField: "text",
