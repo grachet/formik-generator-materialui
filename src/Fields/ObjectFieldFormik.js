@@ -23,7 +23,7 @@ export default function ObjectFieldFormik(props) {
     name={path[path.length - 1]}
     render={arrayHelpers => (
 
-      <div className={(!noBorder ? classes.wrapperArrayField : "") + " " + classes.mymd}>
+      <div className={(!noBorder ? classes.wrapperArrayField : "")}>
         {title &&
           <Typography variant="body2" className={!fieldData.hint ? classes.mbmd : ""}
             color="textSecondary"

@@ -9,13 +9,13 @@ function Rows({ fields }) {
 
   const formRef = useRef(null);
 
-  let [result, setResult] = useState(null)
+  let [result, setResult] = useState(null);
 
   return <div>
     <FormGenerator
       formRef={formRef}
       defaultValue={{
-        name: "john"
+        // name: "john"
       }}
       onSubmit={(values) => {
         setResult(values)
@@ -39,12 +39,12 @@ export default function App() {
       {
         title: "Name",
         path: ["name"],
-        typeField: "textfield",
+        typeField: "text",
       },
       {
         title: "Disabled name",
         path: ["name"],
-        typeField: "textfield",
+        typeField: "text",
         disabled: true
       }
     ],
@@ -52,14 +52,115 @@ export default function App() {
       {
         hint: "Hint text",
         title: "Hint",
-        typeField: "textfield",
+        typeField: "text",
         path: ["hint"]
       },
       {
         warning: "Warning text",
         title: "Warning",
-        typeField: "textfield",
+        typeField: "text",
         path: ["warning"]
+      },
+    ],
+    [
+      {
+        title: "Color hexa",
+        typeField: "select",
+        path: ["color"],
+        choice: ["#003fff", "#5dff00", "#ff0000"]
+      },
+      {
+        title: "Color hexa with name",
+        typeField: "select",
+        path: ["colorNamed"],
+        choice: ["#003fff", "#5dff00", "#ff0000"],
+        titleChoice: ["blue", "green", "red"]
+      },
+    ],
+    [
+      {
+        title: "Group",
+        typeField: "group",
+        hint: "Group hint",
+        subfields: [
+          {
+            title: "Name",
+            typeField: "text",
+            path: ["name"]
+          },
+          {
+            title: "Adress",
+            typeField: "text",
+            path: ["adress"]
+          },
+        ],
+      },
+    ], [
+      {
+        title: "First",
+        typeField: "text",
+        path: ["first"]
+      },
+      {
+        title: "Second",
+        typeField: "text",
+        path: ["second"]
+      },
+      {
+        title: 'Display first-second',
+        separator: "-",
+        display: [
+          {
+            path: [
+              "first"
+            ]
+          },
+          {
+            path: [
+              "second"
+            ],
+          },
+        ],
+        typeField: 'displayValue',
+      },
+      {
+        title: 'first.lenght | second.lenght',
+        separator: " | ",
+        display: [
+          {
+            path: [
+              "first"
+            ]
+          },
+          {
+            path: [
+              "second"
+            ],
+          },
+        ],
+        typeField: 'displayValue',
+      },
+      {
+        title: '(first.lenght + second.lenght)',
+        separator: "",
+        display: [
+          {
+            path: [
+              "first"
+            ],
+            transformation: (val) => (val || "").lenght
+          },
+          {
+            path: [
+              "second"
+            ],
+            transformation: (val) => (val || "").lenght
+          },
+        ],
+        transformation: (value) => {
+          return "test";
+        },
+        typeField: 'displayValue',
       },
     ]
   ]

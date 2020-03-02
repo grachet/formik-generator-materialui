@@ -1,6 +1,6 @@
 import get from "lodash.get";
 
-export const last = (arr) => arr[arr.length - 1];
+export const last = (arr) => arr && arr[arr.length - 1];
 
 export const addValues = (field, values, data) => {
   let newField = { ...field };
