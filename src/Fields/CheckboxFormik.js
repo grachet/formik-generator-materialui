@@ -1,34 +1,34 @@
 import React from 'react';
-import styles from './styles/formStyle';
-import HintWarning from "./HintWarning";
+import HintWarning from "../UI/HintWarning";
 import {
-    makeStyles,
-    FormControlLabel,
-    Checkbox,
+  FormControlLabel,
+  Checkbox,
+  Switch
 } from "@material-ui/core";
 import { useField } from 'formik';
+import classes from '../index.css'
+import { last } from "../functions/formHelper";
 
-import { last } from "lodash";
+export default function CheckboxFormik({ fieldData, isSwitch }) {
 
-const useStyles = makeStyles(styles);
-export default function CheckboxFormik({ fieldData }) {
-    const classes = useStyles();
-    let name = last(fieldData.path);
-    const [field] = useField(name);
+  let name = last(fieldData.path);
+  const [field] = useField(name);
 
-    return (
-        <div className={classes.flex} key={"checkbox" + fieldData.title}>
-            <HintWarning hint={fieldData.warning} isLeft isWarning />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={!!field.value} name={name} onChange={field.onChange}
-                    />
-                }
-                disabled={fieldData.disabled}
-                label={fieldData.title}
+  return (
+    <div className={classes.flex} key={"checkbox" + fieldData.title}>
+      <HintWarning hint={fieldData.warning} isLeft isWarning />
+      <FormControlLabel
+        control={
+          isSwitch ? <Switch
+            checked={!!field.value} name={name} onChange={field.onChange}
+          /> : <Checkbox
+              checked={!!field.value} name={name} onChange={field.onChange}
             />
-            <HintWarning hint={fieldData.hint} />
-        </div>
-    )
+        }
+        disabled={fieldData.disabled}
+        label={fieldData.title}
+      />
+      <HintWarning hint={fieldData.hint} />
+    </div>
+  )
 };

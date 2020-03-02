@@ -1,16 +1,12 @@
 import React from "react";
-import styles from "./styles/formStyle";
 import {
   TextField,
-  makeStyles,
   CircularProgress
-} from "./node_modules/@material-ui/core";
-import { Autocomplete } from "./node_modules/@material-ui/lab";
+} from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
+import { last } from "../functions/formHelper";
+import HintWarning from "../UI/HintWarning";
 
-import { last } from "./node_modules/lodash";
-import HintWarning from "./HintWarning";
-
-const useStyles = makeStyles(styles);
 
 export default function AsyncAutocomplete({
   fieldData,
@@ -23,7 +19,6 @@ export default function AsyncAutocomplete({
   const [inputText, setInputText] = React.useState("");
   const loading = open && !options;
 
-  const classes = useStyles();
   let name = last(fieldData.path);
 
   React.useEffect(() => {

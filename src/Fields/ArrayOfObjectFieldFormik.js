@@ -2,19 +2,15 @@ import React from 'react';
 import { FieldArray } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/Delete';
-import styles from './styles/formStyle';
-import HintWarning from "./HintWarning"
-import FieldGen from "./FormikFieldGenerator";
+import HintWarning from "../UI/HintWarning"
+import FieldGenerator from "../components/FieldGenerator";
+import { Button, IconButton, Typography, Tooltip, Grid, Divider } from '@material-ui/core';
+import classes from '../index.css'
 
-import { Button, IconButton, Typography, Tooltip, Grid, Divider, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(styles);
-
-export default function ObjectFieldFormik(props) {
+export default function ArrayOfObjectFieldFormik(props) {
 
   const { fieldData } = props;
 
-  const classes = useStyles();
   const { title, path, value, emptyAddText, noBorder } = fieldData;
 
   return <FieldArray
@@ -53,7 +49,6 @@ export default function ObjectFieldFormik(props) {
 
 function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
 
-  const classes = useStyles();
   const { path, value, subfields, dense } = fieldData;
 
   let newObject = subfields.reduce((obj, item) => {
@@ -70,7 +65,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
               sm={12} md={subfield.fullWidth ? 12 : 6}
               lg={subfield.fullWidth ? 12 : dense ? 4 : 6}>
 
-              <span className={classes.flexGrow}><FieldGen field={{
+              <span className={classes.flexGrow}><FieldGenerator field={{
                 ...subfield,
                 disabled: fieldData.disabled,
                 path: [path[path.length - 1] + "[" + index + "]." + subfield.name],

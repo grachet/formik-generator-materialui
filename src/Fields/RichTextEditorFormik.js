@@ -1,12 +1,8 @@
 import React from 'react';
-import styles from './styles/formStyle';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useFormikContext } from "formik";
-import HintWarning from "./HintWarning"
-import classNames from 'classnames';
-
-import { Typography, makeStyles } from '@material-ui/core';
+import HintWarning from "../UI/HintWarning"
+import { Typography } from '@material-ui/core';
+import classes from '../index.css'
 
 export const modulesReactQuill = {
   toolbar: [
@@ -25,10 +21,8 @@ export const formatsReactQuill = [
   'link', 'image'
 ];
 
-const useStyles = makeStyles(styles);
 export default function RichTextEditorFormik({ fieldData }) {
 
-  const classes = useStyles();
   const { title, path } = fieldData;
   let name = path[path.length - 1];
   const { setFieldValue } = useFormikContext();
@@ -36,20 +30,20 @@ export default function RichTextEditorFormik({ fieldData }) {
   if (!path) return null;
 
   return (
-    <div className={classNames(classes.flexGrow, classes.mymd)}>
+    <div className={classes.flexGrow + " " + classes.mymd}>
       {title &&
         <Typography variant="body2"
           color="textSecondary">{title}
         </Typography>}
       <div className={classes.flex}>
-        <ReactQuill
+        {/* <ReactQuill
           value={fieldData.value || ""}
           className={classes.flexGrow + " " + classes.mbxl}
           theme="snow"
           modules={modulesReactQuill}
           formats={formatsReactQuill}
           onChange={value => setFieldValue(name, value)}
-        />
+        /> */}
         <HintWarning hint={fieldData.hint} noMargin />
       </div>
     </div>

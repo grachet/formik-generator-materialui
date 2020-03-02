@@ -2,16 +2,13 @@ import React from 'react';
 import { FieldArray } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/Delete';
-import styles from './styles/formStyle';
-import HintWarning from "./HintWarning";
-import FieldGen from "./FormikFieldGenerator";
-
-import { Button, IconButton, makeStyles, Typography, Tooltip } from '@material-ui/core';
-const useStyles = makeStyles(styles);
+import HintWarning from "../UI/HintWarning";
+import FieldGenerator from "../components/FieldGenerator";
+import classes from '../index.css'
+import { Button, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 export default function ArrayFieldFormik({ fieldData }) {
 
-  const classes = useStyles();
   const { title, path, value, emptyAddText, noBorder, renderLeftButton } = fieldData;
 
   return <FieldArray
@@ -29,7 +26,7 @@ export default function ArrayFieldFormik({ fieldData }) {
             {value.map((arrayValue, index) => (
               <div className={classes.flex} key={index}>
                 <span className={classes.flexGrow}>
-                  <FieldGen field={{
+                  <FieldGenerator field={{
                     path: [path[path.length - 1] + "[" + index + "]"],
                     ...fieldData.subfield,
                     value: arrayValue

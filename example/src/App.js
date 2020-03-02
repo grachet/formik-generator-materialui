@@ -42,10 +42,65 @@ export default function App() {
         typeField: "text",
       },
       {
+        title: "Multiline",
+        path: ["name"],
+        typeField: "text",
+        multiline: true,
+      },
+      {
         title: "Disabled name",
         path: ["name"],
         typeField: "text",
         disabled: true
+      }
+    ],
+    [
+      {
+        title: "Is Rich ?",
+        path: ["isRich"],
+        typeField: "checkbox",
+      },
+      {
+        title: "Is disabled ?",
+        path: ["isDisabled"],
+        typeField: "checkbox",
+        disabled: true
+      },
+      {
+        title: "Have an Iphone ?",
+        path: ["haveIphone"],
+        typeField: "switch",
+      },
+      {
+        title: "Is switch disabled ?",
+        path: ["isSwitchDisabled"],
+        typeField: "switch",
+        disabled: true
+      }
+    ],
+    [
+      {
+        title: 'Adress',
+        path: [
+          'adress',
+        ],
+        subfields: [
+          {
+            title: "number",
+            name: "number",
+            typeField: 'text',
+          }, {
+            title: "street name",
+            name: "streetName",
+            typeField: 'textfield',
+          }, {
+            title: "Country",
+            name: "country",
+            choice: ["France", "USA", "Mexico"],
+            typeField: 'select',
+          }],
+        typeField: 'arrayObject',
+        emptyAddText: "Add adress"
       }
     ],
     [
@@ -86,12 +141,17 @@ export default function App() {
           {
             title: "Name",
             typeField: "text",
-            path: ["name"]
+            path: ["group", "name"]
           },
           {
             title: "Adress",
             typeField: "text",
-            path: ["adress"]
+            path: ["group", "adress"]
+          },
+          {
+            title: "Not in group object",
+            typeField: "text",
+            path: ["obj"]
           },
         ],
       },
@@ -163,6 +223,14 @@ export default function App() {
         typeField: 'displayValue',
       },
     ]
+
+    //  case "array":
+    // return <ArrayFieldFormik fieldData={fieldData} />;
+    // case "autocomplete":
+    //   return <AutocompleteFieldFormik fieldData={fieldData} />;
+    // case "asyncAutocomplete":
+    //   return <AsyncAutocompleteFieldFormik fieldData={fieldData} />;
+    // case "richTextEditor":
   ]
 
   return (

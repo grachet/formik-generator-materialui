@@ -7,13 +7,13 @@ import {
 import TextFieldFormik from "../Fields/TextFieldFormik";
 import DisplayValueFormik from '../Fields/DisplayValueFormik';
 import SelectFieldFormik from '../Fields/SelectFieldFormik';
-// import DateTimeFormik from './DateTimeFormik';
-// import CheckboxFormik from './CheckboxFormik';
-// import ArrayFieldFormik from './ArrayFieldFormik';
-// import ObjectFieldFormik from './ObjectFieldFormik';
-// import AutocompleteFieldFormik from "./AutocompleteFieldFormik";
-// import AsyncAutocompleteFieldFormik from './AsyncAutocompleteFieldFormik';
-// import RichTextEditorFormik from './RichTextEditorFormik';
+import DateTimeFormik from '../Fields/DateTimeFormik';
+import CheckboxFormik from '../Fields/CheckboxFormik';
+import ArrayFieldFormik from '../Fields/ArrayFieldFormik';
+import ArrayOfObjectFieldFormik from '../Fields/ArrayOfObjectFieldFormik';
+import AutocompleteFieldFormik from "../Fields/AutocompleteFieldFormik";
+import AsyncAutocompleteFieldFormik from '../Fields/AsyncAutocompleteFieldFormik';
+import RichTextEditorFormik from '../Fields/RichTextEditorFormik';
 import classes from '../index.css'
 
 export default function FormikFieldGenerator({ field, disabled }) {
@@ -39,28 +39,30 @@ export default function FormikFieldGenerator({ field, disabled }) {
   let switchTypeRender = (fieldData) => {
 
     switch (fieldData.typeField) {
+      case "group":
+        return renderGroup(fieldData);
       case "text":
         return <TextFieldFormik fieldData={fieldData} />;
       case "select":
         return <SelectFieldFormik fieldData={fieldData} />;
-      case "group":
-        return renderGroup(fieldData);
       case "displayValue":
         return <DisplayValueFormik fieldData={fieldData} />;
-      // case "dateTime":
-      //   return <DateTimeFormik fieldData={fieldData} />;
-      // case "richTextEditor":
-      //   return <RichTextEditorFormik fieldData={fieldData} />;
-      // case "switch":
-      //   return <CheckboxFormik fieldData={fieldData} />;
-      // case "objectField":
-      //   return <ObjectFieldFormik fieldData={fieldData} />;
-      // case "arrayField":
-      //   return <ArrayFieldFormik fieldData={fieldData} />;
-      // case "autocompleteField":
-      //   return <AutocompleteFieldFormik fieldData={fieldData} />;
-      // case "asyncAutocompleteField":
-      //   return <AsyncAutocompleteFieldFormik fieldData={fieldData} />;
+      case "dateTime":
+        return <DateTimeFormik fieldData={fieldData} />;
+      case "checkbox":
+        return <CheckboxFormik fieldData={fieldData} />;
+      case "switch":
+        return <CheckboxFormik fieldData={fieldData} isSwitch />;
+      case "arrayObject":
+        return <ArrayOfObjectFieldFormik fieldData={fieldData} />;
+      case "array":
+        return <ArrayFieldFormik fieldData={fieldData} />;
+      case "autocomplete":
+        return <AutocompleteFieldFormik fieldData={fieldData} />;
+      case "asyncAutocomplete":
+        return <AsyncAutocompleteFieldFormik fieldData={fieldData} />;
+      case "richTextEditor":
+        return <RichTextEditorFormik fieldData={fieldData} />;
       default:
         return null
     }

@@ -23,7 +23,6 @@ export const addValues = (field, values, data) => {
           }
         }
       } else if (newField.subfields[i].typeField === "displayValue") {
-
         newField.subfields[i].value = newField.subfields[i].display.map(obj => {
           let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
           return obj.transformation ? obj.transformation(newValue) : newValue
@@ -31,7 +30,6 @@ export const addValues = (field, values, data) => {
         if (newField.subfields[i].transformation) {
           newField.subfields[i].value = newField.subfields[i].transformation(newField.subfields[i].value)
         }
-
       } else {
         newField.subfields[i].value = values[last(field.subfields[i].path)];
       }

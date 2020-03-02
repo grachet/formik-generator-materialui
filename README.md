@@ -14,6 +14,33 @@ https://grachet.github.io/formik-generator-materialui
 npm install --save formik-generator-materialui
 ```
 
+## Install Dependencies
+
+# Required dependencies :
+
+-  react: ^16.8.0
+-  react-dom: ^16.8.0
+
+-  formik: ^2.1.0
+-  @material-ui/core: ^4.9.0
+-  @material-ui/icons: ^4.9.0
+-  prop-types: ^15.5.4
+
+ ```bash
+npm install --save formik @material-ui/core @material-ui/icons prop-types
+```
+
+# Other dependencies (important) :
+
+-  @material-ui/lab: ^4.0.0  (autocomplete)
+-  @material-ui/pickers: ^3.2.0  (datetime)
+-  yup: ^0.28.1  (field verification)
+-  draft-js: ^0.11.0  (rich text editor)
+
+ ```bash
+npm install --save @material-ui/lab @material-ui/pickers yup draft-js
+```
+
 ## Usage
 
 ```jsx
@@ -66,7 +93,7 @@ class Example extends Component {
 
 "group"
 
-"textfield"
+"text"
 
 "displayValue"
 
@@ -78,13 +105,13 @@ class Example extends Component {
 
 "switch"
 
-"objectField"
+"arrayObject"
 
-"arrayField"
+"array"
 
-"autocompleteField"
+"autocomplete"
 
-"asyncAutocompleteField"
+"asyncAutocomplete"
 
 ## To run in localhost :
 

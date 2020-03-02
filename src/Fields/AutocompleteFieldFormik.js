@@ -1,21 +1,17 @@
 import React from 'react';
-import styles from './styles/formStyle';
-import HintWarning from "./HintWarning";
+import HintWarning from "../UI/HintWarning";
 import {
   TextField,
-  makeStyles,
 } from "@material-ui/core";
 import { useFormikContext } from 'formik';
 import {
   Autocomplete,
 } from "@material-ui/lab";
-
-import { last } from "lodash";
-
-const useStyles = makeStyles(styles);
+import { last } from "../functions/formHelper";
+import classes from '../index.css'
 
 export default function AutocompleteFieldFormik({ fieldData }) {
-  const classes = useStyles();
+
   let name = last(fieldData.path);
   const { values, setFieldValue, touched, errors } = useFormikContext();
   let error = touched[name] && errors[name] ? errors[name] : "";
