@@ -5,6 +5,8 @@ import * as Yup from "yup"
 import { FormGenerator, FieldGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 
+const tmdbkey = "1dc2b196ec51b322a69db96aa1c90dc9";
+
 function Rows({ fields }) {
 
   const formRef = useRef(null);
@@ -102,7 +104,6 @@ export default function App() {
         typeField: "select",
         path: ["colorNamed"],
         choice: ["#003fff", "#5dff00", "#ff0000"],
-        titleChoice: ["blue", "green", "red"],
         disabled: true
       }
     ],
@@ -137,7 +138,7 @@ export default function App() {
             title: "Group.name",
             typeField: "text",
             path: ["group", "name"],
-            hint: "Field hint",
+            hint: "path = ['group', 'name']",
           },
           {
             title: "Value not in group object",
@@ -150,7 +151,7 @@ export default function App() {
     ],
     [
       {
-        title: 'Adress',
+        title: 'Array of objects (address) ',
         path: [
           'adress',
         ],
@@ -162,7 +163,7 @@ export default function App() {
           }, {
             title: "street name",
             name: "streetName",
-            typeField: 'textfield',
+            typeField: 'text',
           }, {
             title: "Country",
             name: "country",
@@ -170,11 +171,23 @@ export default function App() {
             typeField: 'select',
           }],
         typeField: 'arrayObject',
-        emptyAddText: "Add adress"
+        emptyAddText: "Add object"
       }
     ],
-
-
+    [
+      {
+        title: 'Array of names',
+        path: [
+          'arrayOfNames'
+        ],
+        typeField: 'array',
+        emptyAddText: "Add array",
+        subfield: {
+          multiline: true,
+          typeField: 'text',
+        },
+      }
+    ],
     [
       {
         title: "First",
@@ -241,11 +254,60 @@ export default function App() {
           return "test";
         },
         typeField: 'displayValue',
+      }
+    ],
+    [
+      {
+        title: 'Autocomplete select',
+        path: [
+          'country',
+        ],
+        typeField: 'autocomplete',
+        options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+        getOptionLabel: (val) => val.name,
+        placeholder: "Search a country",
       },
+      {
+        freeSolo: true,
+        title: 'Autocomplete + freetext',
+        path: [
+          'countryFree',
+        ],
+        typeField: 'autocomplete',
+        options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+        getOptionLabel: (val) => val.name,
+        placeholder: "Search a country",
+      },
+      {
+        title: 'Autocomplete + freetext',
+        path: [
+          'countryFree',
+        ],
+        typeField: 'autocomplete',
+        options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+        getOptionLabel: (val) => val.name,
+        placeholder: "Search a country",
+      }
+    ],
+    [
+      {
+        title: 'Async Autocomplete (users)',
+        typeField: 'asyncAutocomplete',
+        path: [
+          'user',
+        ],
+        placeholder: "Search an user",
+        getAsyncOptions: async (value) => {
+          let response = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + tmdbkey + "&query=" + value);
+          let datas = await response.json();
+          console.log(datas)
+          return datas.results || []
+        },
+        getOptionLabel: e => e.Title || "test"
+      }
     ]
 
-    //  case "array":
-    // return <ArrayFieldFormik fieldData={fieldData} />;
+
     // case "autocomplete":
     //   return <AutocompleteFieldFormik fieldData={fieldData} />;
     // case "asyncAutocomplete":

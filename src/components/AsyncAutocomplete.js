@@ -6,7 +6,7 @@ import {
 import { Autocomplete } from "@material-ui/lab";
 import { last } from "../functions/formHelper";
 import HintWarning from "../UI/HintWarning";
-
+import classes from '../index.css'
 
 export default function AsyncAutocomplete({
   fieldData,
