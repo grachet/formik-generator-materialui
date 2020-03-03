@@ -87,7 +87,23 @@ export default [
         'date'
       ],
       typeField: 'date',
-    }
+    },
+    {
+      title: 'Date (openTo year)',
+      openTo: "year",
+      path: [
+        'dateYear'
+      ],
+      typeField: 'date',
+    },
+    {
+      title: 'Date disabled',
+      path: [
+        'dateDisabled'
+      ],
+      typeField: 'date',
+      disabled: true
+    },
   ],
   [
     {

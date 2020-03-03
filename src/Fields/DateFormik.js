@@ -1,41 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HintWarning from "../UI/HintWarning";
-import { DatePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import { useFormikContext } from 'formik';
 import classes from '../index.css'
 import { last } from "../functions/formHelper";
 
 export default function DateTimeFormik({ fieldData }) {
 
-  let name = last(fieldData.path);
+  const { required, title, hint, value, openTo, warning, disabled, path } = fieldData;
+
+  let name = last(path);
   const { setFieldValue } = useFormikContext();
 
   // const [field, meta] = useField(name);
   // let error = meta.touched && meta.error ? meta.error : "";
 
-  let DateTimeComponent = fieldData.disabled ? DatePicker : KeyboardDatePicker;
-
   return (
-    <div className={classes.flex} key={fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
-      <DateTimeComponent
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} isLeft isWarning />
+      <KeyboardDatePicker
         margin={"dense"}
         name={name}
-        required={fieldData.required}
+        openTo={openTo}
+        required={required}
         className={classes.flexGrow}
         clearable
-        inputVariant={fieldData.disabled ? "filled" : "outlined"}
+        inputVariant={disabled ? "filled" : "outlined"}
         autoOk
-        label={fieldData.title}
-        format="dd/MM/yyyy"
+        label={title}
+        format="MM/DD/YYYY"
+        disabled={disabled}
         placeholder="01/01/2020"
         onChange={value => {
-          !fieldData.disabled && setFieldValue(name, value);
+          setFieldValue(name, value.toDate());
         }}
-        value={fieldData.value}
-        animateYearScrolling={false}
+        value={value || null}
       />
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   )
 };

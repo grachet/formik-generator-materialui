@@ -1,6 +1,6 @@
 # formik-generator-materialui
 
->  A form generator who use React, Material UI and Formik as dependencies (an some others). A lot of fields types but feel free to install the minimum.
+>  A form generator who use React, Material UI and Formik as dependencies (an some others). A lot of fields types but feel free to install the minimum of dependencies.
 
 [![NPM](https://img.shields.io/npm/v/formik-generator-materialui.svg)](https://www.npmjs.com/package/formik-generator-materialui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
