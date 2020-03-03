@@ -20,3 +20,7 @@
 .center{
 text-align: center;
 }
+
+.indent{
+  margin-left: 25px;
+  }

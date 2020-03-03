@@ -66,10 +66,15 @@ export default function App() {
           <Paper className="paper padding">
             {"< FormGenerator"}
             <br />
-            {"fields = {"}
-            <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
-              src={fields} />
-            {"} />"}
+            <div className="indent">
+              {!!readOnly && "readOnly={true}"}
+              {!!readOnly && <br />}
+              {"fields = {"}
+              <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
+                src={fields} />
+              {"}"}
+            </div>
+            {"/>"}
           </Paper>
         </Grid>
         ])
