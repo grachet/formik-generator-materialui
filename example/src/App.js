@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Grid, Typography, Button, Paper } from "@material-ui/core"
 import "./app.css";
-import * as Yup from "yup"
-import { FormGenerator, FieldGenerator } from 'formik-generator-materialui'
+import { FormGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
 
@@ -32,6 +31,7 @@ function Rows({ fields }) {
   </div>
 }
 
+
 export default function App() {
 
   return (
@@ -50,7 +50,8 @@ export default function App() {
             {"< FormGenerator"}
             <br />
             {"fields = {"}
-            <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={fields} />
+            <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
+              src={fields} />
             {"} />"}
           </Paper>
         </Grid>

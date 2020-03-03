@@ -1,4 +1,4 @@
-
+import * as Yup from "yup";
 const tmdbkey = "1dc2b196ec51b322a69db96aa1c90dc9";
 
 export default [
@@ -330,19 +330,19 @@ export default [
   ],
   [
     {
+      warning: "Warning Text",
+      hint: "Hint text",
+      title: "Text",
+      typeField: "text",
+      path: ["text"]
+    },
+    {
       title: "Select",
       typeField: "select",
       choice: ["Yes", "No"],
       path: ["select"],
       warning: "Warning text",
       hint: "Hint text",
-    },
-    {
-      warning: "Warning Text",
-      hint: "Hint text",
-      title: "Text",
-      typeField: "text",
-      path: ["text"]
     },
     {
       title: "Checkbox",
@@ -471,6 +471,31 @@ export default [
           path: ["col3"],
         },
       ],
+
     },
   ],
+  [
+    {
+      title: "Text (number)",
+      typeField: "text",
+      path: ["text"],
+      yup: Yup.number().required(),
+      yupStringForExample: "Yup.number().required()"
+    },
+    {
+      title: "Text (2 letters + 3 numbers)",
+      typeField: "text",
+      path: ["text2"],
+      yup: Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
+      yupStringForExample: "Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required()"
+    },
+    {
+      title: "Select (not null)",
+      typeField: "select",
+      choice: ["Yes", "No"],
+      path: ["select"],
+      yup: Yup.string().required(),
+      yupStringForExample: "Yup.string().required()"
+    }
+  ]
 ]
