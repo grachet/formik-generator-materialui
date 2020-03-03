@@ -33,12 +33,14 @@ npm install --save formik @material-ui/core @material-ui/icons prop-types
 # Other dependencies (important) :
 
 -  @material-ui/lab: ^4.0.0  (autocomplete)
--  @material-ui/pickers: ^3.2.0  (datetime)
+-  @material-ui/pickers: ^3.2.0  (date)
+-  @date-io/moment: ^1.3.0  (date)
+-  moment: ^2.24.0 (date)
 -  yup: ^0.28.1  (field verification)
 -  draft-js: ^0.11.0  (rich text editor)
 
  ```bash
-npm install --save @material-ui/lab @material-ui/pickers yup draft-js
+npm install --save @material-ui/lab @material-ui/pickers yup draft-js @date-io/moment@1.x moment
 ```
 
 ## Usage
@@ -83,6 +85,7 @@ class Example extends Component {
 ```
 
 ## Props List :
+
 - data
 - fields
 - onSubmit
@@ -99,7 +102,7 @@ class Example extends Component {
 
 "select"
 
-"dateTime"
+"date"
 
 "richTextEditor"
 
@@ -128,6 +131,10 @@ class Example extends Component {
 
 - npm login
 - npm publish
+
+## Other
+
+Looking for collaborators to update the tool
 
 ## License
 

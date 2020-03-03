@@ -81,13 +81,13 @@ export default [
     }
   ],
   [
-    // {
-    //   title: 'Date',
-    //   path: [
-    //     'date'
-    //   ],
-    //   typeField: 'date',
-    // }
+    {
+      title: 'Date',
+      path: [
+        'date'
+      ],
+      typeField: 'date',
+    }
   ],
   [
     {
@@ -359,14 +359,15 @@ export default [
       hint: "hint text",
       warning: "Warning text",
     },
-    //todo
-    // {
-    //   title: 'Date',
-    //   path: [
-    //     'date'
-    //   ],
-    //   typeField: 'date',
-    // }
+    {
+      title: 'Date',
+      path: [
+        'date'
+      ],
+      typeField: 'date',
+      hint: "hint text",
+      warning: "Warning text",
+    },
     {
       title: 'Just display a value',
       display: [

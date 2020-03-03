@@ -39,6 +39,7 @@ export default function App() {
       <Typography variant="h4" className="title" gutterBottom>
         formik-generator-materialui
         </Typography>
+
       <Grid container spacing={6}>
         {fieldsArray.map((fields, i) => [<Grid key={i + "1"} item xs={12} md={6}>
           <Paper className="padding">

@@ -4,6 +4,10 @@ import * as Yup from 'yup';
 import FieldGenerator from './FieldGenerator';
 import { addValues, getInitialValues, getValidationSchema } from '../functions/formHelper'
 import FormikWithRef from './FormikWithRef';
+import {
+  MuiPickersUtilsProvider
+} from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly, formRef }) {
 
@@ -17,32 +21,34 @@ export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly
   console.log(validationSchema, initialValues)
 
   return (
-    <FormikWithRef
-      ref={formRef}
-      validateOnBlur={false}
-      validateOnChange={false}
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={(values, { setSubmitting }) => {
-        onSubmit(values);
-        setSubmitting(false);
-      }}
-      validationSchema={Yup.object().shape(
-        validationSchema
-      )}
-    >
-      {({ values, ...formFunction }) => (
-        <Form>
-          {fields && fields.map((field, i) => <div key={i}>
-            <FieldGenerator
-              disabled={readOnly}
-              formFunction={formFunction}
-              field={addValues(field, values)}
-            />
-          </div>)}
-        </Form>
-      )}
-    </FormikWithRef>
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <FormikWithRef
+        ref={formRef}
+        validateOnBlur={false}
+        validateOnChange={false}
+        enableReinitialize
+        initialValues={initialValues}
+        onSubmit={(values, { setSubmitting }) => {
+          onSubmit(values);
+          setSubmitting(false);
+        }}
+        validationSchema={Yup.object().shape(
+          validationSchema
+        )}
+      >
+        {({ values, ...formFunction }) => (
+          <Form>
+            {fields && fields.map((field, i) => <div key={i}>
+              <FieldGenerator
+                disabled={readOnly}
+                formFunction={formFunction}
+                field={addValues(field, values)}
+              />
+            </div>)}
+          </Form>
+        )}
+      </FormikWithRef>
+    </MuiPickersUtilsProvider>
   );
 }
 
