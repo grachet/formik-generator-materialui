@@ -8,32 +8,35 @@ import classes from '../index.css'
 
 export default function DisplayValueFormik({ fieldData }) {
 
+  const { yup, title, multiline, value, hint, warning } = fieldData;
+
   let error;
-  if (fieldData.yup) {
+  if (yup) {
     try {
-      fieldData.yup.validateSync(fieldData.value);
+      yup.validateSync(value);
     } catch (e) {
       error = e.message
     }
   }
 
   return (
-    <div className={classes.flex} key={fieldData.title}>
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} noMargin isWarning />
       <TextField
         className={classes.flexGrow}
         margin={"dense"}
         variant={"filled"}
-        label={fieldData.title}
+        label={title}
         inputlabelprops={{ shrink: true }}
         InputProps={{
           readOnly: true
         }}
         error={!!error}
         helperText={error}
-        multiline={fieldData.multiline}
-        value={fieldData.value}
+        multiline={multiline}
+        value={value}
       />
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   )
 };

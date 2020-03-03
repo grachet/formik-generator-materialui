@@ -9,18 +9,18 @@ import { Button, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 export default function ArrayFieldFormik({ fieldData }) {
 
-  const { title, path, value, emptyAddText, noBorder, renderLeftButton } = fieldData;
+  const { title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
 
   return <FieldArray
-    key={fieldData.title}
+    key={title}
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (
       <div className={noBorder ? "" : classes.wrapperArrayField}>
         {title &&
-          <Typography variant="body2" className={(!fieldData.hint ? classes.mbmd : "")}
+          <Typography variant="body2" className={(!hint ? classes.mbmd : "")}
             color="textSecondary"
-            component={'div'}>{title}<HintWarning hint={fieldData.hint} noMargin /></Typography>}
+            component={'div'}>{title}<HintWarning hint={hint} noMargin /><HintWarning hint={warning} noMargin isWarning /></Typography>}
         {value && value.length > 0 ? (
           <div>
             {value.map((arrayValue, index) => (
@@ -28,14 +28,14 @@ export default function ArrayFieldFormik({ fieldData }) {
                 <span className={classes.flexGrow}>
                   <FieldGenerator field={{
                     path: [path[path.length - 1] + "[" + index + "]"],
-                    ...fieldData.subfield,
+                    ...subfield,
                     value: arrayValue
                   }} />
                 </span>
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>
                     <IconButton
-                      disabled={fieldData.disabled}
+                      disabled={disabled}
                       onClick={() => arrayHelpers.insert(index + 1, '')}
                       color="primary"
                     >
@@ -46,7 +46,7 @@ export default function ArrayFieldFormik({ fieldData }) {
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Remove"}>
                     <IconButton
-                      disabled={fieldData.disabled}
+                      disabled={disabled}
                       onClick={() => arrayHelpers.remove(index)}
                       color="primary"
                     >

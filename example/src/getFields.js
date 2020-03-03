@@ -65,7 +65,7 @@ export default [
       titleChoice: ["blue", "green", "red"]
     },
     {
-      title: "Select disabled hint",
+      title: "Select disabled",
       typeField: "select",
       path: ["colorNamed"],
       choice: ["#003fff", "#5dff00", "#ff0000"],
@@ -74,42 +74,58 @@ export default [
   ],
   [
     {
-      title: "Hint select",
-      typeField: "select",
-      path: ["hintText"],
-      choice: ["Yes", "No"],
-      hint: "Hint text",
-    },
-    {
-      warning: "Warning text",
-      title: "Warning text",
-      typeField: "text",
-      path: ["warningText"]
-    },
-    {
-      title: "Hint checkbox",
-      typeField: "checkbox",
-      path: ["hintCheckbox"],
-      hint: "Hint text",
+      title: "Rich text editor",
+      path: ["richText"],
+      fullWidth: true,
+      typeField: 'richTextEditor',
     }
+  ],
+  [
+    // {
+    //   title: 'Date',
+    //   path: [
+    //     'date'
+    //   ],
+    //   typeField: 'date',
+    // }
   ],
   [
     {
       title: "Group",
       typeField: "group",
-      hint: "Group hint",
       subfields: [
         {
           title: "Group.name",
           typeField: "text",
           path: ["group", "name"],
-          hint: "path = ['group', 'name']",
         },
         {
           title: "Value not in group object",
           typeField: "select",
           path: ["notInGroup"],
           choice: ["Me", "You"]
+        },
+      ],
+    },
+    {
+      title: "Group in 3 column",
+      typeField: "group",
+      col: 4,
+      subfields: [
+        {
+          title: "col1",
+          typeField: "text",
+          path: ["col1"],
+        },
+        {
+          title: "col2",
+          typeField: "text",
+          path: ["col2"],
+        },
+        {
+          title: "col3",
+          typeField: "text",
+          path: ["col3"],
         },
       ],
     },
@@ -144,7 +160,7 @@ export default [
     {
       title: 'Array of objects (address) ',
       path: [
-        'adress',
+        'address',
       ],
       subfields: [
         {
@@ -231,7 +247,18 @@ export default [
         return "test";
       },
       typeField: 'displayValue',
-    }
+    },
+    {
+      title: 'Just display a value',
+      display: [
+        {
+          path: [
+            "first"
+          ]
+        }
+      ],
+      typeField: 'displayValue',
+    },
   ],
   [
     {
@@ -245,8 +272,8 @@ export default [
       placeholder: "Search a country",
     },
     {
-      freeSolo: true,
       title: 'Autocomplete + freetext',
+      freeSolo: true,
       path: [
         'countryFree',
       ],
@@ -303,18 +330,147 @@ export default [
   ],
   [
     {
+      title: "Select",
+      typeField: "select",
+      choice: ["Yes", "No"],
+      path: ["select"],
+      warning: "Warning text",
+      hint: "Hint text",
+    },
+    {
+      warning: "Warning Text",
+      hint: "Hint text",
+      title: "Text",
+      typeField: "text",
+      path: ["text"]
+    },
+    {
+      title: "Checkbox",
+      typeField: "checkbox",
+      path: ["checkbox"],
+      warning: "Warning text",
+      hint: "Hint text",
+    },
+    {
       title: "Rich text editor",
       path: ["richText"],
       fullWidth: true,
       typeField: 'richTextEditor',
-      hint: "hint text"
-    }
-  ]
-
-
-  // case "autocomplete":
-  //   return <AutocompleteFieldFormik fieldData={fieldData} />;
-  // case "asyncAutocomplete":
-  //   return <AsyncAutocompleteFieldFormik fieldData={fieldData} />;
-  // case "richTextEditor":
+      hint: "hint text",
+      warning: "Warning text",
+    },
+    //todo
+    // {
+    //   title: 'Date',
+    //   path: [
+    //     'date'
+    //   ],
+    //   typeField: 'date',
+    // }
+    {
+      title: 'Just display a value',
+      display: [
+        {
+          path: [
+            "first"
+          ]
+        }
+      ],
+      typeField: 'displayValue',
+      hint: "hint text",
+      warning: "Warning text",
+    },
+    {
+      title: 'Autocomplete select',
+      path: [
+        'country',
+      ],
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+      warning: "Text warning",
+      hint: "Hint text",
+    },
+    {
+      title: 'Async Autocomplete (free text)',
+      freeSolo: true,
+      typeField: 'asyncAutocomplete',
+      warning: "Text warning",
+      hint: "Hint text",
+      path: [
+        'user',
+      ],
+      placeholder: "Search an user",
+      getAsyncOptions: (value) => {
+        return new Promise(resolve => {
+          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + tmdbkey + "&query=" + value)
+            .then(r => r.json)
+            .then(datas => { console.log(datas); resolve(datas.results || []) })
+        });
+      },
+      getOptionLabel: e => e.Title || ""
+    },
+    {
+      title: 'Array of text fields',
+      path: [
+        'arrayOfText'
+      ],
+      typeField: 'array',
+      emptyAddText: "Add text fields",
+      subfield: {
+        multiline: true,
+        typeField: 'text',
+      },
+      hint: "Hint text",
+      warning: "Warning text",
+    },
+    {
+      title: 'Array of objects',
+      path: [
+        'arrayOfObjects',
+      ],
+      subfields: [
+        {
+          title: "number",
+          name: "number",
+          typeField: 'text',
+        }, {
+          title: "street name",
+          name: "streetName",
+          typeField: 'text',
+        }
+      ],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object",
+      hint: "Hint text",
+      warning: "Warning text",
+    },
+    {
+      title: "Group",
+      typeField: "group",
+      hint: "Hint text",
+      warning: "Warning text",
+      col: 4,
+      subfields: [
+        {
+          warning: "Warning text",
+          title: "col1",
+          typeField: "text",
+          path: ["col1"],
+        },
+        {
+          title: "col2",
+          typeField: "text",
+          path: ["col2"],
+          hint: "Hint text"
+        },
+        {
+          title: "col3",
+          typeField: "text",
+          path: ["col3"],
+        },
+      ],
+    },
+  ],
 ]

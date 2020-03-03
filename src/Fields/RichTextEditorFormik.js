@@ -23,7 +23,7 @@ export const formatsReactQuill = [
 
 export default function RichTextEditorFormik({ fieldData }) {
 
-  const { title, path } = fieldData;
+  const { title, path, warning, hint } = fieldData;
   let name = path[path.length - 1];
   const { setFieldValue } = useFormikContext();
 
@@ -36,6 +36,8 @@ export default function RichTextEditorFormik({ fieldData }) {
           color="textSecondary">{title}
         </Typography>}
       <div className={classes.flex}>
+        <HintWarning hint={hint} noMargin />
+        <HintWarning hint={warning} noMargin isWarning />
         {/* <ReactQuill
           value={fieldData.value || ""}
           className={classes.flexGrow + " " + classes.mbxl}
@@ -44,7 +46,6 @@ export default function RichTextEditorFormik({ fieldData }) {
           formats={formatsReactQuill}
           onChange={value => setFieldValue(name, value)}
         /> */}
-        <HintWarning hint={fieldData.hint} noMargin />
       </div>
     </div>
   )

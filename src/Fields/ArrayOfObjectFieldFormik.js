@@ -11,19 +11,21 @@ export default function ArrayOfObjectFieldFormik(props) {
 
   const { fieldData } = props;
 
-  const { title, path, value, emptyAddText, noBorder } = fieldData;
+  const { title, path, disabled, value, emptyAddText, noBorder, hint, warning } = fieldData;
 
   return <FieldArray
-    key={fieldData.title}
+    key={title}
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (
-
       <div className={(!noBorder ? classes.wrapperArrayField : "")}>
         {title &&
-          <Typography variant="body2" className={!fieldData.hint ? classes.mbmd : ""}
+          <Typography variant="body2" className={!hint ? classes.mbmd : ""}
             color="textSecondary"
-            component={'div'}>{title}<HintWarning hint={fieldData.hint} noMargin /></Typography>}
+            component={'div'}>{title}
+            <HintWarning hint={hint} noMargin />
+            <HintWarning hint={warning} noMargin isWarning />
+          </Typography>}
         {value && value.length > 0 ? (
           <div>
             {value.map((arrayValue, index) => (
@@ -35,7 +37,7 @@ export default function ArrayOfObjectFieldFormik(props) {
           </div>
         ) : (
             <Button
-              disabled={fieldData.disabled} variant="outlined" className={classes.mymd}
+              disabled={disabled} variant="outlined" className={classes.mymd}
               onClick={() => arrayHelpers.push({})}>
               {emptyAddText}
             </Button>
@@ -49,7 +51,7 @@ export default function ArrayOfObjectFieldFormik(props) {
 
 function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
 
-  const { path, value, subfields, dense } = fieldData;
+  const { path, value, subfields, dense, disabled } = fieldData;
 
   let newObject = subfields.reduce((obj, item) => {
     obj[item.name] = "";
@@ -67,7 +69,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
 
               <span className={classes.flexGrow}><FieldGenerator field={{
                 ...subfield,
-                disabled: fieldData.disabled,
+                disabled,
                 path: [path[path.length - 1] + "[" + index + "]." + subfield.name],
                 value: value[index][subfield.name]
               }} /></span>
@@ -76,7 +78,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
         <div className={classes.buttonHint}>
           <Tooltip title={"Add"}>
             <IconButton
-              disabled={fieldData.disabled}
+              disabled={disabled}
               onClick={() => arrayHelpers.insert(index + 1, newObject)}
               color="primary"
             >
@@ -87,7 +89,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
         <div className={classes.buttonHint}>
           <Tooltip title={"Remove"}>
             <IconButton
-              disabled={fieldData.disabled}
+              disabled={disabled}
               onClick={() => arrayHelpers.remove(index)}
               color="primary"
             >

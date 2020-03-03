@@ -7,7 +7,7 @@ import {
 import TextFieldFormik from "../Fields/TextFieldFormik";
 import DisplayValueFormik from '../Fields/DisplayValueFormik';
 import SelectFieldFormik from '../Fields/SelectFieldFormik';
-import DateTimeFormik from '../Fields/DateTimeFormik';
+import DateFormik from '../Fields/DateFormik';
 import CheckboxFormik from '../Fields/CheckboxFormik';
 import ArrayFieldFormik from '../Fields/ArrayFieldFormik';
 import ArrayOfObjectFieldFormik from '../Fields/ArrayOfObjectFieldFormik';
@@ -25,13 +25,14 @@ export default function FormikFieldGenerator({ field, disabled }) {
         {title &&
           <Typography variant="body2" className={(!fieldsData.hint ? classes.mbmd : "")}
             color="textSecondary"
-            component={'div'}>{title}<HintWarning hint={fieldsData.hint} noMargin /></Typography>}
-        {col ? <Grid container spacing={2}>
-          {subfields.map((fieldsData, i) => <Grid key={i} item xs={12} md={fieldsData.col}>
-            {switchTypeRender(disabled ? { ...fieldsData, disabled: true } : fieldsData)}
-          </Grid>)}
-        </Grid> :
-          subfields.map((fieldData, i) => <span key={i}> {switchTypeRender({ ...fieldData, disabled })}</span>)}
+            component={'div'}>{title}<HintWarning hint={fieldsData.hint} noMargin /><HintWarning hint={fieldsData.warning} noMargin isWarning /></Typography>}
+        {col ?
+          <Grid container spacing={2}>
+            {subfields.map((fieldsData, i) => <Grid key={i} item xs={12} sm={col}>
+              {switchTypeRender({ ...fieldsData, disabled: disabled || fieldsData.disabled })}
+            </Grid>)}
+          </Grid> :
+          subfields.map((fieldData, i) => <span key={i}> {switchTypeRender({ ...fieldData, disabled: disabled || fieldData.disabled })}</span>)}
       </div>
     )
   };
@@ -47,8 +48,8 @@ export default function FormikFieldGenerator({ field, disabled }) {
         return <SelectFieldFormik fieldData={fieldData} />;
       case "displayValue":
         return <DisplayValueFormik fieldData={fieldData} />;
-      case "dateTime":
-        return <DateTimeFormik fieldData={fieldData} />;
+      case "date":
+        return <DateFormik fieldData={fieldData} />;
       case "checkbox":
         return <CheckboxFormik fieldData={fieldData} />;
       case "switch":
@@ -68,6 +69,6 @@ export default function FormikFieldGenerator({ field, disabled }) {
     }
   };
 
-  return switchTypeRender(disabled ? { ...field, disabled: true } : field)
+  return switchTypeRender({ ...field, disabled: disabled || field.disabled })
 
 }
