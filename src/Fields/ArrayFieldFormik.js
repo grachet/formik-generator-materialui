@@ -62,7 +62,7 @@ export default function ArrayFieldFormik({ fieldData }) {
             )}
           </div>
         ) : (
-            <Button variant="outlined" className={classes.mymd} onClick={() => arrayHelpers.push('')}>
+            <Button variant="outlined" disabled={disabled} className={classes.mymd} onClick={() => arrayHelpers.push('')}>
               {emptyAddText}
             </Button>
           )}

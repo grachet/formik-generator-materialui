@@ -6,7 +6,7 @@
 
 ## ONLINE DEMO !!
 
-[link to demo in github pages](https://grachet.github.io/formik-generator-materialui/){:target="_blank"}
+<a href="https://grachet.github.io/formik-generator-materialui/" target="_blank">https://grachet.github.io/formik-generator-materialui/</a>
 
 ## Install
 

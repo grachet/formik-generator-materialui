@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react'
-import { Grid, Typography, Button, Paper } from "@material-ui/core"
+import { Grid, Typography, Switch, FormControlLabel, Button, Paper } from "@material-ui/core"
 import "./app.css";
 import { FormGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
 
-function Rows({ fields }) {
+function Rows({ fields, readOnly }) {
 
   const formRef = useRef(null);
 
@@ -13,6 +13,7 @@ function Rows({ fields }) {
 
   return <div>
     <FormGenerator
+      readOnly={readOnly}
       formRef={formRef}
       defaultValue={{
         // name: "john"
@@ -34,16 +35,31 @@ function Rows({ fields }) {
 
 export default function App() {
 
+  const [readOnly, setReadOnly] = useState(false);
+
   return (
     <div className="root">
-      <Typography variant="h4" className="title" gutterBottom>
-        formik-generator-materialui
+      <div className="center">
+        <Typography variant="h4" className="title" gutterBottom component="span">
+          formik-generator-materialui
         </Typography>
+      </div>
+
+      <div>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={!!readOnly} onChange={() => setReadOnly(v => !v)}
+            />
+          }
+          label={"Formgenerator readOnly ?"}
+        />
+      </div>
 
       <Grid container spacing={6}>
         {fieldsArray.map((fields, i) => [<Grid key={i + "1"} item xs={12} md={6}>
           <Paper className="padding">
-            <Rows fields={fields} />
+            <Rows fields={fields} readOnly={readOnly} />
           </Paper>
         </Grid>,
         <Grid key={i + "2"} item xs={12} md={6}>
