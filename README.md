@@ -6,7 +6,7 @@
 
 ## ONLINE DEMO !!
 
-<a href="https://grachet.github.io/formik-generator-materialui/" target="_blank">https://grachet.github.io/formik-generator-materialui/</a>
+[link to demo in github pages](https://grachet.github.io/formik-generator-materialui/){:target="_blank"}
 
 ## Install
 
@@ -16,7 +16,7 @@ npm install --save formik-generator-materialui
 
 ## Install Dependencies
 
-### Required dependencies :
+#### Required dependencies :
 
 -  react: ^16.8.0
 -  react-dom: ^16.8.0
@@ -30,7 +30,7 @@ npm install --save formik-generator-materialui
 npm install --save formik @material-ui/core @material-ui/icons prop-types
 ```
 
-### Other dependencies (important) :
+#### Other dependencies (important) :
 
 -  @material-ui/lab: ^4.0.0  (autocomplete)
 -  @material-ui/pickers: ^3.2.0  (date)
