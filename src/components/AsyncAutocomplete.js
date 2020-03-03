@@ -8,12 +8,7 @@ import { last } from "../functions/formHelper";
 import HintWarning from "../UI/HintWarning";
 import classes from '../index.css'
 
-export default function AsyncAutocomplete({
-  fieldData,
-  setFieldValue,
-  error,
-  value
-}) {
+export default function AsyncAutocomplete({ fieldData, setFieldValue, error, value }) {
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(null);
   const [inputText, setInputText] = React.useState("");
@@ -23,12 +18,9 @@ export default function AsyncAutocomplete({
 
   React.useEffect(() => {
     let active = true;
-    (async () => {
-      const response = await fieldData.getAsyncOptions(inputText || "");
-      if (active) {
-        setOptions(response);
-      }
-    })();
+    fieldData.getAsyncOptions(inputText || "").then(
+      r => !!active && setOptions(r)
+    )
     return () => {
       active = false;
     };
