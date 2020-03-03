@@ -1,12 +1,12 @@
 # formik-generator-materialui
 
->  A form generator who use React, Material UI and Formik as dependencies
+>  A form generator who use React, Material UI and Formik as dependencies (an some others). A lot of fields types but feel free to install the minimum.
 
 [![NPM](https://img.shields.io/npm/v/formik-generator-materialui.svg)](https://www.npmjs.com/package/formik-generator-materialui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## DEMO
+## ONLINE DEMO !!
 
-https://grachet.github.io/formik-generator-materialui
+<a href="https://grachet.github.io/formik-generator-materialui/" target="_blank">https://grachet.github.io/formik-generator-materialui/</a>
 
 ## Install
 
@@ -16,7 +16,7 @@ npm install --save formik-generator-materialui
 
 ## Install Dependencies
 
-# Required dependencies :
+### Required dependencies :
 
 -  react: ^16.8.0
 -  react-dom: ^16.8.0
@@ -30,7 +30,7 @@ npm install --save formik-generator-materialui
 npm install --save formik @material-ui/core @material-ui/icons prop-types
 ```
 
-# Other dependencies (important) :
+### Other dependencies (important) :
 
 -  @material-ui/lab: ^4.0.0  (autocomplete)
 -  @material-ui/pickers: ^3.2.0  (date)
