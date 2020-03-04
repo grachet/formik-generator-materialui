@@ -2,7 +2,57 @@ import get from "lodash.get";
 
 export const last = (arr) => arr && arr[arr.length - 1];
 
-export const addValues = (field, values, data) => {
+export const getDisplayValue = (field, values) => {
+  return field.display.map(obj => {
+    let newValue = obj.path ? values[last(obj.path)] : obj.values;
+    return obj.transformation ? obj.transformation(newValue) : newValue
+  }).join(field.separator || "");
+}
+
+export const addValues = (field, values) => {
+  let newField = { ...field };
+
+  if (field.typeField === "group") {
+    for (let i in field.subfields) {
+      if (field.subfields[i].typeField === "group") {
+        for (let j in field.subfields[i].subfields) {
+          if (field.subfields[i].subfields[j].typeField === "displayValue") {
+
+            newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].display.map(obj => {
+              let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
+              return obj.transformation ? obj.transformation(newValue) : newValue
+            }).join(newField.subfields[i].subfields[j].separator || (""));
+            if (newField.subfields[i].subfields[j].transformation) {
+              newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].transformation(newField.subfields[i].subfields[j].value)
+            }
+
+          } else {
+            newField.subfields[i].subfields[j].value = values[last(field.subfields[i].subfields[j].path)];
+          }
+        }
+      } else if (newField.subfields[i].typeField === "displayValue") {
+        newField.subfields[i].value = newField.subfields[i].display.map(obj => {
+          let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
+          return obj.transformation ? obj.transformation(newValue) : newValue
+        }).join(newField.subfields[i].separator || "");
+        if (newField.subfields[i].transformation) {
+          newField.subfields[i].value = newField.subfields[i].transformation(newField.subfields[i].value)
+        }
+      } else {
+        newField.subfields[i].value = values[last(field.subfields[i].path)];
+      }
+    }
+  } else if (field.typeField === "displayValue") {
+    newField.value = getDisplayValue(field, values);
+    console.log("display", getDisplayValue(field, values))
+  } else {
+    newField.value = values[last(field.path)];
+  }
+
+  return newField
+};
+
+export const addValues2 = (field, values) => {
   let newField = { ...field };
   if (field.typeField === "group") {
     for (let i in field.subfields) {
