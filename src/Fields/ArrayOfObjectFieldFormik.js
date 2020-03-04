@@ -1,7 +1,8 @@
 import React from 'react';
 import { FieldArray } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
-import RemoveIcon from '@material-ui/icons/Delete';
+import RemoveIcon from '@material-ui/icons/RemoveCircle';
+// import RemoveIcon from '@material-ui/icons/Delete';
 import HintWarning from "../UI/HintWarning"
 import FieldGenerator from "../components/FieldGenerator";
 import { Button, IconButton, Typography, Tooltip, Grid, Divider } from '@material-ui/core';
