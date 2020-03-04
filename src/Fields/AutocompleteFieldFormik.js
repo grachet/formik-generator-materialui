@@ -22,7 +22,7 @@ export default function AutocompleteFieldFormik({ fieldData }) {
       <Autocomplete
         freeSolo={fieldData.freeSolo}
         options={fieldData.options}
-        getOptionLabel={fieldData.getOptionLabel}
+        getOptionLabel={(option) => fieldData.getOptionLabel(option) || ""}
         className={classes.flexGrow}
         // defaultValue={values[name] || ""}
         value={values[name] || ""}

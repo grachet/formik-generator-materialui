@@ -9,22 +9,25 @@ import HintWarning from "../UI/HintWarning";
 import classes from '../index.css'
 
 export default function AsyncAutocomplete({ fieldData, setFieldValue, error, value }) {
+
+  const { path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
+
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(null);
   const [inputText, setInputText] = React.useState("");
   const loading = open && !options;
 
-  let name = last(fieldData.path);
+  let name = last(path);
 
   React.useEffect(() => {
     let active = true;
-    fieldData.getAsyncOptions(inputText || "").then(
+    getAsyncOptions(inputText || "").then(
       r => !!active && setOptions(r)
     )
     return () => {
       active = false;
     };
-  }, [inputText, fieldData]);
+  }, [inputText, getAsyncOptions]);
 
   React.useEffect(() => {
     if (!open) {
@@ -33,13 +36,13 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
   }, [open]);
 
   return (
-    <div className={classes.flex} key={fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} isLeft isWarning />
       <Autocomplete
         // getOptionSelected={fieldData.getOptionSelected}
         id="autocomplete"
-        getOptionLabel={fieldData.getOptionLabel}
-        freeSolo={fieldData.freeSolo}
+        getOptionLabel={(option) => fieldData.getOptionLabel(option) || ""}
+        freeSolo={freeSolo}
         options={options || []}
         loading={loading}
         open={open}
@@ -58,17 +61,17 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
         filterOptions={(options, { inputValue }) => options}
         value={value || ""}
         className={classes.flexGrow}
-        disabled={fieldData.disabled}
+        disabled={disabled}
         renderInput={params => (
           <TextField
             {...params}
             margin={"dense"}
             error={!!error}
             helperText={error}
-            label={fieldData.title}
+            label={title}
             fullWidth
-            variant={fieldData.disabled ? "filled" : "outlined"}
-            placeholder={fieldData.placeholder}
+            variant={disabled ? "filled" : "outlined"}
+            placeholder={placeholder}
             InputProps={{
               ...params.InputProps,
               endAdornment: (
@@ -83,7 +86,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
           />
         )}
       />
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   );
 }

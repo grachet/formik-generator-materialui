@@ -67,7 +67,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
               sm={12} md={subfield.fullWidth ? 12 : 6}
               lg={subfield.fullWidth ? 12 : dense ? 4 : 6}>
 
-              <span className={classes.flexGrow}><FieldGenerator field={{
+              <span className={classes.flexGrow}><FieldGenerator fieldData={{
                 ...subfield,
                 disabled,
                 path: [path[path.length - 1] + "[" + index + "]." + subfield.name],

@@ -26,7 +26,7 @@ export default function ArrayFieldFormik({ fieldData }) {
             {value.map((arrayValue, index) => (
               <div className={classes.flex} key={index}>
                 <span className={classes.flexGrow}>
-                  <FieldGenerator field={{
+                  <FieldGenerator fieldData={{
                     path: [path[path.length - 1] + "[" + index + "]"],
                     ...subfield,
                     value: arrayValue

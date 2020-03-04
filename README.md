@@ -20,7 +20,6 @@ npm install --save formik-generator-materialui
 
 -  react: ^16.8.0
 -  react-dom: ^16.8.0
-
 -  formik: ^2.1.0
 -  @material-ui/core: ^4.9.0
 -  @material-ui/icons: ^4.9.0
@@ -115,6 +114,8 @@ class Example extends Component {
 "autocomplete"
 
 "asyncAutocomplete"
+
+ path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel
 
 ## To run in localhost :
 
