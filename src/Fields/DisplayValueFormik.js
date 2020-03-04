@@ -20,7 +20,7 @@ export default function DisplayValueFormik({ fieldData }) {
   }
 
   return (
-    <div className={classes.flex} key={title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} noMargin isWarning />
       <TextField
         className={classes.flexGrow}

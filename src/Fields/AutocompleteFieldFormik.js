@@ -12,7 +12,6 @@ import classes from '../index.css'
 
 export default function AutocompleteFieldFormik({ fieldData }) {
 
-
   const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
 
   let name = last(path);
@@ -20,7 +19,7 @@ export default function AutocompleteFieldFormik({ fieldData }) {
   let error = touched[name] && errors[name] ? errors[name] : "";
 
   return (
-    <div className={classes.flex} key={title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} isLeft isWarning />
       <Autocomplete
         freeSolo={freeSolo}

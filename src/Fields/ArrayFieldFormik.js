@@ -12,7 +12,6 @@ export default function ArrayFieldFormik({ fieldData }) {
   const { title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
 
   return <FieldArray
-    key={title}
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (

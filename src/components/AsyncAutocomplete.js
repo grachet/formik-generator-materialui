@@ -36,11 +36,10 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
   }, [open]);
 
   return (
-    <div className={classes.flex} key={title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} isLeft isWarning />
       <Autocomplete
         // getOptionSelected={fieldData.getOptionSelected}
-        id="autocomplete"
         getOptionLabel={(option) => getOptionLabel(option) || ""}
         freeSolo={freeSolo}
         options={options || []}

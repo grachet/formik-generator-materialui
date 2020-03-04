@@ -19,7 +19,7 @@ export default function TextFieldFormik({ fieldData }) {
   let error = meta.touched && meta.error ? meta.error : "";
 
   return (
-    <div className={classes.flex} key={title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} isLeft isWarning />
       <TextField
         name={field.name}

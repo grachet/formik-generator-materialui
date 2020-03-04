@@ -14,7 +14,6 @@ export default function ArrayOfObjectFieldFormik(props) {
   const { title, path, disabled, value, emptyAddText, noBorder, hint, warning } = fieldData;
 
   return <FieldArray
-    key={title}
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (
@@ -62,16 +61,17 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
     <span>
       <div className={classes.flex}>
         <Grid container spacing={2}>
-          {subfields.map((subfield, index2) =>
-            <Grid item key={index2} className={classes.flex}
+          {subfields.map((subfield, i) =>
+            <Grid item key={i} className={classes.flex}
               sm={12} md={subfield.fullWidth ? 12 : 6}
               lg={subfield.fullWidth ? 12 : dense ? 4 : 6}>
-
-              <span className={classes.flexGrow}><FieldGenerator fieldData={{
-                ...subfield,
-                path: [path[path.length - 1] + "[" + index + "]." + subfield.name],
-                value: value[index][subfield.name]
-              }} readOnly={disabled} /></span>
+              <span className={classes.flexGrow}>
+                <FieldGenerator fieldData={{
+                  ...subfield,
+                  path: [path[path.length - 1] + "[" + index + "]." + subfield.name],
+                  value: value[index][subfield.name]
+                }} readOnly={disabled} />
+              </span>
             </Grid>)}
         </Grid>
         <div className={classes.buttonHint}>

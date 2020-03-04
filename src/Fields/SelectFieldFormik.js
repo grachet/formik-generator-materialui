@@ -36,7 +36,7 @@ export default function SelectFieldFormik({ fieldData }) {
   }, [title]);
 
   return (
-    <div className={classes.flex} key={title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} isLeft isWarning />
       <FormControl
         error={!!error}
@@ -60,7 +60,6 @@ export default function SelectFieldFormik({ fieldData }) {
             :
             <OutlinedInput
               field={value}
-              id={name}
               labelWidth={labelWidth || noLabelNotchWidth}
               notched={!!value || (value === 0)}
             />}

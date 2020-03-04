@@ -17,7 +17,7 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
   const [field] = useField(name);
 
   return (
-    <div className={classes.flex} key={"checkbox" + title}>
+    <div className={classes.flex}>
       <HintWarning hint={warning} isLeft isWarning />
       <FormControlLabel
         control={
