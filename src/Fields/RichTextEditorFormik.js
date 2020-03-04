@@ -34,10 +34,10 @@ export default function RichTextEditorFormik({ fieldData }) {
       {title &&
         <Typography variant="body2"
           color="textSecondary">{title}
+          <HintWarning hint={warning} isWarning />
+          <HintWarning hint={hint} />
         </Typography>}
       <div className={classes.flex}>
-        <HintWarning hint={hint} noMargin />
-        <HintWarning hint={warning} noMargin isWarning />
         {/* <ReactQuill
           value={fieldData.value || ""}
           className={classes.flexGrow + " " + classes.mbxl}

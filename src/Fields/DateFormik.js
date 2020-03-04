@@ -17,7 +17,7 @@ export default function DateTimeFormik({ fieldData }) {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isLeft isWarning />
+      <HintWarning hint={warning} isWarning />
       <KeyboardDatePicker
         margin={"dense"}
         name={name}

@@ -20,6 +20,12 @@ export default [
       multiline: true,
     },
     {
+      title: "Display Link icon to value",
+      path: ["link"],
+      typeField: "text",
+      isLink: true
+    },
+    {
       title: "Disabled text",
       path: ["disabledText"],
       typeField: "text",
@@ -70,6 +76,33 @@ export default [
       path: ["colorNamed"],
       choice: ["#003fff", "#5dff00", "#ff0000"],
       disabled: true
+    },
+    {
+      title: "Select with null value",
+      typeField: "select",
+      path: ["nullValueSelect"],
+      choice: [null, "", 0, "value"]
+    },
+    {
+      title: "Select with categories",
+      typeField: "select",
+      path: ["categories"],
+      choice: [
+        {
+          category: 'General',
+          values: [
+            'Fundamentals',
+            'Description',
+          ],
+        },
+        {
+          category: 'Administration',
+          values: [
+            'Installation',
+            'Commissioning',
+          ],
+        }
+      ]
     }
   ],
   [
@@ -174,17 +207,45 @@ export default [
   ],
   [
     {
-      title: 'Array of objects (address) ',
+      title: 'Array of objects',
       path: [
         'address',
       ],
       subfields: [
         {
-          title: "number",
+          title: "Street",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+    {
+      title: 'Array of objects (more than 3 subfields) ',
+      path: [
+        'addressMoreThan3',
+      ],
+      subfields: [
+        {
+          title: "Name",
+          name: "name",
+          typeField: 'text',
+        }, {
+          title: "Last name",
+          name: "lastName",
+          typeField: 'text',
+        },
+        {
+          title: "Number",
           name: "number",
           typeField: 'text',
         }, {
-          title: "street name",
+          title: "Street name ",
           name: "streetName",
           typeField: 'text',
         }, {
@@ -350,6 +411,7 @@ export default [
       hint: "Hint text",
       title: "Text",
       typeField: "text",
+      isLink: true,
       path: ["text"]
     },
     {

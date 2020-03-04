@@ -21,7 +21,7 @@ export default function DisplayValueFormik({ fieldData }) {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} noMargin isWarning />
+      <HintWarning hint={warning} isWarning />
       <TextField
         className={classes.flexGrow}
         margin={"dense"}

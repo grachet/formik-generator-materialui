@@ -37,7 +37,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isLeft isWarning />
+      <HintWarning hint={warning} isWarning />
       <Autocomplete
         // getOptionSelected={fieldData.getOptionSelected}
         getOptionLabel={(option) => getOptionLabel(option) || ""}

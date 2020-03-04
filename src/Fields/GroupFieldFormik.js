@@ -14,8 +14,8 @@ export default function GroupFieldFormik({ fieldData }) {
         className={(!hint ? classes.mbmd : "")}
         color="textSecondary"
         component={'div'}>{title}
-        <HintWarning hint={hint} noMargin />
-        <HintWarning hint={warning} noMargin isWarning />
+        <HintWarning hint={warning} isWarning />
+        <HintWarning hint={hint} />
       </Typography>}
       {!!col && <Grid container spacing={2}>
         {subfields.map((subfieldData, i) => <Grid key={i} item xs={12} sm={col}>

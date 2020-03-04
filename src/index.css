@@ -15,14 +15,9 @@ display: flex;
   background-color: #ce8128;
 } */
 
-.leftButtonHint{
-margin-left: 10;
-display: inline-block;
-}
-
 .buttonHint  {
-  margin-right: 10;
-display: inline-block;
+margin-top: 5px;
+margin : 5px 4px 0px 4px;
 }
 
 .wrapperArrayField{
@@ -34,4 +29,19 @@ display: inline-block;
 
   .warningColor {
     color: #ce8128;
+  }
+
+  .myl {
+    margin :  20px 0px 20px 0px;
+  }
+
+  .mymd {
+    margin :  20px 0px 20px 0px;
+  }
+
+  .shadowContainer {
+    margin : 6px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.05);
   }

@@ -20,7 +20,7 @@ export default function AutocompleteFieldFormik({ fieldData }) {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isLeft isWarning />
+      <HintWarning hint={warning} isWarning />
       <Autocomplete
         freeSolo={freeSolo}
         options={options}

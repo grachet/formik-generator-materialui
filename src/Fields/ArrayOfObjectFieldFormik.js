@@ -19,11 +19,11 @@ export default function ArrayOfObjectFieldFormik(props) {
     render={arrayHelpers => (
       <div className={(!noBorder ? classes.wrapperArrayField : "")}>
         {title &&
-          <Typography variant="body2" className={!hint ? classes.mbmd : ""}
+          <Typography variant="body2"
             color="textSecondary"
             component={'div'}>{title}
-            <HintWarning hint={hint} noMargin />
-            <HintWarning hint={warning} noMargin isWarning />
+            <HintWarning hint={warning} isWarning />
+            <HintWarning hint={hint} />
           </Typography>}
         {value && value.length > 0 ? (
           <div>
@@ -48,7 +48,7 @@ export default function ArrayOfObjectFieldFormik(props) {
 }
 
 
-function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
+function RenderFieldsContainer({ arrayHelpers, index, fieldData }) {
 
   const { path, value, subfields, dense, disabled } = fieldData;
 
@@ -59,7 +59,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
 
   return (
     <span>
-      <div className={classes.flex}>
+      <div className={classes.flex + " " + (subfields.length >= 3 && classes.shadowContainer)}>
         <Grid container spacing={2}>
           {subfields.map((subfield, i) =>
             <Grid item key={i} className={classes.flex}
@@ -97,7 +97,6 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
           </Tooltip>
         </div>
       </div>
-      {!paper && subfields.length >= 3 && index < value.length - 1 && <Divider className={classes.myl} />}
     </span>
   )
 };

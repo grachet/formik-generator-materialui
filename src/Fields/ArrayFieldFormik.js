@@ -16,10 +16,12 @@ export default function ArrayFieldFormik({ fieldData }) {
     name={path[path.length - 1]}
     render={arrayHelpers => (
       <div className={noBorder ? "" : classes.wrapperArrayField}>
-        {title &&
-          <Typography variant="body2" className={(!hint ? classes.mbmd : "")}
-            color="textSecondary"
-            component={'div'}>{title}<HintWarning hint={hint} noMargin /><HintWarning hint={warning} noMargin isWarning /></Typography>}
+        {title && <Typography variant="body2" className={(!hint ? classes.mbmd : "")}
+          color="textSecondary"
+          component={'div'}>{title}
+          <HintWarning hint={warning} isWarning />
+          <HintWarning hint={hint} />
+        </Typography>}
         {value && value.length > 0 ? (
           <div>
             {value.map((arrayValue, index) => (

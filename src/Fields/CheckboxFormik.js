@@ -18,7 +18,7 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isLeft isWarning />
+      <HintWarning hint={warning} isWarning />
       <FormControlLabel
         control={
           isSwitch ? <Switch

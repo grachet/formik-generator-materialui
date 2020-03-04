@@ -37,7 +37,7 @@ export default function SelectFieldFormik({ fieldData }) {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isLeft isWarning />
+      <HintWarning hint={warning} isWarning />
       <FormControl
         error={!!error}
         variant={disabled ? "filled" : "outlined"}
@@ -73,16 +73,20 @@ export default function SelectFieldFormik({ fieldData }) {
           label={title}
         >
           {choice.map((choice, i) => {
-            if (!choice.category) {
+            if (!choice && choice !== 0) {
+              return <MenuItem key={i} value={null}>
+                {"-"}
+              </MenuItem>
+            } else if (!choice.category) {
               return <MenuItem key={i} value={choice}>
                 {(titleChoice && titleChoice[i]) || choice}
               </MenuItem>
             } else {
               return [
-                <MenuItem key={category} disabled>
-                  <em>{category}</em>
+                <MenuItem key={i + "category"} disabled>
+                  <em>{choice.category}</em>
                 </MenuItem>,
-                choice.values.map((value, j) => <MenuItem key={j + value} value={value}>{value}</MenuItem>)
+                choice.values.map((value, j) => <MenuItem key={j + "" + i} value={value}>{value}</MenuItem>)
               ]
             }
           }
