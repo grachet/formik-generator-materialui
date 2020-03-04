@@ -36,6 +36,7 @@ function Rows({ fields, readOnly }) {
 export default function App() {
 
   const [readOnly, setReadOnly] = useState(false);
+  const [displayAllProps, setDisplayAllProps] = useState(false);
 
   return (
     <div className="root">
@@ -54,6 +55,14 @@ export default function App() {
           }
           label={"Formgenerator readOnly ?"}
         />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={!!displayAllProps} onChange={() => setDisplayAllProps(v => !v)}
+            />
+          }
+          label={"Display all props ?"}
+        />
       </div>
 
       <Grid container spacing={6}>
@@ -64,17 +73,36 @@ export default function App() {
         </Grid>,
         <Grid key={i + "2"} item xs={12} md={6}>
           <Paper className="paper padding">
+            {!!displayAllProps && <span>
+              {"import { FormGenerator } from 'formik-generator-materialui'"}
+              <br />
+              {"const formRef = useRef(null);"}
+              <br /> <br />
+            </span>}
             {"< FormGenerator"}
             <br />
             <div className="indent">
               {!!readOnly && "readOnly={true}"}
               {!!readOnly && <br />}
+              {!!displayAllProps && <span>
+                {"formRef={formRef}"}
+                <br />
+                {"defaultValue={{name:'john'}}"}
+                <br />
+                {"onSubmit={(val) => console.log(val)}"}
+                <br />
+              </span>}
               {"fields = {"}
               <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
                 src={fields} />
               {"}"}
             </div>
             {"/>"}
+            {!!displayAllProps && <span>
+              <br />
+              {"<button onClick={() => formRef.current.submitForm()}> Validate </button>"}
+              <br /> <br />
+            </span>}
           </Paper>
         </Grid>
         ])
