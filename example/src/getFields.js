@@ -178,6 +178,41 @@ export default [
         },
       ],
     },
+    {
+      title: "DisplayField in Group in Group in Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "Text",
+          typeField: "text",
+          path: ["text"],
+        },
+        {
+          title: "2nd group",
+          typeField: "group",
+          subfields: [
+            {
+              title: "3rd group",
+              typeField: "group",
+              subfields: [
+                {
+                  title: 'Display text',
+                  display: [
+                    {
+                      path: [
+                        "text"
+                      ],
+                      transformation: (val) => "text = " + val
+                    }
+                  ],
+                  typeField: 'displayValue',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   [
     {

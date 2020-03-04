@@ -20,85 +20,14 @@ export const getDisplayValue = (fieldData, values) => {
 
 export const addValues = (fieldData, values) => {
   let newField = { ...fieldData };
-
   if (fieldData.typeField === "group") {
-    for (let i in fieldData.subfields) {
-      if (fieldData.subfields[i].typeField === "group") {
-        for (let j in fieldData.subfields[i].subfields) {
-          if (fieldData.subfields[i].subfields[j].typeField === "displayValue") {
-
-            newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].display.map(obj => {
-              let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
-              return obj.transformation ? obj.transformation(newValue) : newValue
-            }).join(newField.subfields[i].subfields[j].separator || (""));
-            if (newField.subfields[i].subfields[j].transformation) {
-              newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].transformation(newField.subfields[i].subfields[j].value)
-            }
-
-          } else {
-            newField.subfields[i].subfields[j].value = values[last(fieldData.subfields[i].subfields[j].path)];
-          }
-        }
-      } else if (newField.subfields[i].typeField === "displayValue") {
-        newField.subfields[i].value = newField.subfields[i].display.map(obj => {
-          let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
-          return obj.transformation ? obj.transformation(newValue) : newValue
-        }).join(newField.subfields[i].separator || "");
-        if (newField.subfields[i].transformation) {
-          newField.subfields[i].value = newField.subfields[i].transformation(newField.subfields[i].value)
-        }
-      } else {
-        newField.subfields[i].value = values[last(fieldData.subfields[i].path)];
-      }
-    }
+    newField.subfields = newField.subfields.map(subfieldData => {
+      return addValues(subfieldData, values)
+    })
   } else if (fieldData.typeField === "displayValue") {
     newField.value = getDisplayValue(fieldData, values);
   } else {
     newField.value = values[last(fieldData.path)];
-  }
-
-  return newField
-};
-
-export const addValues2 = (field, values) => {
-  let newField = { ...field };
-  if (field.typeField === "group") {
-    for (let i in field.subfields) {
-      if (field.subfields[i].typeField === "group") {
-        for (let j in field.subfields[i].subfields) {
-          if (field.subfields[i].subfields[j].typeField === "displayValue") {
-
-            newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].display.map(obj => {
-              let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
-              return obj.transformation ? obj.transformation(newValue) : newValue
-            }).join(newField.subfields[i].subfields[j].separator || (""));
-            if (newField.subfields[i].subfields[j].transformation) {
-              newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].transformation(newField.subfields[i].subfields[j].value)
-            }
-
-          } else {
-            newField.subfields[i].subfields[j].value = values[last(field.subfields[i].subfields[j].path)];
-          }
-        }
-      } else if (newField.subfields[i].typeField === "displayValue") {
-        newField.subfields[i].value = newField.subfields[i].display.map(obj => {
-          let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
-          return obj.transformation ? obj.transformation(newValue) : newValue
-        }).join(newField.subfields[i].separator || "");
-        if (newField.subfields[i].transformation) {
-          newField.subfields[i].value = newField.subfields[i].transformation(newField.subfields[i].value)
-        }
-      } else {
-        newField.subfields[i].value = values[last(field.subfields[i].path)];
-      }
-    }
-  } else if (field.typeField === "displayValue") {
-    newField.value = field.display.map(obj => {
-      let newValue = obj.path ? values[last(obj.path)] || get(data, obj.path) : obj.values;
-      return obj.transformation ? obj.transformation(newValue) : newValue
-    }).join(field.separator || "");
-  } else {
-    newField.value = values[last(field.path)];
   }
   return newField
 };
