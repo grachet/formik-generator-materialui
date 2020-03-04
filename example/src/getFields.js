@@ -192,18 +192,29 @@ export default [
           typeField: "group",
           subfields: [
             {
+              title: "Select",
+              typeField: "select",
+              choice: ["Yes", "No"],
+              path: ["select"]
+            },
+            {
               title: "3rd group",
               typeField: "group",
               subfields: [
                 {
-                  title: 'Display text',
+                  title: 'Display text + select',
+                  separator: " + ",
                   display: [
                     {
                       path: [
                         "text"
                       ],
-                      transformation: (val) => "text = " + val
-                    }
+                    },
+                    {
+                      path: [
+                        "select"
+                      ],
+                    },
                   ],
                   typeField: 'displayValue',
                 },
