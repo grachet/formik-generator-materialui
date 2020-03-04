@@ -435,20 +435,21 @@ export default [
       placeholder: "Search a country",
     },
     {
-      title: 'Autocomplete + freetext',
+      title: 'Autocomplete freetext',
       freeSolo: true,
       path: [
         'countryFree',
       ],
       typeField: 'autocomplete',
-      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-      getOptionLabel: (val) => val.name,
+      options: ["France", "Spain", "Germany"],
+      getOptionLabel: (opt) => opt,
       placeholder: "Search a country",
     },
     {
-      title: 'Autocomplete + freetext',
+      title: 'Autocomplete disabled',
+      disabled: true,
       path: [
-        'countryFree',
+        'countryDisabled',
       ],
       typeField: 'autocomplete',
       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
