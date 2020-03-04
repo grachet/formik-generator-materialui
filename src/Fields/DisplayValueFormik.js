@@ -8,7 +8,7 @@ import classes from '../index.css'
 
 export default function DisplayValueFormik({ fieldData }) {
 
-  const { yup, title, multiline, value, hint, warning } = fieldData;
+  const { yup, title, multiline, value, transformation, hint, warning } = fieldData;
 
   let error;
   if (yup) {
@@ -34,7 +34,7 @@ export default function DisplayValueFormik({ fieldData }) {
         error={!!error}
         helperText={error}
         multiline={multiline}
-        value={value}
+        value={transformation ? transformation(value) : value}
       />
       <HintWarning hint={hint} />
     </div>

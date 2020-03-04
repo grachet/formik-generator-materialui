@@ -2,21 +2,30 @@ import get from "lodash.get";
 
 export const last = (arr) => arr && arr[arr.length - 1];
 
-export const getDisplayValue = (field, values) => {
-  return field.display.map(obj => {
-    let newValue = obj.path ? values[last(obj.path)] : obj.values;
-    return obj.transformation ? obj.transformation(newValue) : newValue
-  }).join(field.separator || "");
+export const getDisplayValue = (fieldData, values) => {
+  return fieldData.display.map(displayItem => {
+    if (displayItem && displayItem.path) {
+      let newValue = values[last(displayItem.path)]
+      if (displayItem.transformation) {
+        newValue = displayItem.transformation(newValue);
+      }
+      return newValue
+    } else if (displayItem || displayItem === 0) {
+      return displayItem
+    } else {
+      return ""
+    }
+  }).join(fieldData.separator || "");
 }
 
-export const addValues = (field, values) => {
-  let newField = { ...field };
+export const addValues = (fieldData, values) => {
+  let newField = { ...fieldData };
 
-  if (field.typeField === "group") {
-    for (let i in field.subfields) {
-      if (field.subfields[i].typeField === "group") {
-        for (let j in field.subfields[i].subfields) {
-          if (field.subfields[i].subfields[j].typeField === "displayValue") {
+  if (fieldData.typeField === "group") {
+    for (let i in fieldData.subfields) {
+      if (fieldData.subfields[i].typeField === "group") {
+        for (let j in fieldData.subfields[i].subfields) {
+          if (fieldData.subfields[i].subfields[j].typeField === "displayValue") {
 
             newField.subfields[i].subfields[j].value = newField.subfields[i].subfields[j].display.map(obj => {
               let newValue = obj.path ? Object.keys(values).indexOf(last(obj.path)) !== -1 ? values[last(obj.path)] : get(data, obj.path) : obj.values;
@@ -27,7 +36,7 @@ export const addValues = (field, values) => {
             }
 
           } else {
-            newField.subfields[i].subfields[j].value = values[last(field.subfields[i].subfields[j].path)];
+            newField.subfields[i].subfields[j].value = values[last(fieldData.subfields[i].subfields[j].path)];
           }
         }
       } else if (newField.subfields[i].typeField === "displayValue") {
@@ -39,14 +48,13 @@ export const addValues = (field, values) => {
           newField.subfields[i].value = newField.subfields[i].transformation(newField.subfields[i].value)
         }
       } else {
-        newField.subfields[i].value = values[last(field.subfields[i].path)];
+        newField.subfields[i].value = values[last(fieldData.subfields[i].path)];
       }
     }
-  } else if (field.typeField === "displayValue") {
-    newField.value = getDisplayValue(field, values);
-    console.log("display", getDisplayValue(field, values))
+  } else if (fieldData.typeField === "displayValue") {
+    newField.value = getDisplayValue(fieldData, values);
   } else {
-    newField.value = values[last(field.path)];
+    newField.value = values[last(fieldData.path)];
   }
 
   return newField

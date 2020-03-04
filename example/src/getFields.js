@@ -292,49 +292,64 @@ export default [
       display: [
         {
           path: [
-            "first"
-          ]
+            "first",
+          ],
+          transformation: (val) => (val || "").length
         },
         {
           path: [
             "second"
           ],
+          transformation: (val) => (val || "").length
         },
       ],
       typeField: 'displayValue',
     },
     {
       title: '(first.lenght + second.lenght)',
-      separator: "",
+      separator: "+",
       display: [
         {
           path: [
             "first"
           ],
-          transformation: (val) => (val || "").lenght
+          transformation: (val) => (val || "").length
         },
         {
           path: [
             "second"
           ],
-          transformation: (val) => (val || "").lenght
+          transformation: (val) => (val || "").length
         },
       ],
       transformation: (value) => {
-        return "test";
+        let [a, b] = value.split("+");
+        return parseInt(a) + parseInt(b);
       },
       typeField: 'displayValue',
     },
     {
       title: 'Just display a value',
+      separator: " ",
       display: [
-        {
-          path: [
-            "first"
-          ]
-        }
+        "constante",
+        0,
+        null
       ],
       typeField: 'displayValue',
+    },
+    {
+      title: 'Mix const/editable value',
+      separator: " ",
+      display: [
+        "constante",
+        {
+          path: [
+            "second"
+          ]
+        },
+      ],
+      typeField: 'displayValue'
     },
   ],
   [
@@ -449,11 +464,7 @@ export default [
     {
       title: 'Just display a value',
       display: [
-        {
-          path: [
-            "first"
-          ]
-        }
+        "constante",
       ],
       typeField: 'displayValue',
       hint: "hint text",

@@ -18,7 +18,7 @@ export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly
   const initialValues = fields && getInitialValues(fields, defaultValue);
   const validationSchema = fields && getValidationSchema(fields);
 
-  console.log(validationSchema, initialValues)
+  // console.log(validationSchema, initialValues)
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
