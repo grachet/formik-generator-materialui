@@ -179,6 +179,31 @@ export default [
       ],
     },
     {
+      title: "Group (Array of objects)",
+      typeField: "group",
+      subfields: [
+        {
+          title: 'Array of objects',
+          path: [
+            'address',
+          ],
+          subfields: [
+            {
+              title: "Street",
+              name: "streetName",
+              typeField: 'text',
+            }, {
+              title: "Country",
+              name: "country",
+              choice: ["France", "USA", "Mexico"],
+              typeField: 'select',
+            }],
+          typeField: 'arrayObject',
+          emptyAddText: "Add object"
+        },
+      ],
+    },
+    {
       title: "DisplayField in Group in Group in Group",
       typeField: "group",
       subfields: [
@@ -370,7 +395,7 @@ export default [
       ],
       transformation: (value) => {
         let [a, b] = value.split("+");
-        return parseInt(a) + parseInt(b);
+        return parseInt(a, 10) + parseInt(b, 10);
       },
       typeField: 'displayValue',
     },

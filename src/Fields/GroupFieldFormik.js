@@ -9,9 +9,9 @@ export default function GroupFieldFormik({ fieldData }) {
   const { title, subfields, col, hint, warning, disabled } = fieldData;
 
   return (
-    <div className={classes.wrapperArrayField}>
+    <div className={classes.borderContainer}>
       {title && <Typography variant="body2"
-        className={(!hint ? classes.mbmd : "")}
+        gutterBottom
         color="textSecondary"
         component={'div'}>{title}
         <HintWarning hint={warning} isWarning />

@@ -6,37 +6,20 @@ flex-grow: 1;
 display: flex;
 }
 
-/* .warningColor{
-  background-color: #EB962C;
-  color: #fff;
-}
-
-.warningColor:hover{
-  background-color: #ce8128;
-} */
-
 .buttonHint  {
 margin-top: 5px;
 margin : 5px 4px 0px 4px;
 }
 
-.wrapperArrayField{
+.borderContainer{
     border: 1px solid rgba(0,0,0,0.25);
-    padding: 20px;
+    padding: 10px 15px 10px 15px;
     border-radius: 4px;
     margin:  20px 0px 20px 0px;
   }
 
   .warningColor {
     color: #ce8128;
-  }
-
-  .myl {
-    margin :  20px 0px 20px 0px;
-  }
-
-  .mymd {
-    margin :  20px 0px 20px 0px;
   }
 
   .shadowContainer {

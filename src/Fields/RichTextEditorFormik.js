@@ -30,7 +30,7 @@ export default function RichTextEditorFormik({ fieldData }) {
   if (!path) return null;
 
   return (
-    <div className={classes.flexGrow + " " + classes.mymd}>
+    <div className={classes.flexGrow}>
       {title &&
         <Typography variant="body2"
           color="textSecondary">{title}
@@ -38,6 +38,8 @@ export default function RichTextEditorFormik({ fieldData }) {
           <HintWarning hint={hint} />
         </Typography>}
       <div className={classes.flex}>
+        <div className={classes.borderContainer}>
+        </div>
         {/* <ReactQuill
           value={fieldData.value || ""}
           className={classes.flexGrow + " " + classes.mbxl}

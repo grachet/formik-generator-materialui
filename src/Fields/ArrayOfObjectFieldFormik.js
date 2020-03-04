@@ -18,9 +18,9 @@ export default function ArrayOfObjectFieldFormik(props) {
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (
-      <div className={(!noBorder ? classes.wrapperArrayField : "")}>
+      <div className={(!noBorder ? classes.borderContainer : "")}>
         {title &&
-          <Typography variant="body2"
+          <Typography variant="body2" gutterBottom
             color="textSecondary"
             component={'div'}>{title}
             <HintWarning hint={warning} isWarning />
@@ -37,7 +37,7 @@ export default function ArrayOfObjectFieldFormik(props) {
           </div>
         ) : (
             <Button
-              disabled={disabled} variant="outlined" className={classes.mymd}
+              disabled={disabled} variant="outlined"
               onClick={() => arrayHelpers.push({})}>
               {emptyAddText}
             </Button>

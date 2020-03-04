@@ -16,8 +16,8 @@ export default function ArrayFieldFormik({ fieldData }) {
     validateOnChange={false}
     name={path[path.length - 1]}
     render={arrayHelpers => (
-      <div className={noBorder ? "" : classes.wrapperArrayField}>
-        {title && <Typography variant="body2" className={(!hint ? classes.mbmd : "")}
+      <div className={noBorder ? "" : classes.borderContainer}>
+        {title && <Typography variant="body2" gutterBottom
           color="textSecondary"
           component={'div'}>{title}
           <HintWarning hint={warning} isWarning />
@@ -64,7 +64,7 @@ export default function ArrayFieldFormik({ fieldData }) {
             )}
           </div>
         ) : (
-            <Button variant="outlined" disabled={disabled} className={classes.mymd} onClick={() => arrayHelpers.push('')}>
+            <Button variant="outlined" disabled={disabled} onClick={() => arrayHelpers.push('')}>
               {emptyAddText}
             </Button>
           )}
