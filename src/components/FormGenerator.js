@@ -40,7 +40,7 @@ export default function FormGenerator({ defaultValue, fields, onSubmit, readOnly
           <Form>
             {fields && fields.map((field, i) => <div key={i}>
               <FieldGenerator
-                disabled={readOnly}
+                readOnly={readOnly}
                 formFunction={formFunction}
                 fieldData={addValues(field, values)}
               />

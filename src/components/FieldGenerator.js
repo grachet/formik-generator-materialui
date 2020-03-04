@@ -1,9 +1,4 @@
 import React from 'react';
-import HintWarning from "../UI/HintWarning";
-import {
-  Typography,
-  Grid,
-} from "@material-ui/core";
 import TextFieldFormik from "../Fields/TextFieldFormik";
 import DisplayValueFormik from '../Fields/DisplayValueFormik';
 import SelectFieldFormik from '../Fields/SelectFieldFormik';
@@ -16,9 +11,9 @@ import AsyncAutocompleteFieldFormik from '../Fields/AsyncAutocompleteFieldFormik
 import RichTextEditorFormik from '../Fields/RichTextEditorFormik';
 import GroupFieldFormik from '../Fields/GroupFieldFormik';
 
-export default function FieldGenerator({ fieldData, disabled }) {
+export default function FieldGenerator({ fieldData, readOnly }) {
 
-  if (disabled) {
+  if (readOnly) {
     //can be true without read only
     fieldData.disabled = true
   }

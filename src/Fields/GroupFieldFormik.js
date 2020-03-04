@@ -19,12 +19,12 @@ export default function GroupFieldFormik({ fieldData }) {
       </Typography>}
       {!!col && <Grid container spacing={2}>
         {subfields.map((subfieldData, i) => <Grid key={i} item xs={12} sm={col}>
-          <FieldGenerator fieldData={subfieldData} disabled={subfieldData.disabled} />
+          <FieldGenerator fieldData={subfieldData} readOnly={fieldData.disabled} />
         </Grid>)}
       </Grid>}
       {!col && subfields.map((subfieldData, i) =>
         <span key={i}>
-          <FieldGenerator fieldData={subfieldData} disabled={subfieldData.disabled} />
+          <FieldGenerator fieldData={subfieldData} readOnly={fieldData.disabled} />
         </span>)
       }
     </div>
