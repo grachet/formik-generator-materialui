@@ -41,7 +41,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
       <Autocomplete
         // getOptionSelected={fieldData.getOptionSelected}
         id="autocomplete"
-        getOptionLabel={(option) => fieldData.getOptionLabel(option) || ""}
+        getOptionLabel={(option) => getOptionLabel(option) || ""}
         freeSolo={freeSolo}
         options={options || []}
         loading={loading}

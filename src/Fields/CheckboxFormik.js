@@ -11,12 +11,14 @@ import { last } from "../functions/formHelper";
 
 export default function CheckboxFormik({ fieldData, isSwitch }) {
 
-  let name = last(fieldData.path);
+  const { title, path, disabled, hint, warning } = fieldData;
+
+  let name = last(path);
   const [field] = useField(name);
 
   return (
-    <div className={classes.flex} key={"checkbox" + fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
+    <div className={classes.flex} key={"checkbox" + title}>
+      <HintWarning hint={warning} isLeft isWarning />
       <FormControlLabel
         control={
           isSwitch ? <Switch
@@ -25,10 +27,10 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
               checked={!!field.value} name={name} onChange={field.onChange}
             />
         }
-        disabled={fieldData.disabled}
-        label={fieldData.title}
+        disabled={disabled}
+        label={title}
       />
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   )
 };

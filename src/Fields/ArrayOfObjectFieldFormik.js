@@ -69,10 +69,9 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, paper }) {
 
               <span className={classes.flexGrow}><FieldGenerator fieldData={{
                 ...subfield,
-                disabled,
                 path: [path[path.length - 1] + "[" + index + "]." + subfield.name],
                 value: value[index][subfield.name]
-              }} /></span>
+              }} readOnly={disabled} /></span>
             </Grid>)}
         </Grid>
         <div className={classes.buttonHint}>

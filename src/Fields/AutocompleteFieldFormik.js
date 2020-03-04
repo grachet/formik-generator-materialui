@@ -12,35 +12,38 @@ import classes from '../index.css'
 
 export default function AutocompleteFieldFormik({ fieldData }) {
 
-  let name = last(fieldData.path);
+
+  const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
+
+  let name = last(path);
   const { values, setFieldValue, touched, errors } = useFormikContext();
   let error = touched[name] && errors[name] ? errors[name] : "";
 
   return (
-    <div className={classes.flex} key={fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} isLeft isWarning />
       <Autocomplete
-        freeSolo={fieldData.freeSolo}
-        options={fieldData.options}
-        getOptionLabel={(option) => fieldData.getOptionLabel(option) || ""}
+        freeSolo={freeSolo}
+        options={options}
+        getOptionLabel={(option) => getOptionLabel(option) || ""}
         className={classes.flexGrow}
         // defaultValue={values[name] || ""}
         value={values[name] || ""}
         onChange={(_, val) => setFieldValue(name, val)}
-        onInputChange={(_, val) => fieldData.freeSolo && setFieldValue(name, val)}
-        disabled={fieldData.disabled}
+        onInputChange={(_, val) => freeSolo && setFieldValue(name, val)}
+        disabled={disabled}
         renderInput={params => (<TextField
           {...params}
           margin={"dense"}
           error={!!error}
           helperText={error}
-          label={fieldData.title}
+          label={title}
           fullWidth
-          variant={fieldData.disabled ? "filled" : "outlined"}
-          placeholder={fieldData.placeholder}
+          variant={disabled ? "filled" : "outlined"}
+          placeholder={placeholder}
         />)}
       />
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   )
 };

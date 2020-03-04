@@ -95,23 +95,49 @@ class Example extends Component {
 
 "group"
 
+title, subfields, col, hint, warning, disabled
+
 "text"
+
+ title, path, disabled, value, hint, warning, required, multiline, link
 
 "displayValue"
 
+yup, title, multiline, value, hint, warning
+
 "select"
+
+title, path, choice, titleChoice, category, disabled, value, hint, warning, required
 
 "date"
 
+required, title, hint, value, openTo, warning, disabled, path
+
 "richTextEditor"
+
+title, path, warning, hint
 
 "switch"
 
+title, path, disabled, hint, warning
+
+"checkbox"
+
+title, path, disabled, hint, warning
+
 "arrayObject"
+
+title, path, disabled, value, emptyAddText, noBorder, hint, warning
+
+ path, value, subfields, dense, disabled
 
 "array"
 
+ title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton
+
 "autocomplete"
+
+ freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning
 
 "asyncAutocomplete"
 

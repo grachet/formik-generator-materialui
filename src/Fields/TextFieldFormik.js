@@ -9,14 +9,18 @@ import classes from '../index.css'
 
 export default function TextFieldFormik({ fieldData }) {
 
-  let name = last(fieldData.path);
+
+  const { title, path, disabled, value, hint, warning, required, multiline, link } = fieldData;
+
+
+  let name = last(path);
   const [field, meta] = useField(name);
 
   let error = meta.touched && meta.error ? meta.error : "";
 
   return (
-    <div className={classes.flex} key={fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} isLeft isWarning />
       <TextField
         name={field.name}
         value={field.value || ''}
@@ -24,18 +28,18 @@ export default function TextFieldFormik({ fieldData }) {
         onBlur={field.onBlur}
         error={!!error}
         helperText={error}
-        required={fieldData.required}
+        required={required}
         className={classes.flexGrow}
         margin={"dense"}
-        multiline={fieldData.multiline}
-        variant={fieldData.disabled ? "filled" : "outlined"}
-        label={fieldData.title}
+        multiline={multiline}
+        variant={disabled ? "filled" : "outlined"}
+        label={title}
         InputProps={{
-          readOnly: fieldData.disabled
+          readOnly: disabled
         }}
       />
-      {fieldData.link && <HintWarning hint={fieldData.value} isLink />}
-      <HintWarning hint={fieldData.hint} />
+      {link && <HintWarning hint={value} isLink />}
+      <HintWarning hint={hint} />
     </div>
   )
 };

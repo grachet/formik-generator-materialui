@@ -30,7 +30,7 @@ export default function ArrayFieldFormik({ fieldData }) {
                     path: [path[path.length - 1] + "[" + index + "]"],
                     ...subfield,
                     value: arrayValue
-                  }} />
+                  }} readOnly={disabled} />
                 </span>
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>

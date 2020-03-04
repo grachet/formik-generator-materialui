@@ -17,51 +17,52 @@ import { last } from "../functions/formHelper";
 
 export default function SelectFieldFormik({ fieldData }) {
 
-  const selectRef = useRef(null);
+  const { title, path, choice, titleChoice, category, disabled, value, hint, warning, required } = fieldData;
 
+  const selectRef = useRef(null);
   const [labelWidth, setLabelWidth] = useState(null);
 
-  let name = last(fieldData.path);
+  let name = last(path);
   const [field, meta] = useField(name);
 
   let error = meta.touched && meta.error ? meta.error : "";
-  let noLabelNotchWidth = fieldData.title ? fieldData.title.length * 9 : 0;
+  let noLabelNotchWidth = title ? title.length * 9 : 0;
 
   useEffect(() => {
     if (selectRef && selectRef.current) {
       let labelWidth = selectRef.current.offsetWidth;
       setLabelWidth(labelWidth);
     }
-  }, [fieldData.title]);
+  }, [title]);
 
   return (
-    <div className={classes.flex} key={fieldData.title}>
-      <HintWarning hint={fieldData.warning} isLeft isWarning />
+    <div className={classes.flex} key={title}>
+      <HintWarning hint={warning} isLeft isWarning />
       <FormControl
         error={!!error}
-        variant={fieldData.disabled ? "filled" : "outlined"}
+        variant={disabled ? "filled" : "outlined"}
         margin={"dense"}
         className={classes.flexGrow}>
         <InputLabel
-          shrink={!!fieldData.value || (fieldData.value === 0)}
-          required={fieldData.required}
+          shrink={!!value || (value === 0)}
+          required={required}
           ref={selectRef}
-          htmlFor={name}>{fieldData.title}</InputLabel>
+          htmlFor={name}>{title}</InputLabel>
         <Select
           name={field.name}
           value={field.value === 0 ? 0 : field.value || ''}
           onChange={field.onChange}
-          input={fieldData.disabled ?
+          input={disabled ?
             <FilledInput
               readOnly={true}
-              field={fieldData.value}
+              field={value}
             />
             :
             <OutlinedInput
-              field={fieldData.value}
+              field={value}
               id={name}
               labelWidth={labelWidth || noLabelNotchWidth}
-              notched={!!fieldData.value || (fieldData.value === 0)}
+              notched={!!value || (value === 0)}
             />}
           MenuProps={{
             PaperProps: {
@@ -70,17 +71,17 @@ export default function SelectFieldFormik({ fieldData }) {
               },
             }
           }}
-          label={fieldData.title}
+          label={title}
         >
-          {fieldData.choice.map((choice, i) => {
+          {choice.map((choice, i) => {
             if (!choice.category) {
               return <MenuItem key={i} value={choice}>
-                {(fieldData.titleChoice && fieldData.titleChoice[i]) || choice}
+                {(titleChoice && titleChoice[i]) || choice}
               </MenuItem>
             } else {
               return [
-                <MenuItem key={choice.category} disabled>
-                  <em>{choice.category}</em>
+                <MenuItem key={category} disabled>
+                  <em>{category}</em>
                 </MenuItem>,
                 choice.values.map((value, j) => <MenuItem key={j + value} value={value}>{value}</MenuItem>)
               ]
@@ -90,7 +91,7 @@ export default function SelectFieldFormik({ fieldData }) {
         </Select>
         {error && <FormHelperText margin={"dense"} error>{error}</FormHelperText>}
       </FormControl>
-      <HintWarning hint={fieldData.hint} />
+      <HintWarning hint={hint} />
     </div>
   )
 };
