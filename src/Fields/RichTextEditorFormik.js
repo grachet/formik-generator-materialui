@@ -3,34 +3,19 @@ import { useFormikContext } from "formik";
 import HintWarning from "../UI/HintWarning"
 import { Typography } from '@material-ui/core';
 import classes from '../index.css'
-
-export const modulesReactQuill = {
-  toolbar: [
-    [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-    ['link'],
-    ['clean']
-  ],
-};
-
-export const formatsReactQuill = [
-  'header',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image'
-];
+import MUIRichTextEditor from 'mui-rte'
+import { last } from "../functions/formHelper"
 
 export default function RichTextEditorFormik({ fieldData }) {
 
-  const { title, path, warning, hint } = fieldData;
-  let name = path[path.length - 1];
-  const { setFieldValue } = useFormikContext();
+  const { title, path, disabled, warning, hint, isSmallIcons } = fieldData;
 
-  if (!path) return null;
+  let name = last(path);
+  const { values, setFieldValue, touched, errors } = useFormikContext();
+  let error = touched[name] && errors[name] ? errors[name] : "";
 
   return (
-    <div className={classes.flexGrow}>
+    <div className={classes.flexGrow + " " + classes.borderContainer}>
       {title &&
         <Typography variant="body2"
           color="textSecondary">{title}
@@ -38,16 +23,18 @@ export default function RichTextEditorFormik({ fieldData }) {
           <HintWarning hint={hint} />
         </Typography>}
       <div className={classes.flex}>
-        <div className={classes.borderContainer}>
-        </div>
-        {/* <ReactQuill
-          value={fieldData.value || ""}
-          className={classes.flexGrow + " " + classes.mbxl}
-          theme="snow"
-          modules={modulesReactQuill}
-          formats={formatsReactQuill}
-          onChange={value => setFieldValue(name, value)}
-        /> */}
+        <MUIRichTextEditor
+          readOnly={disabled}
+          toolbarButtonSize={isSmallIcons ? "small" : "medium"}
+          value={values[name] || ""}
+          inlineToolbar={true}
+          error={!!error}
+          label="Start typing..."
+          onSave={(string) => {
+            setFieldValue(name, string)
+          }}
+        // onChange={(editorState) => console.log(editorState)}
+        />
       </div>
     </div>
   )

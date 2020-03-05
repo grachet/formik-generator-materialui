@@ -109,8 +109,14 @@ export default [
     {
       title: "Rich text editor",
       path: ["richText"],
-      fullWidth: true,
       typeField: 'richTextEditor',
+      hint: "You must click on save button",
+    },
+    {
+      title: "RTE small icons ",
+      path: ["richTextSmall"],
+      typeField: 'richTextEditor',
+      isSmallIcons: true
     }
   ],
   [
@@ -522,6 +528,7 @@ export default [
       typeField: 'richTextEditor',
       hint: "hint text",
       warning: "Warning text",
+      isSmallIcons: true
     },
     {
       title: 'Date',
