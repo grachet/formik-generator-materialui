@@ -431,7 +431,7 @@ export default [
         'countryFree',
       ],
       typeField: 'autocomplete',
-      options: ["France", "Spain", "Germany", "azertyuiopqsdfghjklmwxcvbnazsdcvnjk,l;"],
+      options: ["France", "Spain", "Germany"],
       getOptionLabel: (opt) => opt,
       placeholder: "Search a country",
       hint: "Options with freesolo must be string"

@@ -10,6 +10,8 @@ import {
 import { last } from "../functions/formHelper";
 import classes from '../index.css'
 
+let localValue = "";
+
 export default function AutocompleteFieldFormik({ fieldData }) {
 
   const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
@@ -29,11 +31,21 @@ export default function AutocompleteFieldFormik({ fieldData }) {
         options={options || []}
         getOptionLabel={(option) => getOptionLabel(option) || ""}
         value={values[name] || ""}
-        onChange={(_, val) => setFieldValue(name, val)}
-
+        onChange={(_, val) => {
+          if (freeSolo) {
+            localValue = val
+          }
+          setFieldValue(name, val)
+        }}
+        onClose={() => {
+          freeSolo && setFieldValue(name, localValue)
+        }}
         freeSolo={freeSolo}
-        onInputChange={(_, val) => freeSolo && setFieldValue(name, val)}
-
+        onInputChange={(_, val) => {
+          if (freeSolo) {
+            localValue = val
+          }
+        }}
         renderInput={params => (<TextField
           {...params}
           margin={"dense"}

@@ -48,7 +48,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
         onOpen={() => {
           setOpen(true);
         }}
-        onClose={(_, val) => {
+        onClose={() => {
           setOpen(false);
         }}
         onChange={(_, val) => {
