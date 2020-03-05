@@ -9,16 +9,13 @@ import {
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-export default function FormGenerator({ defaultValues, fields, onSubmit, readOnly, formRef }) {
+export default function FormGenerator({ initialValues, fields, onSubmit, readOnly, formRef }) {
 
   //  static propTypes = {
   //   text: PropTypes.string
   // }
 
-  const initialValues = fields && getInitialValues(fields, defaultValues);
   const validationSchema = fields && getValidationSchema(fields);
-
-  // console.log(validationSchema, initialValues)
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>

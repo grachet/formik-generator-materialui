@@ -1,13 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { Grid, Typography, Switch, FormControlLabel, Button, Paper } from "@material-ui/core"
 import "./app.css";
 import { FormGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
 import getDefaultValues from './getDefaultValues';
-import get from 'lodash.get';
 
-function Rows({ fields, readOnly, defaultValues }) {
+function Rows({ fields, readOnly, initialValues }) {
 
   const formRef = useRef(null);
 
@@ -17,7 +16,7 @@ function Rows({ fields, readOnly, defaultValues }) {
     <FormGenerator
       readOnly={readOnly}
       formRef={formRef}
-      defaultValues={defaultValues}
+      initialValues={initialValues}
       onSubmit={(values) => {
         setResult(values)
       }}
@@ -37,7 +36,7 @@ export default function App() {
 
   const [readOnly, setReadOnly] = useState(false);
   const [displayAllProps, setDisplayAllProps] = useState(true);
-  let [defaultValues, setDefaultValues] = useState(getDefaultValues(fieldsArray, true));
+  let [initialValues, setDefaultValues] = useState(getDefaultValues(fieldsArray, true));
 
   return (
     <div className="root">
@@ -85,7 +84,7 @@ export default function App() {
       <Grid container spacing={6}>
         {fieldsArray.map((fields, i) => [<Grid key={i + "1"} item xs={12} md={6}>
           <Paper className="padding">
-            <Rows fields={fields} readOnly={readOnly} defaultValues={defaultValues[i]} />
+            <Rows fields={fields} readOnly={readOnly} initialValues={initialValues[i]} />
           </Paper>
         </Grid>,
         <Grid key={i + "2"} item xs={12} md={6}>
@@ -104,9 +103,9 @@ export default function App() {
               {!!displayAllProps && <span>
                 {"formRef={formRef}"}
                 <br />
-                {"defaultValues={"}
+                {"initialValues={"}
                 <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
-                  src={defaultValues[i]} />
+                  src={initialValues[i]} />
                 {"}"}
                 <br />
                 {"onSubmit={(val) => console.log(val)}"}
