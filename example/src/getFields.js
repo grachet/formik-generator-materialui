@@ -425,16 +425,6 @@ export default [
   ],
   [
     {
-      title: 'Autocomplete select',
-      path: [
-        'country',
-      ],
-      typeField: 'autocomplete',
-      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-      getOptionLabel: (val) => val.name,
-      placeholder: "Search a country",
-    },
-    {
       title: 'Autocomplete freetext',
       freeSolo: true,
       path: [
@@ -445,6 +435,16 @@ export default [
       getOptionLabel: (opt) => opt,
       placeholder: "Search a country",
       hint: "Options with freesolo must be string"
+    },
+    {
+      title: 'Autocomplete select',
+      path: [
+        'country',
+      ],
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
     },
     {
       title: 'Autocomplete disabled',
@@ -460,41 +460,36 @@ export default [
   ],
   [
     {
+      title: 'Async Autocomplete (free text)',
+      freeSolo: true,
+      typeField: 'asyncAutocomplete',
+      path: [
+        'filmTitle',
+      ],
+      placeholder: "Search a film title",
+      getAsyncOptions: async (value) => {
+        let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
+        let datas = await rep.json();
+        return (datas && datas.results && datas.results.map(r => r.title)) || []
+      },
+      hint: "Options with freesolo must be string",
+      getOptionLabel: opt => opt
+    },
+    {
       title: 'Async Autocomplete (select)',
       typeField: 'asyncAutocomplete',
       path: [
         'film',
       ],
       placeholder: "Search a film",
-      getAsyncOptions: (value) => {
-        return new Promise((resolve, reject) => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-            .then(r => r.json())
-            .then(datas => { console.log(datas); return resolve((datas && datas.results) || []) })
-            .catch(err => { console.log(err); return reject(err) })
-        });
+      getAsyncOptions: async (value) => {
+        let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
+        let datas = await rep.json();
+        return (datas && datas.results) || []
       },
       getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
       hint: "For async call on input change (not just 1 time on launch)"
     },
-    {
-      title: 'Async Autocomplete (free text)',
-      freeSolo: true,
-      typeField: 'asyncAutocomplete',
-      path: [
-        'user',
-      ],
-      placeholder: "Search an user",
-      getAsyncOptions: (value) => {
-        return new Promise((resolve, reject) => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-            .then(r => r.json())
-            .then(datas => { console.log(datas); return resolve((datas && datas.results) || []) })
-            .catch(err => { console.log(err); return reject(err) })
-        });
-      },
-      getOptionLabel: e => e.Title || ""
-    }
   ],
   [
     {
@@ -558,25 +553,22 @@ export default [
       warning: "Text warning",
       hint: "Hint text",
     },
-    // {
-    //   title: 'Async Autocomplete (free text)',
-    //   freeSolo: true,
-    //   typeField: 'asyncAutocomplete',
-    //   warning: "Text warning",
-    //   hint: "Hint text",
-    //   path: [
-    //     'user',
-    //   ],
-    //   placeholder: "Search an user",
-    //   getAsyncOptions: (value) => {
-    //     return new Promise(resolve => {
-    //       fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-    //         .then(r => r.json)
-    //         .then(datas => { console.log(datas); resolve(datas.results || []) })
-    //     });
-    //   },
-    //   getOptionLabel: e => e.Title || ""
-    // },
+    {
+      title: 'Async Autocomplete (select)',
+      warning: "Text warning",
+      hint: "Hint text",
+      typeField: 'asyncAutocomplete',
+      path: [
+        'film',
+      ],
+      placeholder: "Search a film",
+      getAsyncOptions: async (value) => {
+        let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
+        let datas = await rep.json();
+        return (datas && datas.results) || []
+      },
+      getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
+    },
     {
       title: 'Array of text fields',
       path: [

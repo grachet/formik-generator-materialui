@@ -48,9 +48,8 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
         onOpen={() => {
           setOpen(true);
         }}
-        onClose={() => {
+        onClose={(_, val) => {
           setOpen(false);
-          freeSolo && setFieldValue(name, inputText);
         }}
         onChange={(_, val) => {
           setFieldValue(name, val)
@@ -58,6 +57,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
         onInputChange={(_, val) => {
           setInputText(val);
           setOptions(null);
+          freeSolo && setFieldValue(name, val);
         }}
         filterOptions={(options, { inputValue }) => options}
         value={value || ""}
