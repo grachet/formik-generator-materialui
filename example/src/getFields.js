@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-const tmdbkey = "1dc2b196ec51b322a69db96aa1c90dc9";
+import { constante } from "./index";
 
 export default [
   [
@@ -467,7 +467,7 @@ export default [
       placeholder: "Search an user",
       getAsyncOptions: (value) => {
         return new Promise(resolve => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + tmdbkey + "&query=" + value)
+          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
             .then(r => r.json)
             .then(datas => { console.log(datas); resolve(datas.results || []) })
         });
@@ -484,7 +484,7 @@ export default [
       placeholder: "Search an user",
       getAsyncOptions: (value) => {
         return new Promise(resolve => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + tmdbkey + "&query=" + value)
+          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
             .then(r => r.json)
             .then(datas => { console.log(datas); resolve(datas.results || []) })
         });
@@ -566,7 +566,7 @@ export default [
       placeholder: "Search an user",
       getAsyncOptions: (value) => {
         return new Promise(resolve => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + tmdbkey + "&query=" + value)
+          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
             .then(r => r.json)
             .then(datas => { console.log(datas); resolve(datas.results || []) })
         });

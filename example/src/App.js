@@ -63,6 +63,13 @@ export default function App() {
           }
           label={"Display all props ?"}
         />
+        <span className="floatRight">
+          <Button
+            target="_blank" variant={"outlined"}
+            href={"https://github.com/grachet/formik-generator-materialui/blob/master/example/src/getFields.js"}>
+            File src
+          </Button>
+        </span>
       </div>
 
       <Grid container spacing={6}>
