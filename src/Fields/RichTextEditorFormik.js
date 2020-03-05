@@ -12,15 +12,14 @@ export default function RichTextEditorFormik({ fieldData }) {
 
   const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
-  let name = last(path);
   const { values, setFieldValue, touched, errors } = useFormikContext();
-  let error = touched[name] && errors[name] ? errors[name] : "";
+  let error = touched[path] && errors[path] ? errors[path] : "";
 
   const ref = useRef()
 
   useEffect(() => {
     console.log("reset")
-    value = values[name] || null
+    value = values[path] || null
   }, [])
 
   return (
@@ -41,7 +40,7 @@ export default function RichTextEditorFormik({ fieldData }) {
           error={!!error}
           label="Start typing..."
           onSave={(string) => {
-            setFieldValue(name, string)
+            setFieldValue(path, string)
           }}
           onChange={(editorState) => saveOnEdit && ref.current.save()}
         />

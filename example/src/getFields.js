@@ -121,26 +121,31 @@ export default [
       choice: ["Yes", "No"]
     },
   ],
-  //   [
-  //     {
-  //       title: "Rich text editor",
-  //       path: "richText"],
-  //       typeField: 'richTextEditor',
-  //       hint: "You must click on save button",
-  //     },
-  //     {
-  //       title: "RTE small icons ",
-  //       path: "richTextSmall"],
-  //       typeField: 'richTextEditor',
-  //       isSmallIcons: true
-  //     },
-  //     {
-  //       title: "RTE small icons ",
-  //       path: "richTextSaveOnEdit"],
-  //       typeField: 'richTextEditor',
-  //       saveOnEdit: true
-  //     }
-  //   ],
+  [
+    {
+      title: "Rich text editor",
+      path: "richText",
+      typeField: 'richTextEditor',
+      hint: "You must click on save button",
+    },
+    {
+      title: "RTE small icons ",
+      path: "richTextSmall",
+      typeField: 'richTextEditor',
+      isSmallIcons: true
+    },
+    {
+      title: "RTE save on edit ",
+      path: "richTextSaveOnEdit",
+      typeField: 'richTextEditor',
+      saveOnEdit: true
+    },
+    {
+      title: "RTE in object ",
+      path: "object.richText",
+      typeField: 'richTextEditor'
+    },
+  ],
   //   [
   //     {
   //       title: 'Date',
