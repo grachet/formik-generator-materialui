@@ -117,6 +117,12 @@ export default [
       path: ["richTextSmall"],
       typeField: 'richTextEditor',
       isSmallIcons: true
+    },
+    {
+      title: "RTE small icons ",
+      path: ["richTextSaveOnEdit"],
+      typeField: 'richTextEditor',
+      saveOnEdit: true
     }
   ],
   [
