@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldArray } from 'formik';
+import { FieldArray, useField } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
@@ -10,11 +10,16 @@ import { Button, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 export default function ArrayFieldFormik({ fieldData }) {
 
-  const { title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
+  const { title, path, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
+
+  const [{ value }] = useField(path);
+
+
+
 
   return <FieldArray
     validateOnChange={false}
-    name={path[path.length - 1]}
+    name={path}
     render={arrayHelpers => (
       <div className={noBorder ? "" : classes.borderContainer}>
         {title && <Typography variant="body2" gutterBottom
@@ -28,11 +33,12 @@ export default function ArrayFieldFormik({ fieldData }) {
             {value.map((arrayValue, index) => (
               <div className={classes.flex} key={index}>
                 <span className={classes.flexGrow}>
-                  <FieldGenerator fieldData={{
+                  {/* //todo */}
+                  {/* <FieldGenerator fieldData={{
                     path: [path[path.length - 1] + "[" + index + "]"],
                     ...subfield,
                     value: arrayValue
-                  }} readOnly={disabled} />
+                  }} readOnly={disabled} /> */}
                 </span>
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>

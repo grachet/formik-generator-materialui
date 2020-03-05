@@ -277,32 +277,37 @@ export default [
       ],
     },
   ],
-  //   [
-  //     {
-  //       title: 'Array of text fields',
-  //       path:
-  //         'arrayOfText'
-  //       ],
-  //       typeField: 'array',
-  //       emptyAddText: "Add text fields",
-  //       subfield: {
-  //         multiline: true,
-  //         typeField: 'text',
-  //       },
-  //     },
-  //     {
-  //       title: 'Array of select fields',
-  //       path:
-  //         'arrayOfSelect'
-  //       ],
-  //       typeField: 'array',
-  //       emptyAddText: "Add select fields",
-  //       subfield: {
-  //         choice: ["Yes", "Two"],
-  //         typeField: 'select',
-  //       },
-  //     }
-  //   ],
+  [
+    {
+      title: 'Array of text fields multiline',
+      path: 'arrayOfText',
+      typeField: 'array',
+      emptyAddText: "Add text fields",
+      subfield: {
+        multiline: true,
+        typeField: 'text',
+      },
+    },
+    {
+      title: 'Array of select fields',
+      path: 'arrayOfSelect',
+      typeField: 'array',
+      emptyAddText: "Add select fields",
+      subfield: {
+        choice: ["Yes", "Two"],
+        typeField: 'select',
+      },
+    },
+    {
+      title: 'Array of text in object',
+      path: 'object.arrayOfText',
+      typeField: 'array',
+      emptyAddText: "Add text fields",
+      subfield: {
+        typeField: 'text',
+      },
+    },
+  ],
   //   [
   //     {
   //       title: 'Array of objects',
