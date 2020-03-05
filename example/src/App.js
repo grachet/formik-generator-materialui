@@ -1,11 +1,13 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Grid, Typography, Switch, FormControlLabel, Button, Paper } from "@material-ui/core"
 import "./app.css";
 import { FormGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
+import getDefaultValues from './getDefaultValues';
+import get from 'lodash.get';
 
-function Rows({ fields, readOnly }) {
+function Rows({ fields, readOnly, defaultValues }) {
 
   const formRef = useRef(null);
 
@@ -15,9 +17,7 @@ function Rows({ fields, readOnly }) {
     <FormGenerator
       readOnly={readOnly}
       formRef={formRef}
-      defaultValue={{
-        // name: "john"
-      }}
+      defaultValues={defaultValues}
       onSubmit={(values) => {
         setResult(values)
       }}
@@ -36,7 +36,8 @@ function Rows({ fields, readOnly }) {
 export default function App() {
 
   const [readOnly, setReadOnly] = useState(false);
-  const [displayAllProps, setDisplayAllProps] = useState(false);
+  const [displayAllProps, setDisplayAllProps] = useState(true);
+  let [defaultValues, setDefaultValues] = useState(getDefaultValues(fieldsArray, true));
 
   return (
     <div className="root">
@@ -64,6 +65,15 @@ export default function App() {
           label={"Display all props ?"}
         />
         <span className="floatRight">
+          <span
+            className="prmd">
+            <Button
+              variant={"outlined"}
+              onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
+            >
+              Update default values
+          </Button>
+          </span>
           <Button
             target="_blank" variant={"outlined"}
             href={"https://github.com/grachet/formik-generator-materialui/blob/master/example/src/getFields.js"}>
@@ -75,7 +85,7 @@ export default function App() {
       <Grid container spacing={6}>
         {fieldsArray.map((fields, i) => [<Grid key={i + "1"} item xs={12} md={6}>
           <Paper className="padding">
-            <Rows fields={fields} readOnly={readOnly} />
+            <Rows fields={fields} readOnly={readOnly} defaultValues={defaultValues[i]} />
           </Paper>
         </Grid>,
         <Grid key={i + "2"} item xs={12} md={6}>
@@ -94,7 +104,10 @@ export default function App() {
               {!!displayAllProps && <span>
                 {"formRef={formRef}"}
                 <br />
-                {"defaultValue={{name:'john'}}"}
+                {"defaultValues={"}
+                <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
+                  src={defaultValues[i]} />
+                {"}"}
                 <br />
                 {"onSubmit={(val) => console.log(val)}"}
                 <br />
