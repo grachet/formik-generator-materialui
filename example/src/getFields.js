@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { constante } from "./index";
+import { constante } from "./App.js";
 
 export default [
   [
@@ -441,9 +441,10 @@ export default [
         'countryFree',
       ],
       typeField: 'autocomplete',
-      options: ["France", "Spain", "Germany"],
+      options: ["France", "Spain", "Germany", "azertyuiopqsdfghjklmwxcvbnazsdcvnjk,l;"],
       getOptionLabel: (opt) => opt,
       placeholder: "Search a country",
+      hint: "Options with freesolo must be string"
     },
     {
       title: 'Autocomplete disabled',
@@ -472,7 +473,8 @@ export default [
             .then(datas => { console.log(datas); resolve(datas.results || []) })
         });
       },
-      getOptionLabel: e => e.Title || ""
+      getOptionLabel: e => e.Title || "",
+      hint: "For async call on input change (not just 1 time on launch)"
     },
     {
       title: 'Async Autocomplete (free text)',

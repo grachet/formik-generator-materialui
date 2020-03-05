@@ -22,15 +22,18 @@ export default function AutocompleteFieldFormik({ fieldData }) {
     <div className={classes.flex}>
       <HintWarning hint={warning} isWarning />
       <Autocomplete
-        freeSolo={freeSolo}
-        options={options}
-        getOptionLabel={(option) => getOptionLabel(option) || ""}
-        className={classes.flexGrow}
         // defaultValue={values[name] || ""}
+        // loading={loading}
+        className={classes.flexGrow}
+        disabled={disabled}
+        options={options || []}
+        getOptionLabel={(option) => getOptionLabel(option) || ""}
         value={values[name] || ""}
         onChange={(_, val) => setFieldValue(name, val)}
+
+        freeSolo={freeSolo}
         onInputChange={(_, val) => freeSolo && setFieldValue(name, val)}
-        disabled={disabled}
+
         renderInput={params => (<TextField
           {...params}
           margin={"dense"}
