@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useFormikContext } from "formik";
+import { useField } from "formik";
 import HintWarning from "../UI/HintWarning"
 import { Typography } from '@material-ui/core';
 import classes from '../index.css'
@@ -12,14 +12,15 @@ export default function RichTextEditorFormik({ fieldData }) {
 
   const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
-  const { values, setFieldValue, touched, errors } = useFormikContext();
-  let error = touched[path] && errors[path] ? errors[path] : "";
+  const [field, meta, helpers] = useField(path);
+  let error = meta.touched && meta.error ? meta.error : "";
 
   const ref = useRef()
 
   useEffect(() => {
+    //todo change on initial value change
     console.log("reset")
-    value = values[path] || null
+    value = field.value || null
   }, [])
 
   return (
@@ -40,7 +41,7 @@ export default function RichTextEditorFormik({ fieldData }) {
           error={!!error}
           label="Start typing..."
           onSave={(string) => {
-            setFieldValue(path, string)
+            helpers.setValue(string)
           }}
           onChange={(editorState) => saveOnEdit && ref.current.save()}
         />

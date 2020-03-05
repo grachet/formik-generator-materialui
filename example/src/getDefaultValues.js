@@ -16,6 +16,9 @@ export default (fieldsArray, noValues) => {
       case "switch":
         set(obj, item.path, randomBoolean())
         break;
+      case "date":
+        set(obj, item.path, randomDate())
+        break;
       case "select":
         set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
         break;
@@ -25,6 +28,13 @@ export default (fieldsArray, noValues) => {
     return obj
   }, {}))
 }
+
+
+
+function randomDate(start = new Date(2012, 0, 1), end = new Date()) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 
 function randomArrayItem(array) {
   return array[Math.floor(Math.random() * array.length)]

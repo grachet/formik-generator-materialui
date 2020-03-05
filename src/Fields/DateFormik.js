@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
 import HintWarning from "../UI/HintWarning";
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import { useFormikContext } from 'formik';
+import { useField } from 'formik';
 import classes from '../index.css'
 import { last } from "../functions/formHelper";
 
 export default function DateTimeFormik({ fieldData }) {
 
-  const { required, title, hint, value, openTo, warning, disabled, path } = fieldData;
+  const { required, title, hint, openTo, warning, disabled, path } = fieldData;
 
-  let name = last(path);
-  const { setFieldValue } = useFormikContext();
-
-  // const [field, meta] = useField(name);
-  // let error = meta.touched && meta.error ? meta.error : "";
+  const [field, meta, helpers] = useField(path);
+  let error = meta.touched && meta.error ? meta.error : "";
 
   return (
     <div className={classes.flex}>
       <HintWarning hint={warning} isWarning />
       <KeyboardDatePicker
         margin={"dense"}
-        name={name}
+        name={field.name}
         openTo={openTo}
         required={required}
+        //error={!!error} todo
         className={classes.flexGrow}
         clearable
         inputVariant={disabled ? "filled" : "outlined"}
@@ -32,9 +30,9 @@ export default function DateTimeFormik({ fieldData }) {
         disabled={disabled}
         placeholder="01/01/2020"
         onChange={value => {
-          setFieldValue(name, value.toDate());
+          helpers.setValue(value.toDate())
         }}
-        value={value || null}
+        value={field.value || null}
       />
       <HintWarning hint={hint} />
     </div>

@@ -146,31 +146,30 @@ export default [
       typeField: 'richTextEditor'
     },
   ],
-  //   [
-  //     {
-  //       title: 'Date',
-  //       path:
-  //         'date'
-  //       ],
-  //       typeField: 'date',
-  //     },
-  //     {
-  //       title: 'Date (openTo year)',
-  //       openTo: "year",
-  //       path:
-  //         'dateYear'
-  //       ],
-  //       typeField: 'date',
-  //     },
-  //     {
-  //       title: 'Date disabled',
-  //       path:
-  //         'dateDisabled'
-  //       ],
-  //       typeField: 'date',
-  //       disabled: true
-  //     },
-  //   ],
+  [
+    {
+      title: 'Date',
+      path: 'date',
+      typeField: 'date',
+    },
+    {
+      title: 'Date (openTo year)',
+      openTo: "year",
+      path: 'dateYear',
+      typeField: 'date',
+    },
+    {
+      title: 'Date disabled',
+      path: 'dateDisabled',
+      typeField: 'date',
+      disabled: true
+    },
+    {
+      title: 'Date in object',
+      path: 'object.date',
+      typeField: 'date',
+    },
+  ],
   //   [
   //     {
   //       title: "Group",
