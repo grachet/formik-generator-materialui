@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TextField,
   CircularProgress
@@ -19,7 +19,7 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
 
   let name = last(path);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let active = true;
     getAsyncOptions(inputText || "").then(
       r => !!active && setOptions(r)
@@ -50,12 +50,14 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
         }}
         onClose={() => {
           setOpen(false);
+          freeSolo && setFieldValue(name, inputText);
         }}
-        onChange={(_, val) => setFieldValue(name, val)}
+        onChange={(_, val) => {
+          setFieldValue(name, val)
+        }}
         onInputChange={(_, val) => {
           setInputText(val);
           setOptions(null);
-          setFieldValue(name, val);
         }}
         filterOptions={(options, { inputValue }) => options}
         value={value || ""}

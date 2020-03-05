@@ -9,6 +9,8 @@ export default function AsyncAutocompleteFieldFormik({ fieldData }) {
   const { values, setFieldValue, errors, touched } = useFormikContext();
   let error = touched[name] && errors[name] ? errors[name] : "";
 
+  console.log(values[name])
+
   return (
     <AsyncAutocomplete
       fieldData={fieldData}

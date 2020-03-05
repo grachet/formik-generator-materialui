@@ -463,17 +463,18 @@ export default [
       title: 'Async Autocomplete (select)',
       typeField: 'asyncAutocomplete',
       path: [
-        'user',
+        'film',
       ],
-      placeholder: "Search an user",
+      placeholder: "Search a film",
       getAsyncOptions: (value) => {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
           fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-            .then(r => r.json)
-            .then(datas => { console.log(datas); resolve(datas.results || []) })
+            .then(r => r.json())
+            .then(datas => { console.log(datas); return resolve((datas && datas.results) || []) })
+            .catch(err => { console.log(err); return reject(err) })
         });
       },
-      getOptionLabel: e => e.Title || "",
+      getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
       hint: "For async call on input change (not just 1 time on launch)"
     },
     {
@@ -485,10 +486,11 @@ export default [
       ],
       placeholder: "Search an user",
       getAsyncOptions: (value) => {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
           fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-            .then(r => r.json)
-            .then(datas => { console.log(datas); resolve(datas.results || []) })
+            .then(r => r.json())
+            .then(datas => { console.log(datas); return resolve((datas && datas.results) || []) })
+            .catch(err => { console.log(err); return reject(err) })
         });
       },
       getOptionLabel: e => e.Title || ""
@@ -556,25 +558,25 @@ export default [
       warning: "Text warning",
       hint: "Hint text",
     },
-    {
-      title: 'Async Autocomplete (free text)',
-      freeSolo: true,
-      typeField: 'asyncAutocomplete',
-      warning: "Text warning",
-      hint: "Hint text",
-      path: [
-        'user',
-      ],
-      placeholder: "Search an user",
-      getAsyncOptions: (value) => {
-        return new Promise(resolve => {
-          fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
-            .then(r => r.json)
-            .then(datas => { console.log(datas); resolve(datas.results || []) })
-        });
-      },
-      getOptionLabel: e => e.Title || ""
-    },
+    // {
+    //   title: 'Async Autocomplete (free text)',
+    //   freeSolo: true,
+    //   typeField: 'asyncAutocomplete',
+    //   warning: "Text warning",
+    //   hint: "Hint text",
+    //   path: [
+    //     'user',
+    //   ],
+    //   placeholder: "Search an user",
+    //   getAsyncOptions: (value) => {
+    //     return new Promise(resolve => {
+    //       fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value)
+    //         .then(r => r.json)
+    //         .then(datas => { console.log(datas); resolve(datas.results || []) })
+    //     });
+    //   },
+    //   getOptionLabel: e => e.Title || ""
+    // },
     {
       title: 'Array of text fields',
       path: [
