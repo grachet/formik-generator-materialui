@@ -170,118 +170,113 @@ export default [
       typeField: 'date',
     },
   ],
-  //   [
-  //     {
-  //       title: "Group",
-  //       typeField: "group",
-  //       subfields: [
-  //         {
-  //           title: "Group.name",
-  //           typeField: "text",
-  //           path: "group", "name"],
-  //         },
-  //         {
-  //           title: "Value not in group object",
-  //           typeField: "select",
-  //           path: "notInGroup"],
-  //           choice: ["Me", "You"]
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "Group in 3 column",
-  //       typeField: "group",
-  //       col: 4,
-  //       subfields: [
-  //         {
-  //           title: "col1",
-  //           typeField: "text",
-  //           path: "col1"],
-  //         },
-  //         {
-  //           title: "col2",
-  //           typeField: "text",
-  //           path: "col2"],
-  //         },
-  //         {
-  //           title: "col3",
-  //           typeField: "text",
-  //           path: "col3"],
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "Group (Array of objects)",
-  //       typeField: "group",
-  //       subfields: [
-  //         {
-  //           title: 'Array of objects',
-  //           path:
-  //             'address',
-  //           ],
-  //           subfields: [
-  //             {
-  //               title: "Street",
-  //               name: "streetName",
-  //               typeField: 'text',
-  //             }, {
-  //               title: "Country",
-  //               name: "country",
-  //               choice: ["France", "USA", "Mexico"],
-  //               typeField: 'select',
-  //             }],
-  //           typeField: 'arrayObject',
-  //           emptyAddText: "Add object"
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "DisplayField in Group in Group in Group",
-  //       typeField: "group",
-  //       subfields: [
-  //         {
-  //           title: "Text",
-  //           typeField: "text",
-  //           path: "text"],
-  //         },
-  //         {
-  //           title: "2nd group",
-  //           typeField: "group",
-  //           subfields: [
-  //             {
-  //               title: "Select",
-  //               typeField: "select",
-  //               choice: ["Yes", "No"],
-  //               path: "select"]
-  //             },
-  //             {
-  //               title: "3rd group",
-  //               typeField: "group",
-  //               subfields: [
-  //                 {
-  //                   title: 'Display text + select',
-  //                   separator: " + ",
-  //                   display: [
-  //                     {
-  //                       path:
-  //                         "text"
-  //                       ],
-  //                     },
-  //                     {
-  //                       path:
-  //                         "select"
-  //                       ],
-  //                     },
-  //                   ],
-  //                   typeField: 'displayValue',
-  //                 },
-  //               ],
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   ],
+  [
+    {
+      title: "Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "Group.name",
+          typeField: "text",
+          path: "group.name",
+        },
+        {
+          title: "Value not in group object",
+          typeField: "select",
+          path: "notInGroup",
+          choice: ["Me", "You"]
+        },
+      ],
+    },
+    {
+      title: "Group in 3 column",
+      typeField: "group",
+      col: 4,
+      subfields: [
+        {
+          title: "col1",
+          typeField: "text",
+          path: "col1",
+        },
+        {
+          title: "col2",
+          typeField: "text",
+          path: "col2",
+        },
+        {
+          title: "col3",
+          typeField: "text",
+          path: "col3",
+        },
+      ],
+    },
+    {
+      title: "Group (Array of objects)",
+      typeField: "group",
+      subfields: [
+        {
+          title: 'Array of objects',
+          path:
+            'address',
+          subfields: [
+            {
+              title: "Street",
+              name: "streetName",
+              typeField: 'text',
+            }, {
+              title: "Country",
+              name: "country",
+              choice: ["France", "USA", "Mexico"],
+              typeField: 'select',
+            }],
+          typeField: 'arrayObject',
+          emptyAddText: "Add object"
+        },
+      ],
+    },
+    {
+      title: "DisplayField in Group in Group in Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "Text",
+          typeField: "text",
+          path: "text",
+        },
+        {
+          title: "2nd group",
+          typeField: "group",
+          subfields: [
+            {
+              title: "Select",
+              typeField: "select",
+              choice: ["Yes", "No"],
+              path: "select"
+            },
+            {
+              title: "3rd group",
+              typeField: "group",
+              subfields: [
+                {
+                  title: 'Display text + select',
+                  separator: " + ",
+                  display: [
+                    {
+                      path: "text"
+                    },
+                    {
+                      path: "select"
+                    },
+                  ],
+                  typeField: 'displayValue',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
   //   [
   //     {
   //       title: 'Array of text fields',

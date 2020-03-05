@@ -7,25 +7,35 @@ export default (fieldsArray, noValues) => {
   }
 
   return fieldsArray.map((fields) => fields.reduce((obj, item) => {
-    switch (item.typeField) {
-      //todo not last
-      case "text":
-        set(obj, item.path, randomString(10))
-        break;
-      case "checkbox":
-      case "switch":
-        set(obj, item.path, randomBoolean())
-        break;
-      case "date":
-        set(obj, item.path, randomDate())
-        break;
-      case "select":
-        set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
-        break;
-      default:
-        set(obj, item.path, null)
+
+    let setValue = (obj, item) => {
+      switch (item.typeField) {
+        //todo not last
+        case "text":
+          set(obj, item.path, randomString(10))
+          break;
+        case "checkbox":
+        case "switch":
+          set(obj, item.path, randomBoolean())
+          break;
+        case "date":
+          set(obj, item.path, randomDate())
+          break;
+        case "group":
+          item.subfields.forEach(sub => {
+            obj = setValue(obj, sub)
+          });
+          break;
+        case "select":
+          set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
+          break;
+        default:
+          set(obj, item.path, null)
+      }
+      return obj
     }
-    return obj
+
+    return setValue(obj, item)
   }, {}))
 }
 
