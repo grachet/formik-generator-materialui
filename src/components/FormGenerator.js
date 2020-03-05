@@ -39,7 +39,7 @@ export default function FormGenerator({ initialValues, fields, onSubmit, readOnl
               <FieldGenerator
                 readOnly={readOnly}
                 formFunction={formFunction}
-                fieldData={addValues(field, values)}
+                fieldData={field}
               />
             </div>)}
           </Form>

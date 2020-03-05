@@ -9,12 +9,9 @@ import classes from '../index.css'
 
 export default function TextFieldFormik({ fieldData }) {
 
+  const { title, path, disabled, hint, warning, required, multiline, isLink } = fieldData;
 
-  const { title, path, disabled, value, hint, warning, required, multiline, isLink } = fieldData;
-
-
-  let name = last(path);
-  const [field, meta] = useField(name);
+  const [field, meta] = useField(path);
 
   let error = meta.touched && meta.error ? meta.error : "";
 
@@ -22,7 +19,7 @@ export default function TextFieldFormik({ fieldData }) {
     <div className={classes.flex}>
       <HintWarning hint={warning} isWarning />
       <TextField
-        name={field.name}
+        name={path}
         value={field.value || ''}
         onChange={field.onChange}
         onBlur={field.onBlur}
@@ -38,7 +35,7 @@ export default function TextFieldFormik({ fieldData }) {
           readOnly: disabled
         }}
       />
-      {isLink && <HintWarning hint={value} isLink />}
+      {isLink && <HintWarning hint={field.value || ''} isLink />}
       <HintWarning hint={hint} />
     </div>
   )

@@ -1,4 +1,4 @@
-
+import set from "lodash.set"
 
 export default (fieldsArray, noValues) => {
 
@@ -10,17 +10,24 @@ export default (fieldsArray, noValues) => {
     switch (item.typeField) {
       //todo not last
       case "text":
-        obj[last(item.path)] = randomString(10);
+        set(obj, item.path, randomString(10))
         break;
       case "checkbox":
       case "switch":
-        obj[last(item.path)] = randomBoolean();
+        set(obj, item.path, randomBoolean())
+        break;
+      case "select":
+        set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
         break;
       default:
-        obj[last(item.path)] = null;
+        set(obj, item.path, null)
     }
     return obj
   }, {}))
+}
+
+function randomArrayItem(array) {
+  return array[Math.floor(Math.random() * array.length)]
 }
 
 function randomBoolean() {

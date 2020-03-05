@@ -17,13 +17,12 @@ import { last } from "../functions/formHelper";
 
 export default function SelectFieldFormik({ fieldData }) {
 
-  const { title, path, choice, titleChoice, category, disabled, value, hint, warning, required } = fieldData;
+  const { title, path, choice, titleChoice, category, disabled, hint, warning, required } = fieldData;
 
   const selectRef = useRef(null);
   const [labelWidth, setLabelWidth] = useState(null);
 
-  let name = last(path);
-  const [field, meta] = useField(name);
+  const [field, meta] = useField(path);
 
   let error = meta.touched && meta.error ? meta.error : "";
   let noLabelNotchWidth = title ? title.length * 9 : 0;
@@ -44,10 +43,10 @@ export default function SelectFieldFormik({ fieldData }) {
         margin={"dense"}
         className={classes.flexGrow}>
         <InputLabel
-          shrink={!!value || (value === 0)}
+          shrink={!!field.value || (field.value === 0)}
           required={required}
           ref={selectRef}
-          htmlFor={name}>{title}</InputLabel>
+          htmlFor={path}>{title}</InputLabel>
         <Select
           name={field.name}
           value={field.value === 0 ? 0 : field.value || ''}
@@ -55,13 +54,11 @@ export default function SelectFieldFormik({ fieldData }) {
           input={disabled ?
             <FilledInput
               readOnly={true}
-              field={value}
             />
             :
             <OutlinedInput
-              field={value}
               labelWidth={labelWidth || noLabelNotchWidth}
-              notched={!!value || (value === 0)}
+              notched={!!field.value || (field.value === 0)}
             />}
           MenuProps={{
             PaperProps: {

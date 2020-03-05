@@ -13,8 +13,7 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
 
   const { title, path, disabled, hint, warning } = fieldData;
 
-  let name = last(path);
-  const [field] = useField(name);
+  const [field] = useField(path);
 
   return (
     <div className={classes.flex}>
@@ -22,9 +21,9 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
       <FormControlLabel
         control={
           isSwitch ? <Switch
-            checked={!!field.value} name={name} onChange={field.onChange}
+            checked={!!field.value} name={path} onChange={field.onChange}
           /> : <Checkbox
-              checked={!!field.value} name={name} onChange={field.onChange}
+              checked={!!field.value} name={path} onChange={field.onChange}
             />
         }
         disabled={disabled}
