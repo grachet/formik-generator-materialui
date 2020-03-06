@@ -30,7 +30,7 @@ export default function DateTimeFormik({ fieldData }) {
         disabled={disabled}
         placeholder="01/01/2020"
         onChange={value => {
-          helpers.setValue(value.toDate())
+          helpers.setValue((value && value.toDate() || null));
         }}
         value={field.value || null}
       />

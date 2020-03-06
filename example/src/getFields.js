@@ -20,12 +20,17 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
     }
   }
 
+  //yup: Yup.number().required(),
+  //yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
+  //yup: isYup && Yup.string().required(),
+
   return [
     {
       title: "Text " + title,
       path: getPath("text"),
       typeField: "text",
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: "Switch " + title,
@@ -38,32 +43,45 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       typeField: "select",
       path: getPath("select"),
       choice: ["Yes", "No"],
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: "RTE " + title,
       path: getPath("richText"),
       typeField: 'richTextEditor',
       isSmallIcons: true,
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: 'Date ' + title,
       path: getPath('date'),
       typeField: 'date',
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: "Group",
       typeField: "group",
+      col: 6,
       subfields: [
         {
-          title: "Text " + title,
+          title: "Text",
           typeField: "text",
           path: getPath("textGroup"),
+          yup: isYup && Yup.string().required(),
+          ...hintWarning,
+        },
+        {
+          title: "Text2",
+          typeField: "text",
+          path: getPath("textGroup2"),
+          yup: isYup && Yup.string().required(),
+          ...hintWarning,
         }
       ],
-      ...hintWarning
+      ...hintWarning,
     },
     {
       title: 'Array of text ' + title,
@@ -73,7 +91,8 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       subfield: {
         typeField: 'text',
       },
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: 'Array of objects ' + title,
@@ -91,10 +110,8 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         }],
       typeField: 'arrayObject',
       emptyAddText: "Add object",
-      ...hintWarning
-    },
-    {
-
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: 'Display text ' + title,
@@ -104,7 +121,8 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         }
       ],
       typeField: 'displayValue',
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: 'Autocomplete ' + title,
@@ -113,7 +131,8 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
       getOptionLabel: (val) => val.name,
       placeholder: "Search a country",
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
     {
       title: 'Async Autocomplete Free ' + title,
@@ -128,7 +147,8 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       },
       hint: "Options with freesolo must be string",
       getOptionLabel: opt => opt,
-      ...hintWarning
+      ...hintWarning,
+      yup: isYup && Yup.string().required(),
     },
   ]
 
@@ -597,170 +617,4 @@ export default [
   getAllFieldsTypeExample("(in array in object)", true),
   getAllFieldsTypeExample("(hint and warning)", false, true),
   getAllFieldsTypeExample("(with verification)", false, false, true),
-  //   [
-  //     {
-  //       warning: "Warning Text",
-  //       hint: "Hint text",
-  //       title: "Text",
-  //       typeField: "text",
-  //       isLink: true,
-  //       path: "text"]
-  //     },
-  //     {
-  //       title: "Select",
-  //       typeField: "select",
-  //       choice: ["Yes", "No"],
-  //       path: "select"],
-  //       warning: "Warning text",
-  //       hint: "Hint text",
-  //     },
-  //     {
-  //       title: "Checkbox",
-  //       typeField: "checkbox",
-  //       path: "checkbox"],
-  //       warning: "Warning text",
-  //       hint: "Hint text",
-  //     },
-  //     {
-  //       title: "Rich text editor",
-  //       path: "richText"],
-  //       fullWidth: true,
-  //       typeField: 'richTextEditor',
-  //       hint: "hint text",
-  //       warning: "Warning text",
-  //       isSmallIcons: true
-  //     },
-  //     {
-  //       title: 'Date',
-  //       path:
-  //         'date'
-  //       ],
-  //       typeField: 'date',
-  //       hint: "hint text",
-  //       warning: "Warning text",
-  //     },
-  //     {
-  //       title: 'Just display a value',
-  //       display: [
-  //         "constante",
-  //       ],
-  //       typeField: 'displayValue',
-  //       hint: "hint text",
-  //       warning: "Warning text",
-  //     },
-  //     {
-  //       title: 'Autocomplete select',
-  //       path:
-  //         'country',
-  //       ],
-  //       typeField: 'autocomplete',
-  //       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-  //       getOptionLabel: (val) => val.name,
-  //       placeholder: "Search a country",
-  //       warning: "Text warning",
-  //       hint: "Hint text",
-  //     },
-  //     {
-  //       title: 'Async Autocomplete (select)',
-  //       warning: "Text warning",
-  //       hint: "Hint text",
-  //       typeField: 'asyncAutocomplete',
-  //       path:
-  //         'film',
-  //       ],
-  //       placeholder: "Search a film",
-  //       getAsyncOptions: async (value) => {
-  //         let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
-  //         let datas = await rep.json();
-  //         return (datas && datas.results) || []
-  //       },
-  //       getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
-  //     },
-  //     {
-  //       title: 'Array of text fields',
-  //       path:
-  //         'arrayOfText'
-  //       ],
-  //       typeField: 'array',
-  //       emptyAddText: "Add text fields",
-  //       subfield: {
-  //         multiline: true,
-  //         typeField: 'text',
-  //       },
-  //       hint: "Hint text",
-  //       warning: "Warning text",
-  //     },
-  //     {
-  //       title: 'Array of objects',
-  //       path:
-  //         'arrayOfObjects',
-  //       ],
-  //       subfields: [
-  //         {
-  //           title: "number",
-  //           name: "number",
-  //           typeField: 'text',
-  //         }, {
-  //           title: "street name",
-  //           name: "streetName",
-  //           typeField: 'text',
-  //         }
-  //       ],
-  //       typeField: 'arrayObject',
-  //       emptyAddText: "Add object",
-  //       hint: "Hint text",
-  //       warning: "Warning text",
-  //     },
-  //     {
-  //       title: "Group",
-  //       typeField: "group",
-  //       hint: "Hint text",
-  //       warning: "Warning text",
-  //       col: 4,
-  //       subfields: [
-  //         {
-  //           warning: "Warning text",
-  //           title: "col1",
-  //           typeField: "text",
-  //           path: "col1"],
-  //         },
-  //         {
-  //           title: "col2",
-  //           typeField: "text",
-  //           path: "col2"],
-  //           hint: "Hint text"
-  //         },
-  //         {
-  //           title: "col3",
-  //           typeField: "text",
-  //           path: "col3"],
-  //         },
-  //       ],
-
-  //     },
-  //   ],
-  //   [
-  //     {
-  //       title: "Text (number)",
-  //       typeField: "text",
-  //       path: "text"],
-  //       yup: Yup.number().required(),
-  //       yupStringForExample: "Yup.number().required()"
-  //     },
-  //     {
-  //       title: "Text (2 letters + 3 numbers)",
-  //       typeField: "text",
-  //       path: "text2"],
-  //       yup: Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
-  //       yupStringForExample: "Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required()"
-  //     },
-  //     {
-  //       title: "Select (not null)",
-  //       typeField: "select",
-  //       choice: ["Yes", "No"],
-  //       path: "select"],
-  //       yup: Yup.string().required(),
-  //       yupStringForExample: "Yup.string().required()"
-  //     }
-  //   ]
 ]

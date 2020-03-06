@@ -48,7 +48,7 @@ export default (fieldsArray, noValues) => {
           set(obj, item.path, item.freeSolo ? randomString(10) : randomArrayItem(item.options))
           break;
         case "asyncAutocomplete":
-          item.freeSolo ? set(obj, item.path, randomString(10)) : null
+          set(obj, item.path, item.freeSolo ? randomString(10) : null)
           break;
         default:
           set(obj, item.path, null)

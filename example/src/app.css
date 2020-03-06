@@ -26,10 +26,13 @@ margin-bottom: 20px;
   margin-left: 25px;
   }
 
-  .prmd{
+.prmd{
     padding-right: 15px;
 }
 
+.mrmd{
+  margin-right: 15px;
+}
 
   .floatRight {
 float: right;

@@ -23,7 +23,7 @@ function Rows({ fields, readOnly, initialValues }) {
       fields={fields}
     />
     <Button style={{ marginTop: 20 }} variant={"outlined"} onClick={() => {
-      formRef.current.submitForm(); //.isSubmitting() .setFieldTouched() ...
+      formRef.current.submitForm();
     }}>Validate</Button>
     {result && <div style={{ marginTop: 20 }} >
       <ReactJson name={false} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={result} />
@@ -68,9 +68,18 @@ export default function App() {
             className="prmd">
             <Button
               variant={"outlined"}
+              onClick={() => setDefaultValues(getDefaultValues(fieldsArray, true))}
+            >
+              Set default null
+          </Button>
+          </span>
+          <span
+            className="prmd">
+            <Button
+              variant={"outlined"}
               onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
             >
-              Update default values
+              Generate default values
           </Button>
           </span>
           <Button
@@ -128,11 +137,19 @@ export default function App() {
         }
       </Grid>
       <br />
+      <span className="mrmd">
+        <Button
+          variant={"outlined"}
+          onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
+        >
+          Generate default values
+          </Button>
+      </span>
       <Button
         variant={"outlined"}
-        onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
+        onClick={() => setDefaultValues(getDefaultValues(fieldsArray, true))}
       >
-        Update default values
+        Set default null
           </Button>
     </div>
   )
