@@ -31,11 +31,6 @@ export default [
       typeField: "text",
       disabled: true
     },
-    {
-      title: "Text in object in array",
-      path: "object.array.0",
-      typeField: "text",
-    }
   ],
   [
     {
@@ -60,11 +55,7 @@ export default [
       typeField: "switch",
       disabled: true
     },
-    {
-      title: "Switch in object",
-      path: "object.isSwitch",
-      typeField: "switch",
-    }
+
   ],
   [
     {
@@ -114,12 +105,6 @@ export default [
         }
       ]
     },
-    {
-      title: "Select in object",
-      typeField: "select",
-      path: "object.select",
-      choice: ["Yes", "No"]
-    },
   ],
   [
     {
@@ -140,11 +125,6 @@ export default [
       typeField: 'richTextEditor',
       saveOnEdit: true
     },
-    {
-      title: "RTE in object ",
-      path: "object.richText",
-      typeField: 'richTextEditor'
-    },
   ],
   [
     {
@@ -163,11 +143,6 @@ export default [
       path: 'dateDisabled',
       typeField: 'date',
       disabled: true
-    },
-    {
-      title: 'Date in object',
-      path: 'object.date',
-      typeField: 'date',
     },
   ],
   [
@@ -251,7 +226,7 @@ export default [
               title: "Select",
               typeField: "select",
               choice: ["Yes", "No"],
-              path: "object.select"
+              path: "select"
             },
             {
               title: "3rd group",
@@ -265,7 +240,7 @@ export default [
                       path: "text"
                     },
                     {
-                      path: "object.select"
+                      path: "select"
                     },
                   ],
                   typeField: 'displayValue',
@@ -297,16 +272,7 @@ export default [
         choice: ["Yes", "Two"],
         typeField: 'select',
       },
-    },
-    {
-      title: 'Array of text in object',
-      path: 'object.arrayOfText',
-      typeField: 'array',
-      emptyAddText: "Add text fields",
-      subfield: {
-        typeField: 'text',
-      },
-    },
+    }
   ],
   [
     {
@@ -355,24 +321,7 @@ export default [
         }],
       typeField: 'arrayObject',
       emptyAddText: "Add object"
-    },
-    {
-      title: 'Array of objects in object',
-      path: 'object.address',
-      subfields: [
-        {
-          title: "Street",
-          name: "streetName",
-          typeField: 'text',
-        }, {
-          title: "Country",
-          name: "country",
-          choice: ["France", "USA", "Mexico"],
-          typeField: 'select',
-        }],
-      typeField: 'arrayObject',
-      emptyAddText: "Add object"
-    },
+    }
   ],
   [
     {
@@ -482,14 +431,6 @@ export default [
       getOptionLabel: (val) => val.name,
       placeholder: "Search a country",
     },
-    {
-      title: 'Autocomplete in object',
-      path: 'object.country',
-      typeField: 'autocomplete',
-      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-      getOptionLabel: (val) => val.name,
-      placeholder: "Search a country",
-    }
   ],
   [
     {
@@ -519,18 +460,93 @@ export default [
       getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
       hint: "For async call on input change (not just 1 time on launch)"
     },
+  ],
+  [
     {
-      title: 'Async Autocomplete in object',
+      title: "Text (in array in object)",
+      path: "arrayExample.0.text",
+      typeField: "text",
+    },
+    {
+      title: "Switch (in array in object)",
+      path: "arrayExample.0.isSwitch",
+      typeField: "switch",
+    },
+    {
+      title: "Select (in array in object)",
+      typeField: "select",
+      path: "arrayExample.0.select",
+      choice: ["Yes", "No"]
+    },
+    {
+      title: "RTE (in array in object)",
+      path: "arrayExample.0.richText",
+      typeField: 'richTextEditor',
+      isSmallIcons: true
+    },
+    {
+      title: 'Date (in array in object)',
+      path: 'arrayExample.0.date',
+      typeField: 'date',
+    },
+    {
+      title: 'Array of text (in array in object)',
+      path: 'arrayExample.0.arrayOfText',
+      typeField: 'array',
+      emptyAddText: "Add text fields",
+      subfield: {
+        typeField: 'text',
+      },
+    },
+    {
+      title: 'Array of objects (in array in object)',
+      path: 'arrayExample.0.arrayOfObjects',
+      subfields: [
+        {
+          title: "Street",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+    {
+      title: 'Autocomplete (in array in object)',
+      path: 'arrayExample.0.autocomplete',
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+    },
+    {
+      title: 'Async Autocomplete Free (in array in object)',
+      freeSolo: true,
       typeField: 'asyncAutocomplete',
-      path: 'object.film',
-      placeholder: "Search a film",
+      path: 'arrayExample.0.asyncAutocompleteFree',
+      placeholder: "Search a film title",
       getAsyncOptions: async (value) => {
         let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
         let datas = await rep.json();
-        return (datas && datas.results) || []
+        return (datas && datas.results && datas.results.map(r => r.title)) || []
       },
-      getOptionLabel: opt => (opt.title) ? (opt.title + " (" + opt.release_date + ")") : "",
-      hint: "For async call on input change (not just 1 time on launch)"
+      hint: "Options with freesolo must be string",
+      getOptionLabel: opt => opt
+    },
+    {
+      title: "Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "Text (in array in object)",
+          typeField: "text",
+          path: "arrayExample.0.textGroup",
+        }
+      ],
     },
   ],
   //   [
