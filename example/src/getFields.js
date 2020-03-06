@@ -30,12 +30,13 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       path: getPath("text"),
       typeField: "text",
       ...hintWarning,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
     },
     {
       title: "Switch " + title,
       path: getPath("isSwitch"),
       typeField: "switch",
+      warning: isYup && "No verification",
       ...hintWarning
     },
     {
@@ -53,13 +54,15 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       isSmallIcons: true,
       ...hintWarning,
       yup: isYup && Yup.string().required(),
+      saveOnEdit: true,
+      warning: isYup && "Not return empty string if empty",
     },
     {
       title: 'Date ' + title,
       path: getPath('date'),
       typeField: 'date',
       ...hintWarning,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.date().required(),
     },
     {
       title: "Group",
@@ -74,12 +77,19 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
           ...hintWarning,
         },
         {
-          title: "Text2",
-          typeField: "text",
-          path: getPath("textGroup2"),
-          yup: isYup && Yup.string().required(),
+          title: "Group 2",
+          typeField: "group",
+          subfields: [
+            {
+              title: "Text2",
+              typeField: "text",
+              path: getPath("textGroup2"),
+              yup: isYup && Yup.string().required(),
+              ...hintWarning,
+            }
+          ],
           ...hintWarning,
-        }
+        },
       ],
       ...hintWarning,
     },
@@ -92,7 +102,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         typeField: 'text',
       },
       ...hintWarning,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.array().of(Yup.string().required()),//.required(),
     },
     {
       title: 'Array of objects ' + title,
@@ -111,7 +121,12 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       typeField: 'arrayObject',
       emptyAddText: "Add object",
       ...hintWarning,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.array().of(
+        Yup.object().shape({
+          streetName: Yup.string().required(),
+          country: Yup.string().required(),
+        })
+      ),
     },
     {
       title: 'Display text ' + title,
@@ -121,6 +136,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         }
       ],
       typeField: 'displayValue',
+      warning: isYup && "Verification triggered anytime",
       ...hintWarning,
       yup: isYup && Yup.string().required(),
     },
@@ -141,17 +157,18 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       path: getPath('asyncAutocompleteFree'),
       placeholder: "Search a film title",
       getAsyncOptions: async (value) => {
+        if (!value) {
+          return []
+        }
         let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
         let datas = await rep.json();
         return (datas && datas.results && datas.results.map(r => r.title)) || []
       },
-      hint: "Options with freesolo must be string",
       getOptionLabel: opt => opt,
       ...hintWarning,
       yup: isYup && Yup.string().required(),
     },
   ]
-
 }
 
 export default [
@@ -593,6 +610,9 @@ export default [
       path: 'filmTitle',
       placeholder: "Search a film title",
       getAsyncOptions: async (value) => {
+        if (!value) {
+          return []
+        }
         let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
         let datas = await rep.json();
         return (datas && datas.results && datas.results.map(r => r.title)) || []
@@ -606,6 +626,9 @@ export default [
       path: 'film',
       placeholder: "Search a film",
       getAsyncOptions: async (value) => {
+        if (!value) {
+          return []
+        }
         let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
         let datas = await rep.json();
         return (datas && datas.results) || []

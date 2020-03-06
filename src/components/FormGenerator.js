@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'formik';
 import * as Yup from 'yup';
 import FieldGenerator from './FieldGenerator';
@@ -9,15 +9,22 @@ import {
 } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
+let validationSchema = {};
+
 export default function FormGenerator({ initialValues, fields, onSubmit, readOnly, formRef, isValidateOnlyOnSubmit }) {
 
   //  static propTypes = {
   //   text: PropTypes.string
   // }
 
-  const validationSchema = fields && getValidationSchema(fields);
+  const [validationSchema, setValidationSchema] = useState({})
 
-  console.log(validationSchema)
+  useEffect(() => {
+    setValidationSchema(Yup.object().shape(
+      getValidationSchema((fields || []))
+    ));
+    console.log("new validationSchema", validationSchema)
+  }, [fields])
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -25,15 +32,14 @@ export default function FormGenerator({ initialValues, fields, onSubmit, readOnl
         ref={formRef}
         validateOnBlur={!isValidateOnlyOnSubmit}
         validateOnChange={!isValidateOnlyOnSubmit}
+        // validateOnMount={!isValidateOnlyOnSubmit}
         enableReinitialize
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
           onSubmit(values);
           setSubmitting(false);
         }}
-        validationSchema={Yup.object().shape(
-          validationSchema
-        )}
+        validationSchema={validationSchema}
       >
         {({ values, ...formFunction }) => (
           <Form>

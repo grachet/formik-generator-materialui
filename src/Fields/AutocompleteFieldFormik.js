@@ -16,8 +16,7 @@ export default function AutocompleteFieldFormik({ fieldData }) {
 
   const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
 
-  const [{ value }, meta, { setValue }] = useField(path);
-  let error = meta.touched && meta.error ? meta.error : "";
+  const [{ value }, { error }, { setValue }] = useField(path);
 
   return (
     <div className={classes.flex}>

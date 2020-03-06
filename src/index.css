@@ -11,6 +11,13 @@ margin-top: 5px;
 margin : 5px 4px 0px 4px;
 }
 
+.errorBorderContainer{
+  border: 1px solid #F44336;
+  padding: 10px 15px 10px 15px;
+  border-radius: 4px;
+  margin:  20px 0px 0px 0px;
+}
+
 .borderContainer{
     border: 1px solid rgba(0,0,0,0.25);
     padding: 10px 15px 10px 15px;

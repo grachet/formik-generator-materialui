@@ -6,14 +6,13 @@ import AsyncAutocomplete from '../components/AsyncAutocomplete';
 export default function AsyncAutocompleteFieldFormik({ fieldData, fieldData: { path } }) {
 
 
-  const [{ value }, { touched, error }, { setValue }] = useField(path);
-  let errorMessage = touched && error ? error : "";
+  const [{ value }, { error }, { setValue }] = useField(path);
 
   return (
     <AsyncAutocomplete
       fieldData={fieldData}
       setValue={setValue}
-      errorMessage={errorMessage}
+      error={error}
       value={value}
     />
   )

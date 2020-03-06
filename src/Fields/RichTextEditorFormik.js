@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useField } from "formik";
 import HintWarning from "../UI/HintWarning";
-import { Typography } from '@material-ui/core';
+import { Typography, FormHelperText } from '@material-ui/core';
 import classes from '../index.css';
 import MUIRichTextEditor from 'mui-rte';
 import { last } from "../functions/formHelper";
@@ -10,8 +10,7 @@ export default function RichTextEditorFormik({ fieldData }) {
 
   const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
-  const [, { initialValue, touched, error }, helpers] = useField(path);
-  let errorMessage = touched && error ? error : "";
+  const [, { initialValue, error }, helpers] = useField(path);
 
   const [value, setValue] = useState(initialValue || null);
 
@@ -23,28 +22,30 @@ export default function RichTextEditorFormik({ fieldData }) {
   }, [initialValue])
 
   return (
-    <div className={classes.flexGrow + " " + classes.borderContainer}>
-      {title &&
-        <Typography variant="body2"
-          color="textSecondary">{title}
-          <HintWarning hint={warning} isWarning />
-          <HintWarning hint={hint} />
-        </Typography>}
-      <div className={classes.flex}>
-        <MUIRichTextEditor
-          ref={ref}
-          readOnly={disabled}
-          toolbarButtonSize={isSmallIcons ? "small" : "medium"}
-          value={value}
-          inlineToolbar={true}
-          error={!!errorMessage}
-          label="Start typing..."
-          onSave={(string) => {
-            helpers.setValue(string)
-          }}
-          onChange={(editorState) => saveOnEdit && ref.current.save()}
-        />
+    <div>
+      <div className={classes.flexGrow + " " + (!!error ? classes.errorBorderContainer : classes.borderContainer)}>
+        {title &&
+          <Typography variant="body2"
+            color="textSecondary">{title}
+            <HintWarning hint={warning} isWarning />
+            <HintWarning hint={hint} />
+          </Typography>}
+        <div className={classes.flex}>
+          <MUIRichTextEditor
+            ref={ref}
+            readOnly={disabled}
+            toolbarButtonSize={isSmallIcons ? "small" : "medium"}
+            value={value}
+            inlineToolbar={true}
+            label="Start typing..."
+            onSave={(string) => {
+              helpers.setValue(string)
+            }}
+            onChange={(editorState) => saveOnEdit && ref.current.save()}
+          />
+        </div>
       </div>
+      {!!error && <FormHelperText error>{error}</FormHelperText>}
     </div>
   )
 }

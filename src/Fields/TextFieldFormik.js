@@ -11,8 +11,7 @@ export default function TextFieldFormik({ fieldData }) {
 
   const { title, path, disabled, hint, warning, required, multiline, isLink } = fieldData;
 
-  const [field, meta] = useField(path);
-  let error = meta.touched && meta.error ? meta.error : "";
+  const [field, { error }] = useField(path);
 
   return (
     <div className={classes.flex}>

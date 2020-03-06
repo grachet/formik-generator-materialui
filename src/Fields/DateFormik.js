@@ -9,8 +9,7 @@ export default function DateTimeFormik({ fieldData }) {
 
   const { required, title, hint, openTo, warning, disabled, path } = fieldData;
 
-  const [field, meta, helpers] = useField(path);
-  let error = meta.touched && meta.error ? meta.error : "";
+  const [field, { error }, helpers] = useField(path);
 
   return (
     <div className={classes.flex}>
@@ -20,7 +19,8 @@ export default function DateTimeFormik({ fieldData }) {
         name={field.name}
         openTo={openTo}
         required={required}
-        //error={!!error} todo
+        error={!!error}
+        helperText={error}
         className={classes.flexGrow}
         clearable
         inputVariant={disabled ? "filled" : "outlined"}

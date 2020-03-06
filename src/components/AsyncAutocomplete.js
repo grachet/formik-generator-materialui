@@ -8,7 +8,7 @@ import { last } from "../functions/formHelper";
 import HintWarning from "../UI/HintWarning";
 import classes from '../index.css'
 
-export default function AsyncAutocomplete({ fieldData, setValue, errorMessage, value }) {
+export default function AsyncAutocomplete({ fieldData, setValue, error, value }) {
 
   const { path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
 
@@ -65,8 +65,8 @@ export default function AsyncAutocomplete({ fieldData, setValue, errorMessage, v
           <TextField
             {...params}
             margin={"dense"}
-            error={!!errorMessage}
-            helperText={errorMessage}
+            error={!!error}
+            helperText={error}
             label={title}
             fullWidth
             variant={disabled ? "filled" : "outlined"}

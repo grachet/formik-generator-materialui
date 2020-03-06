@@ -22,9 +22,7 @@ export default function SelectFieldFormik({ fieldData }) {
   const selectRef = useRef(null);
   const [labelWidth, setLabelWidth] = useState(null);
 
-  const [field, meta] = useField(path);
-
-  let error = meta.touched && meta.error ? meta.error : "";
+  const [field, { error }] = useField(path);
   let noLabelNotchWidth = title ? title.length * 9 : 0;
 
   useEffect(() => {
