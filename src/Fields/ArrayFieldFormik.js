@@ -33,12 +33,13 @@ export default function ArrayFieldFormik({ fieldData }) {
             {value.map((arrayValue, index) => (
               <div className={classes.flex} key={index}>
                 <span className={classes.flexGrow}>
-                  {/* //todo */}
-                  {/* <FieldGenerator fieldData={{
-                    path: [path[path.length - 1] + "[" + index + "]"],
-                    ...subfield,
-                    value: arrayValue
-                  }} readOnly={disabled} /> */}
+                  <FieldGenerator
+                    fieldData={{
+                      path: path + "[" + index + "]",
+                      ...subfield,
+                      value: arrayValue
+                    }}
+                    readOnly={disabled} />
                 </span>
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>

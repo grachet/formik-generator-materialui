@@ -26,6 +26,13 @@ export default (fieldsArray, noValues) => {
             obj = setValue(obj, sub)
           });
           break;
+        case "array":
+          let newArray = setValue([], { ...item.subfield, path: "0" })
+          newArray = setValue(newArray, { ...item.subfield, path: "1" })
+          newArray = setValue(newArray, { ...item.subfield, path: "2" })
+          set(obj, item.path, newArray)
+          console.log(newArray, obj)
+          break;
         case "select":
           set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
           break;

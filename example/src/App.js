@@ -127,6 +127,13 @@ export default function App() {
         ])
         }
       </Grid>
+      //todo remove
+      <Button
+        variant={"outlined"}
+        onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
+      >
+        Update default values
+          </Button>
     </div>
   )
 
