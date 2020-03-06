@@ -8,8 +8,6 @@ export default (fieldsArray, noValues) => {
 
   return fieldsArray.map((fields) => fields.reduce((obj, item) => {
 
-    let newArray = [], newObject = [];
-
     let setValue = (obj, item) => {
       switch (item.typeField) {
         //todo not last
@@ -27,6 +25,9 @@ export default (fieldsArray, noValues) => {
           item.subfields.forEach(sub => {
             obj = setValue(obj, sub)
           });
+          break;
+        case "richTextEditor":
+          set(obj, item.path, randomRTE())
           break;
         case "array":
           obj = setValue(obj, { ...item.subfield, path: item.path + ".0" })
@@ -59,6 +60,9 @@ function randomDate(start = new Date(2012, 0, 1), end = new Date()) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+function randomRTE() {
+  return "{\"blocks\":[{\"key\":\"cfbbd\",\"text\":\"" + randomString(20) + "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"
+}
 
 function randomArrayItem(array) {
   return array[Math.floor(Math.random() * array.length)]

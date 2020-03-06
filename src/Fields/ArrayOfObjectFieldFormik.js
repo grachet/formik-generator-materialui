@@ -60,8 +60,6 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
     return obj
   }, {});
 
-  console.log(newObject)
-
   return (
     <span>
       <div className={classes.flex + " " + (subfields.length >= 3 && classes.shadowContainer)}>

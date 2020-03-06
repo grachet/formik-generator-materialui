@@ -251,7 +251,7 @@ export default [
               title: "Select",
               typeField: "select",
               choice: ["Yes", "No"],
-              path: "select"
+              path: "object.select"
             },
             {
               title: "3rd group",
@@ -374,100 +374,86 @@ export default [
       emptyAddText: "Add object"
     },
   ],
-  //   [
-  //     {
-  //       title: "First Value",
-  //       typeField: "text",
-  //       path: "first"]
-  //     },
-  //     {
-  //       title: "Second Value",
-  //       typeField: "text",
-  //       path: "second"]
-  //     },
-  //     {
-  //       title: 'Display first-second',
-  //       separator: "-",
-  //       display: [
-  //         {
-  //           path:
-  //             "first"
-  //           ]
-  //         },
-  //         {
-  //           path:
-  //             "second"
-  //           ],
-  //         },
-  //       ],
-  //       typeField: 'displayValue',
-  //     },
-  //     {
-  //       title: 'first.lenght | second.lenght',
-  //       separator: " | ",
-  //       display: [
-  //         {
-  //           path:
-  //             "first",
-  //           ],
-  //           transformation: (val) => (val || "").length
-  //         },
-  //         {
-  //           path:
-  //             "second"
-  //           ],
-  //           transformation: (val) => (val || "").length
-  //         },
-  //       ],
-  //       typeField: 'displayValue',
-  //     },
-  //     {
-  //       title: '(first.lenght + second.lenght)',
-  //       separator: "+",
-  //       display: [
-  //         {
-  //           path:
-  //             "first"
-  //           ],
-  //           transformation: (val) => (val || "").length
-  //         },
-  //         {
-  //           path:
-  //             "second"
-  //           ],
-  //           transformation: (val) => (val || "").length
-  //         },
-  //       ],
-  //       transformation: (value) => {
-  //         let [a, b] = value.split("+");
-  //         return parseInt(a, 10) + parseInt(b, 10);
-  //       },
-  //       typeField: 'displayValue',
-  //     },
-  //     {
-  //       title: 'Just display a value',
-  //       separator: " ",
-  //       display: [
-  //         "constante",
-  //         0,
-  //         null
-  //       ],
-  //       typeField: 'displayValue',
-  //     },
-  //     {
-  //       title: 'Mix const/editable value',
-  //       separator: " ",
-  //       display: [
-  //         "constante",
-  //         {
-  //           path:
-  //             "second"
-  //           ]
-  //         },
-  //       ],
-  //       typeField: 'displayValue'
-  //     },
-  //   ],
+  [
+    {
+      title: "First Value",
+      typeField: "text",
+      path: "first"
+    },
+    {
+      title: "Second Value",
+      typeField: "text",
+      path: "second"
+    },
+    {
+      title: 'Display first-second',
+      separator: "-",
+      display: [
+        {
+          path: "first"
+        },
+        {
+          path: "second"
+        },
+      ],
+      typeField: 'displayValue',
+    },
+    {
+      title: 'first.lenght | second.lenght',
+      separator: " | ",
+      display: [
+        {
+          path: "first",
+          transformation: (val) => (val || "").length
+        },
+        {
+          path: "second",
+          transformation: (val) => (val || "").length
+        },
+      ],
+      typeField: 'displayValue',
+    },
+    {
+      title: '(first.lenght + second.lenght)',
+      separator: "+",
+      display: [
+        {
+          path: "first",
+          transformation: (val) => (val || "").length
+        },
+        {
+          path: "second",
+          transformation: (val) => (val || "").length
+        },
+      ],
+      transformation: (value) => {
+        let [a, b] = value.split("+");
+        return parseInt(a, 10) + parseInt(b, 10);
+      },
+      typeField: 'displayValue',
+    },
+    {
+      title: 'Just display a value',
+      separator: " ",
+      display: [
+        "constante",
+        0,
+        null
+      ],
+      typeField: 'displayValue',
+    },
+    {
+      title: 'Mix const/editable value',
+      separator: " ",
+      display: [
+        "constante",
+        {
+          path: "second"
+        },
+      ],
+      typeField: 'displayValue'
+    },
+  ],
   //   [
   //     {
   //       title: 'Autocomplete freetext',

@@ -1,27 +1,27 @@
-import React, { useRef, useEffect } from 'react';
-import { useField } from "formik";
-import HintWarning from "../UI/HintWarning"
+import React, { useRef, useEffect, useState } from 'react';
+import { useFormikContext } from 'formik';
+import HintWarning from "../UI/HintWarning";
 import { Typography } from '@material-ui/core';
-import classes from '../index.css'
-import MUIRichTextEditor from 'mui-rte'
-import { last } from "../functions/formHelper"
-
-let value = null;
+import classes from '../index.css';
+import MUIRichTextEditor from 'mui-rte';
+import { last } from "../functions/formHelper";
 
 export default function RichTextEditorFormik({ fieldData }) {
 
   const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
-  const [field, meta, helpers] = useField(path);
-  let error = meta.touched && meta.error ? meta.error : "";
+  const { values, setFieldValue, touched, errors, initialValues: { [path]: initialValue } } = useFormikContext();
+
+  const [value, setValue] = useState(initialValue || null);
+
+  let error = touched[name] && errors[name] ? errors[name] : "";
 
   const ref = useRef()
 
   useEffect(() => {
-    //todo change on initial value change
-    console.log("reset")
-    value = field.value || null
-  }, [])
+    console.log("reset rte " + title, initialValue)
+    setValue(initialValue || null)
+  }, [initialValue])
 
   return (
     <div className={classes.flexGrow + " " + classes.borderContainer}>
@@ -38,10 +38,10 @@ export default function RichTextEditorFormik({ fieldData }) {
           toolbarButtonSize={isSmallIcons ? "small" : "medium"}
           value={value}
           inlineToolbar={true}
-          error={!!error}
+          error={!!error} //todo
           label="Start typing..."
           onSave={(string) => {
-            helpers.setValue(string)
+            setFieldValue(path, string)
           }}
           onChange={(editorState) => saveOnEdit && ref.current.save()}
         />
