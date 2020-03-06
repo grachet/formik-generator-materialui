@@ -44,6 +44,9 @@ export default (fieldsArray, noValues) => {
         case "select":
           set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
           break;
+        case "autocomplete":
+          set(obj, item.path, randomArrayItem(item.options))
+          break;
         default:
           set(obj, item.path, null)
       }
@@ -53,8 +56,6 @@ export default (fieldsArray, noValues) => {
     return setValue(obj, item)
   }, {}))
 }
-
-
 
 function randomDate(start = new Date(2012, 0, 1), end = new Date()) {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));

@@ -265,7 +265,7 @@ export default [
                       path: "text"
                     },
                     {
-                      path: "select"
+                      path: "object.select"
                     },
                   ],
                   typeField: 'displayValue',
@@ -454,41 +454,43 @@ export default [
       typeField: 'displayValue'
     },
   ],
-  //   [
-  //     {
-  //       title: 'Autocomplete freetext',
-  //       freeSolo: true,
-  //       path:
-  //         'countryFree',
-  //       ],
-  //       typeField: 'autocomplete',
-  //       options: ["France", "Spain", "Germany"],
-  //       getOptionLabel: (opt) => opt,
-  //       placeholder: "Search a country",
-  //       hint: "Options with freesolo must be string"
-  //     },
-  //     {
-  //       title: 'Autocomplete select',
-  //       path:
-  //         'country',
-  //       ],
-  //       typeField: 'autocomplete',
-  //       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-  //       getOptionLabel: (val) => val.name,
-  //       placeholder: "Search a country",
-  //     },
-  //     {
-  //       title: 'Autocomplete disabled',
-  //       disabled: true,
-  //       path:
-  //         'countryDisabled',
-  //       ],
-  //       typeField: 'autocomplete',
-  //       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-  //       getOptionLabel: (val) => val.name,
-  //       placeholder: "Search a country",
-  //     }
-  //   ],
+  [
+    {
+      title: 'Autocomplete freetext',
+      freeSolo: true,
+      path: 'countryFree',
+      typeField: 'autocomplete',
+      options: ["France", "Spain", "Germany"],
+      getOptionLabel: (opt) => opt,
+      placeholder: "Search a country",
+      hint: "Options with freesolo must be string"
+    },
+    {
+      title: 'Autocomplete select',
+      path: 'country',
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+    },
+    {
+      title: 'Autocomplete disabled',
+      disabled: true,
+      path: 'countryDisabled',
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+    },
+    {
+      title: 'Autocomplete in object',
+      path: 'object.country',
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+    }
+  ],
   //   [
   //     {
   //       title: 'Async Autocomplete (free text)',

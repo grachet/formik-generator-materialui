@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'formik';
 import * as Yup from 'yup';
 import FieldGenerator from './FieldGenerator';
-import { addValues, getInitialValues, getValidationSchema } from '../functions/formHelper'
+import { addValues, getValidationSchema } from '../functions/formHelper'
 import FormikWithRef from './FormikWithRef';
 import {
   MuiPickersUtilsProvider

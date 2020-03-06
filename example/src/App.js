@@ -127,6 +127,7 @@ export default function App() {
         ])
         }
       </Grid>
+      <br />
       <Button
         variant={"outlined"}
         onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}

@@ -3,7 +3,7 @@ import HintWarning from "../UI/HintWarning";
 import {
   TextField,
 } from "@material-ui/core";
-import { useFormikContext } from 'formik';
+import { useField } from 'formik';
 import {
   Autocomplete,
 } from "@material-ui/lab";
@@ -16,29 +16,28 @@ export default function AutocompleteFieldFormik({ fieldData }) {
 
   const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
 
-  let name = last(path);
-  const { values, setFieldValue, touched, errors } = useFormikContext();
-  let error = touched[name] && errors[name] ? errors[name] : "";
+  const [{ value }, meta, { setValue }] = useField(path);
+  let error = meta.touched && meta.error ? meta.error : "";
 
   return (
     <div className={classes.flex}>
       <HintWarning hint={warning} isWarning />
       <Autocomplete
-        // defaultValue={values[name] || ""}
+        // defaultValue={}
         // loading={loading}
         className={classes.flexGrow}
         disabled={disabled}
         options={options || []}
         getOptionLabel={(option) => getOptionLabel(option) || ""}
-        value={values[name] || ""}
+        value={value || ""}
         onChange={(_, val) => {
           if (freeSolo) {
             localValue = val
           }
-          setFieldValue(name, val)
+          setValue(val)
         }}
         onClose={() => {
-          freeSolo && setFieldValue(name, localValue)
+          freeSolo && setValue(localValue)
         }}
         freeSolo={freeSolo}
         onInputChange={(_, val) => {

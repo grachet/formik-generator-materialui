@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import classes from '../index.css'
 import { useFormikContext } from 'formik';
+import get from 'lodash.get';
 
 export default function DisplayValueFormik({ fieldData }) {
 
@@ -14,7 +15,7 @@ export default function DisplayValueFormik({ fieldData }) {
 
   let displayedValue = display.map(displayItem => {
     if (displayItem && displayItem.path) {
-      let newValue = values[displayItem.path]
+      let newValue = get(values, displayItem.path);
       if (displayItem.transformation) {
         newValue = displayItem.transformation(newValue);
       }
