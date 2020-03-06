@@ -1,20 +1,20 @@
 import React from 'react';
-import { useFormikContext } from 'formik';
+import { useField } from 'formik';
 import { last } from "../functions/formHelper";
 import AsyncAutocomplete from '../components/AsyncAutocomplete';
 
-export default function AsyncAutocompleteFieldFormik({ fieldData }) {
+export default function AsyncAutocompleteFieldFormik({ fieldData, fieldData: { path } }) {
 
-  let name = last(fieldData.path);
-  const { values, setFieldValue, errors, touched } = useFormikContext();
-  let error = touched[name] && errors[name] ? errors[name] : "";
+
+  const [{ value }, { touched, error }, { setValue }] = useField(path);
+  let errorMessage = touched && error ? error : "";
 
   return (
     <AsyncAutocomplete
       fieldData={fieldData}
-      setFieldValue={setFieldValue}
-      error={error}
-      value={values[name]}
+      setValue={setValue}
+      errorMessage={errorMessage}
+      value={value}
     />
   )
 };

@@ -8,7 +8,7 @@ import { last } from "../functions/formHelper";
 import HintWarning from "../UI/HintWarning";
 import classes from '../index.css'
 
-export default function AsyncAutocomplete({ fieldData, setFieldValue, error, value }) {
+export default function AsyncAutocomplete({ fieldData, setValue, errorMessage, value }) {
 
   const { path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
 
@@ -16,8 +16,6 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
   const [options, setOptions] = React.useState(null);
   const [inputText, setInputText] = React.useState("");
   const loading = open && !options;
-
-  let name = last(path);
 
   useEffect(() => {
     let active = true;
@@ -52,12 +50,12 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
           setOpen(false);
         }}
         onChange={(_, val) => {
-          setFieldValue(name, val)
+          setValue(val)
         }}
         onInputChange={(_, val) => {
           setInputText(val);
           setOptions(null);
-          freeSolo && setFieldValue(name, val);
+          freeSolo && setValue(val);
         }}
         filterOptions={(options, { inputValue }) => options}
         value={value || ""}
@@ -67,8 +65,8 @@ export default function AsyncAutocomplete({ fieldData, setFieldValue, error, val
           <TextField
             {...params}
             margin={"dense"}
-            error={!!error}
-            helperText={error}
+            error={!!errorMessage}
+            helperText={errorMessage}
             label={title}
             fullWidth
             variant={disabled ? "filled" : "outlined"}

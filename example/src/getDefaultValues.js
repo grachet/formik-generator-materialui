@@ -45,14 +45,16 @@ export default (fieldsArray, noValues) => {
           set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
           break;
         case "autocomplete":
-          set(obj, item.path, randomArrayItem(item.options))
+          set(obj, item.path, item.freeSolo ? randomString(10) : randomArrayItem(item.options))
+          break;
+        case "asyncAutocomplete":
+          item.freeSolo ? set(obj, item.path, randomString(10)) : null
           break;
         default:
           set(obj, item.path, null)
       }
       return obj
     }
-
     return setValue(obj, item)
   }, {}))
 }
