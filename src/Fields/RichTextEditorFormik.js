@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useFormikContext } from 'formik';
+import { useField } from "formik";
 import HintWarning from "../UI/HintWarning";
 import { Typography } from '@material-ui/core';
 import classes from '../index.css';
@@ -10,16 +10,15 @@ export default function RichTextEditorFormik({ fieldData }) {
 
   const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
-  const { values, setFieldValue, touched, errors, initialValues: { [path]: initialValue } } = useFormikContext();
+  const [, { initialValue, touched, error }, helpers] = useField(path);
+  let errorMessage = touched && error ? error : "";
 
   const [value, setValue] = useState(initialValue || null);
 
-  let error = touched[name] && errors[name] ? errors[name] : "";
-
-  const ref = useRef()
+  const ref = useRef();
 
   useEffect(() => {
-    console.log("reset rte " + title, initialValue)
+    console.log("reset")
     setValue(initialValue || null)
   }, [initialValue])
 
@@ -38,10 +37,10 @@ export default function RichTextEditorFormik({ fieldData }) {
           toolbarButtonSize={isSmallIcons ? "small" : "medium"}
           value={value}
           inlineToolbar={true}
-          error={!!error} //todo
+          error={!!errorMessage}
           label="Start typing..."
           onSave={(string) => {
-            setFieldValue(path, string)
+            helpers.setValue(string)
           }}
           onChange={(editorState) => saveOnEdit && ref.current.save()}
         />
