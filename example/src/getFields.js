@@ -1,6 +1,139 @@
 import * as Yup from "yup";
 import { constante } from "./App.js";
 
+let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
+
+  let hintWarning = isHintWarning ? {
+    warning: "Text warning",
+    hint: "Hint text",
+  } : {}
+
+  let getPath = (path) => {
+    if (isObject) {
+      return "arrayExample.0." + path
+    } else if (isHintWarning) {
+      return path + "Hint"
+    } else if (isYup) {
+      return path + "Verification"
+    } else {
+      return path
+    }
+  }
+
+  return [
+    {
+      title: "Text " + title,
+      path: getPath("text"),
+      typeField: "text",
+      ...hintWarning
+    },
+    {
+      title: "Switch " + title,
+      path: getPath("isSwitch"),
+      typeField: "switch",
+      ...hintWarning
+    },
+    {
+      title: "Select " + title,
+      typeField: "select",
+      path: getPath("select"),
+      choice: ["Yes", "No"],
+      ...hintWarning
+    },
+    {
+      title: "RTE " + title,
+      path: getPath("richText"),
+      typeField: 'richTextEditor',
+      isSmallIcons: true,
+      ...hintWarning
+    },
+    {
+      title: 'Date ' + title,
+      path: getPath('date'),
+      typeField: 'date',
+      ...hintWarning
+    },
+    {
+      title: "Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "Text " + title,
+          typeField: "text",
+          path: getPath("textGroup"),
+        }
+      ],
+      ...hintWarning
+    },
+    {
+      title: 'Array of text ' + title,
+      path: getPath('arrayOfText'),
+      typeField: 'array',
+      emptyAddText: "Add text fields",
+      subfield: {
+        typeField: 'text',
+      },
+      ...hintWarning
+    },
+    {
+      title: 'Array of objects ' + title,
+      path: getPath('arrayOfObjects'),
+      subfields: [
+        {
+          title: "Street",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object",
+      ...hintWarning
+    },
+    {
+
+    },
+    {
+      title: 'Display text ' + title,
+      display: [
+        {
+          path: getPath("text")
+        }
+      ],
+      typeField: 'displayValue',
+      ...hintWarning
+    },
+    {
+      title: 'Autocomplete ' + title,
+      path: getPath('autocomplete'),
+      typeField: 'autocomplete',
+      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
+      getOptionLabel: (val) => val.name,
+      placeholder: "Search a country",
+      ...hintWarning
+    },
+    {
+      title: 'Async Autocomplete Free ' + title,
+      freeSolo: true,
+      typeField: 'asyncAutocomplete',
+      path: getPath('asyncAutocompleteFree'),
+      placeholder: "Search a film title",
+      getAsyncOptions: async (value) => {
+        let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
+        let datas = await rep.json();
+        return (datas && datas.results && datas.results.map(r => r.title)) || []
+      },
+      hint: "Options with freesolo must be string",
+      getOptionLabel: opt => opt,
+      ...hintWarning
+    },
+  ]
+
+}
+
 export default [
   [
     {
@@ -461,94 +594,9 @@ export default [
       hint: "For async call on input change (not just 1 time on launch)"
     },
   ],
-  [
-    {
-      title: "Text (in array in object)",
-      path: "arrayExample.0.text",
-      typeField: "text",
-    },
-    {
-      title: "Switch (in array in object)",
-      path: "arrayExample.0.isSwitch",
-      typeField: "switch",
-    },
-    {
-      title: "Select (in array in object)",
-      typeField: "select",
-      path: "arrayExample.0.select",
-      choice: ["Yes", "No"]
-    },
-    {
-      title: "RTE (in array in object)",
-      path: "arrayExample.0.richText",
-      typeField: 'richTextEditor',
-      isSmallIcons: true
-    },
-    {
-      title: 'Date (in array in object)',
-      path: 'arrayExample.0.date',
-      typeField: 'date',
-    },
-    {
-      title: 'Array of text (in array in object)',
-      path: 'arrayExample.0.arrayOfText',
-      typeField: 'array',
-      emptyAddText: "Add text fields",
-      subfield: {
-        typeField: 'text',
-      },
-    },
-    {
-      title: 'Array of objects (in array in object)',
-      path: 'arrayExample.0.arrayOfObjects',
-      subfields: [
-        {
-          title: "Street",
-          name: "streetName",
-          typeField: 'text',
-        }, {
-          title: "Country",
-          name: "country",
-          choice: ["France", "USA", "Mexico"],
-          typeField: 'select',
-        }],
-      typeField: 'arrayObject',
-      emptyAddText: "Add object"
-    },
-    {
-      title: 'Autocomplete (in array in object)',
-      path: 'arrayExample.0.autocomplete',
-      typeField: 'autocomplete',
-      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-      getOptionLabel: (val) => val.name,
-      placeholder: "Search a country",
-    },
-    {
-      title: 'Async Autocomplete Free (in array in object)',
-      freeSolo: true,
-      typeField: 'asyncAutocomplete',
-      path: 'arrayExample.0.asyncAutocompleteFree',
-      placeholder: "Search a film title",
-      getAsyncOptions: async (value) => {
-        let rep = await fetch("https://api.themoviedb.org/3/search/movie?api_key=" + constante + "&query=" + value);
-        let datas = await rep.json();
-        return (datas && datas.results && datas.results.map(r => r.title)) || []
-      },
-      hint: "Options with freesolo must be string",
-      getOptionLabel: opt => opt
-    },
-    {
-      title: "Group",
-      typeField: "group",
-      subfields: [
-        {
-          title: "Text (in array in object)",
-          typeField: "text",
-          path: "arrayExample.0.textGroup",
-        }
-      ],
-    },
-  ],
+  getAllFieldsTypeExample("(in array in object)", true),
+  getAllFieldsTypeExample("(hint and warning)", false, true),
+  getAllFieldsTypeExample("(with verification)", false, false, true),
   //   [
   //     {
   //       warning: "Warning Text",
