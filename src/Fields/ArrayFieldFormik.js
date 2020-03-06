@@ -14,9 +14,6 @@ export default function ArrayFieldFormik({ fieldData }) {
 
   const [{ value }] = useField(path);
 
-
-
-
   return <FieldArray
     validateOnChange={false}
     name={path}

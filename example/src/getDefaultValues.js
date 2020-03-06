@@ -8,6 +8,8 @@ export default (fieldsArray, noValues) => {
 
   return fieldsArray.map((fields) => fields.reduce((obj, item) => {
 
+    let newArray = [], newObject = [];
+
     let setValue = (obj, item) => {
       switch (item.typeField) {
         //todo not last
@@ -27,11 +29,16 @@ export default (fieldsArray, noValues) => {
           });
           break;
         case "array":
-          let newArray = setValue([], { ...item.subfield, path: "0" })
-          newArray = setValue(newArray, { ...item.subfield, path: "1" })
-          newArray = setValue(newArray, { ...item.subfield, path: "2" })
-          set(obj, item.path, newArray)
-          console.log(newArray, obj)
+          obj = setValue(obj, { ...item.subfield, path: item.path + ".0" })
+          obj = setValue(obj, { ...item.subfield, path: item.path + ".1" })
+          obj = setValue(obj, { ...item.subfield, path: item.path + ".2" })
+          break;
+        case "arrayObject":
+          [0, 1].forEach(i => {
+            item.subfields.forEach(subfield => {
+              obj = setValue(obj, { ...subfield, path: item.path + "." + i + "." + subfield.name })
+            })
+          });
           break;
         case "select":
           set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))

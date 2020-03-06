@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldArray } from 'formik';
+import { FieldArray, useField } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
@@ -12,11 +12,13 @@ export default function ArrayOfObjectFieldFormik(props) {
 
   const { fieldData } = props;
 
-  const { title, path, disabled, value, emptyAddText, noBorder, hint, warning } = fieldData;
+  const { title, path, disabled, emptyAddText, noBorder, hint, warning } = fieldData;
+
+  const [{ value }] = useField(path);
 
   return <FieldArray
     validateOnChange={false}
-    name={path[path.length - 1]}
+    name={path}
     render={arrayHelpers => (
       <div className={(!noBorder ? classes.borderContainer : "")}>
         {title &&
@@ -30,7 +32,7 @@ export default function ArrayOfObjectFieldFormik(props) {
           <div>
             {value.map((arrayValue, index) => (
               <span key={index}>
-                <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} {...props} />
+                <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} {...props} value={value} />
               </span>
             )
             )}
@@ -49,14 +51,16 @@ export default function ArrayOfObjectFieldFormik(props) {
 }
 
 
-function RenderFieldsContainer({ arrayHelpers, index, fieldData }) {
+function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
 
-  const { path, value, subfields, dense, disabled } = fieldData;
+  const { path, subfields, dense, disabled } = fieldData;
 
   let newObject = subfields.reduce((obj, item) => {
     obj[item.name] = "";
     return obj
   }, {});
+
+  console.log(newObject)
 
   return (
     <span>
@@ -69,7 +73,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData }) {
               <span className={classes.flexGrow}>
                 <FieldGenerator fieldData={{
                   ...subfield,
-                  path: [path[path.length - 1] + "[" + index + "]." + subfield.name],
+                  path: path + "[" + index + "]." + subfield.name,
                   value: value[index][subfield.name]
                 }} readOnly={disabled} />
               </span>

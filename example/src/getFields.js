@@ -308,59 +308,72 @@ export default [
       },
     },
   ],
-  //   [
-  //     {
-  //       title: 'Array of objects',
-  //       path:
-  //         'address',
-  //       ],
-  //       subfields: [
-  //         {
-  //           title: "Street",
-  //           name: "streetName",
-  //           typeField: 'text',
-  //         }, {
-  //           title: "Country",
-  //           name: "country",
-  //           choice: ["France", "USA", "Mexico"],
-  //           typeField: 'select',
-  //         }],
-  //       typeField: 'arrayObject',
-  //       emptyAddText: "Add object"
-  //     },
-  //     {
-  //       title: 'Array of objects (more than 3 subfields) ',
-  //       path:
-  //         'addressMoreThan3',
-  //       ],
-  //       subfields: [
-  //         {
-  //           title: "Name",
-  //           name: "name",
-  //           typeField: 'text',
-  //         }, {
-  //           title: "Last name",
-  //           name: "lastName",
-  //           typeField: 'text',
-  //         },
-  //         {
-  //           title: "Number",
-  //           name: "number",
-  //           typeField: 'text',
-  //         }, {
-  //           title: "Street name ",
-  //           name: "streetName",
-  //           typeField: 'text',
-  //         }, {
-  //           title: "Country",
-  //           name: "country",
-  //           choice: ["France", "USA", "Mexico"],
-  //           typeField: 'select',
-  //         }],
-  //       typeField: 'arrayObject',
-  //       emptyAddText: "Add object"
-  //     }
-  //   ],
+  [
+    {
+      title: 'Array of objects',
+      path: 'address',
+      subfields: [
+        {
+          title: "Street",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+    {
+      title: 'Array of objects (more than 3 subfields) ',
+      path: 'addressMoreThan3',
+      subfields: [
+        {
+          title: "Name",
+          name: "name",
+          typeField: 'text',
+        }, {
+          title: "Last name",
+          name: "lastName",
+          typeField: 'text',
+        },
+        {
+          title: "Number",
+          name: "number",
+          typeField: 'text',
+        }, {
+          title: "Street name ",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+    {
+      title: 'Array of objects in object',
+      path: 'object.address',
+      subfields: [
+        {
+          title: "Street",
+          name: "streetName",
+          typeField: 'text',
+        }, {
+          title: "Country",
+          name: "country",
+          choice: ["France", "USA", "Mexico"],
+          typeField: 'select',
+        }],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+  ],
   //   [
   //     {
   //       title: "First Value",
