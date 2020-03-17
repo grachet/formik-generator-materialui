@@ -7,6 +7,7 @@ import FormikWithRef from './FormikWithRef';
 import {
   MuiPickersUtilsProvider
 } from '@material-ui/pickers';
+import classes from '../index.css'
 import MomentUtils from '@date-io/moment';
 
 let validationSchema = {};
@@ -43,7 +44,7 @@ export default function FormGenerator({ initialValues, fields, onSubmit, readOnl
       >
         {({ values, ...formFunction }) => (
           <Form>
-            {fields && fields.map((field, i) => <div key={i}>
+            {fields && fields.map((field, i) => <div key={i} className={classes.noCollapse}>
               <FieldGenerator
                 readOnly={readOnly}
                 formFunction={formFunction}
