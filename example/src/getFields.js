@@ -43,7 +43,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       title: "Select " + title,
       typeField: "select",
       path: getPath("select"),
-      choice: ["Yes", "No"],
+      choices: ["Yes", "No"],
       ...hintWarning,
       yup: isYup && Yup.string().required(),
     },
@@ -115,7 +115,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         }, {
           title: "Country",
           name: "country",
-          choice: ["France", "USA", "Mexico"],
+          choices: ["France", "USA", "Mexico"],
           typeField: 'select',
         }],
       typeField: 'arrayObject',
@@ -232,33 +232,33 @@ export default [
       title: "Select (value === displayed)",
       typeField: "select",
       path: "color",
-      choice: ["#003fff", "#5dff00", "#ff0000"]
+      choices: ["#003fff", "#5dff00", "#ff0000"]
     },
     {
       title: "Select (value !== displayed)",
       typeField: "select",
       path: "colorNamed",
-      choice: ["#003fff", "#5dff00", "#ff0000"],
-      titleChoice: ["blue", "green", "red"]
+      choices: ["#003fff", "#5dff00", "#ff0000"],
+      titleChoices: ["blue", "green", "red"]
     },
     {
       title: "Select disabled",
       typeField: "select",
       path: "colorNamed",
-      choice: ["#003fff", "#5dff00", "#ff0000"],
+      choices: ["#003fff", "#5dff00", "#ff0000"],
       disabled: true
     },
     {
       title: "Select with null value",
       typeField: "select",
       path: "nullValueSelect",
-      choice: [null, "", 0, "value"]
+      choices: [null, "", 0, "value"]
     },
     {
       title: "Select with categories",
       typeField: "select",
       path: "categories",
-      choice: [
+      choices: [
         {
           category: 'General',
           values: [
@@ -329,7 +329,7 @@ export default [
           title: "Value not in group object",
           typeField: "select",
           path: "notInGroup",
-          choice: ["Me", "You"]
+          choices: ["Me", "You"]
         },
       ],
     },
@@ -371,7 +371,7 @@ export default [
             }, {
               title: "Country",
               name: "country",
-              choice: ["France", "USA", "Mexico"],
+              choices: ["France", "USA", "Mexico"],
               typeField: 'select',
             }],
           typeField: 'arrayObject',
@@ -395,7 +395,7 @@ export default [
             {
               title: "Select",
               typeField: "select",
-              choice: ["Yes", "No"],
+              choices: ["Yes", "No"],
               path: "select"
             },
             {
@@ -439,7 +439,7 @@ export default [
       typeField: 'array',
       emptyAddText: "Add select fields",
       subfield: {
-        choice: ["Yes", "Two"],
+        choices: ["Yes", "Two"],
         typeField: 'select',
       },
     }
@@ -456,7 +456,7 @@ export default [
         }, {
           title: "Country",
           name: "country",
-          choice: ["France", "USA", "Mexico"],
+          choices: ["France", "USA", "Mexico"],
           typeField: 'select',
         }],
       typeField: 'arrayObject',
@@ -486,7 +486,7 @@ export default [
         }, {
           title: "Country",
           name: "country",
-          choice: ["France", "USA", "Mexico"],
+          choices: ["France", "USA", "Mexico"],
           typeField: 'select',
         }],
       typeField: 'arrayObject',

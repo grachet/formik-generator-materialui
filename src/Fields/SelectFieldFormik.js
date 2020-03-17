@@ -17,7 +17,7 @@ import { last } from "../functions/formHelper";
 
 export default function SelectFieldFormik({ fieldData }) {
 
-  const { title, path, choice, titleChoice, category, disabled, hint, warning, required } = fieldData;
+  const { title, path, choices, titleChoices, disabled, hint, warning, required } = fieldData;
 
   const selectRef = useRef(null);
   const [labelWidth, setLabelWidth] = useState(null);
@@ -67,14 +67,14 @@ export default function SelectFieldFormik({ fieldData }) {
           }}
           label={title}
         >
-          {choice.map((choice, i) => {
+          {choices.map((choice, i) => {
             if (!choice && choice !== 0) {
               return <MenuItem key={i} value={null}>
                 {"-"}
               </MenuItem>
             } else if (!choice.category) {
               return <MenuItem key={i} value={choice}>
-                {(titleChoice && titleChoice[i]) || choice}
+                {(titleChoices && titleChoices[i]) || choice}
               </MenuItem>
             } else {
               return [

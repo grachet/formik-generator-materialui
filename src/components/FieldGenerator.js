@@ -13,36 +13,33 @@ import GroupFieldFormik from '../Fields/GroupFieldFormik';
 
 export default function FieldGenerator({ fieldData, readOnly }) {
 
-  if (readOnly) {
-    //can be true without read only
-    fieldData.disabled = true
-  }
+  let fieldDataWithReadOnly = { ...fieldData, disabled: fieldData.disabled || readOnly };
 
   switch (fieldData.typeField) {
     case "group":
-      return <GroupFieldFormik fieldData={fieldData} />;
+      return <GroupFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "text":
-      return <TextFieldFormik fieldData={fieldData} />;
+      return <TextFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "select":
-      return <SelectFieldFormik fieldData={fieldData} />;
+      return <SelectFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "displayValue":
-      return <DisplayValueFormik fieldData={fieldData} />;
+      return <DisplayValueFormik fieldData={fieldDataWithReadOnly} />;
     case "date":
-      return <DateFormik fieldData={fieldData} />;
+      return <DateFormik fieldData={fieldDataWithReadOnly} />;
     case "checkbox":
-      return <CheckboxFormik fieldData={fieldData} />;
+      return <CheckboxFormik fieldData={fieldDataWithReadOnly} />;
     case "switch":
-      return <CheckboxFormik fieldData={fieldData} isSwitch />;
+      return <CheckboxFormik fieldData={fieldDataWithReadOnly} isSwitch />;
     case "arrayObject":
-      return <ArrayOfObjectFieldFormik fieldData={fieldData} />;
+      return <ArrayOfObjectFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "array":
-      return <ArrayFieldFormik fieldData={fieldData} />;
+      return <ArrayFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "autocomplete":
-      return <AutocompleteFieldFormik fieldData={fieldData} />;
+      return <AutocompleteFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "asyncAutocomplete":
-      return <AsyncAutocompleteFieldFormik fieldData={fieldData} />;
+      return <AsyncAutocompleteFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "richTextEditor":
-      return <RichTextEditorFormik fieldData={fieldData} />;
+      return <RichTextEditorFormik fieldData={fieldDataWithReadOnly} />;
     default:
       return null
   }

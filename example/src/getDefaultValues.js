@@ -42,7 +42,7 @@ export default (fieldsArray, noValues) => {
           });
           break;
         case "select":
-          set(obj, item.path, item.choice[0] && item.choice[0].category ? null : randomArrayItem(item.choice))
+          set(obj, item.path, item.choices[0] && item.choices[0].category ? null : randomArrayItem(item.choices))
           break;
         case "autocomplete":
           set(obj, item.path, item.freeSolo ? randomString(10) : randomArrayItem(item.options))
@@ -51,7 +51,7 @@ export default (fieldsArray, noValues) => {
           set(obj, item.path, item.freeSolo ? randomString(10) : null)
           break;
         default:
-          set(obj, item.path, null)
+        // set(obj, item.path, null)
       }
       return obj
     }

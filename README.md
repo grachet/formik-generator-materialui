@@ -107,7 +107,7 @@ yup, title, multiline, value, hint, warning
 
 "select"
 
-title, path, choice, titleChoice, category, disabled, value, hint, warning, required
+title, path, choices, titleChoices, disabled, value, hint, warning, required
 
 "date"
 
