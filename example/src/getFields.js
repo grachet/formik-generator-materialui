@@ -102,7 +102,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         typeField: 'text',
       },
       ...hintWarning,
-      yup: isYup && Yup.array().of(Yup.string().required()),//.required(),
+      yup: isYup && Yup.array().of(Yup.string().required()).required(),
     },
     {
       title: 'Array of objects ' + title,
@@ -126,7 +126,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
           streetName: Yup.string().required(),
           country: Yup.string().required(),
         })
-      ),
+      ).required(),
     },
     {
       title: 'Display text ' + title,

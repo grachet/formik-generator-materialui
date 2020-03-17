@@ -26,6 +26,7 @@ export default function RichTextEditorFormik({ fieldData }) {
       <div className={classes.flexGrow + " " + (!!error ? classes.errorBorderContainer : classes.borderContainer)}>
         {title &&
           <Typography variant="body2"
+            className={!!error ? classes.errorColor : ""}
             color="textSecondary">{title}
             <HintWarning hint={warning} isWarning />
             <HintWarning hint={hint} />

@@ -5,7 +5,7 @@ import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
 import HintWarning from "../UI/HintWarning"
 import FieldGenerator from "../components/FieldGenerator";
-import { Button, IconButton, Typography, Tooltip, Grid, Divider } from '@material-ui/core';
+import { Button, IconButton, Typography, FormHelperText, Tooltip, Grid, Divider } from '@material-ui/core';
 import classes from '../index.css'
 
 export default function ArrayOfObjectFieldFormik(props) {
@@ -14,15 +14,16 @@ export default function ArrayOfObjectFieldFormik(props) {
 
   const { title, path, disabled, emptyAddText, noBorder, hint, warning } = fieldData;
 
-  const [{ value }] = useField(path);
+  const [{ value }, { error }] = useField(path);
 
   return <FieldArray
     validateOnChange={false}
     name={path}
     render={arrayHelpers => (
-      <div className={(!noBorder ? classes.borderContainer : "")}>
+      <div className={noBorder ? "" : !!error ? classes.errorBorderContainer : classes.borderContainer}>
         {title &&
           <Typography variant="body2" gutterBottom
+            className={!!error ? classes.errorColor : ""}
             color="textSecondary"
             component={'div'}>{title}
             <HintWarning hint={warning} isWarning />
@@ -44,6 +45,7 @@ export default function ArrayOfObjectFieldFormik(props) {
               {emptyAddText}
             </Button>
           )}
+        {!!error && !Array.isArray(error) && < FormHelperText error>{error}</FormHelperText>}
       </div>
 
     )}

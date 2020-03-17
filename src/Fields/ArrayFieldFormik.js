@@ -6,22 +6,24 @@ import RemoveIcon from '@material-ui/icons/RemoveCircle';
 import HintWarning from "../UI/HintWarning";
 import FieldGenerator from "../components/FieldGenerator";
 import classes from '../index.css'
-import { Button, IconButton, Typography, Tooltip } from '@material-ui/core';
+import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@material-ui/core';
 
 export default function ArrayFieldFormik({ fieldData }) {
 
   const { title, path, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
 
-  const [{ value }] = useField(path);
+  const [{ value }, { error }] = useField(path);
 
   return <FieldArray
     validateOnChange={false}
     name={path}
     render={arrayHelpers => (
-      <div className={noBorder ? "" : classes.borderContainer}>
+      <div className={noBorder ? "" : !!error ? classes.errorBorderContainer : classes.borderContainer}>
         {title && <Typography variant="body2" gutterBottom
           color="textSecondary"
-          component={'div'}>{title}
+          component={'div'}
+          className={!!error ? classes.errorColor : ""}
+        >{title}
           <HintWarning hint={warning} isWarning />
           <HintWarning hint={hint} />
         </Typography>}
@@ -72,7 +74,8 @@ export default function ArrayFieldFormik({ fieldData }) {
               {emptyAddText}
             </Button>
           )}
-      </div>
+        {!!error && !Array.isArray(error) && < FormHelperText error>{error}</FormHelperText>}
+      </ div>
     )}
   />
 }
