@@ -9,7 +9,7 @@ import get from 'lodash.get';
 
 export default function DisplayValueFormik({ fieldData }) {
 
-  const { yup, title, multiline, transformation, hint, warning, display } = fieldData;
+  const { yup, title, required, multiline, transformation, hint, warning, display } = fieldData;
 
   const { values } = useFormikContext();
 
@@ -46,6 +46,7 @@ export default function DisplayValueFormik({ fieldData }) {
       <TextField
         className={classes.flexGrow}
         margin={"dense"}
+        required={required}
         variant={"filled"}
         label={title}
         inputlabelprops={{ shrink: true }}

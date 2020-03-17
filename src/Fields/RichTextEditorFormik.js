@@ -8,7 +8,7 @@ import { last } from "../functions/formHelper";
 
 export default function RichTextEditorFormik({ fieldData }) {
 
-  const { title, path, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
+  const { title, path, required, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
 
   const [, { initialValue, error }, helpers] = useField(path);
 
@@ -27,7 +27,7 @@ export default function RichTextEditorFormik({ fieldData }) {
         {title &&
           <Typography variant="body2"
             className={!!error ? classes.errorColor : ""}
-            color="textSecondary">{title}
+            color="textSecondary">{required ? title + " *" : title}
             <HintWarning hint={warning} isWarning />
             <HintWarning hint={hint} />
           </Typography>}

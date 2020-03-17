@@ -10,7 +10,7 @@ import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@materi
 
 export default function ArrayFieldFormik({ fieldData }) {
 
-  const { title, path, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
+  const { title, path, required, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
 
   const [{ value }, { error }] = useField(path);
 
@@ -23,7 +23,7 @@ export default function ArrayFieldFormik({ fieldData }) {
           color="textSecondary"
           component={'div'}
           className={!!error ? classes.errorColor : ""}
-        >{title}
+        >{required ? title + " *" : title}
           <HintWarning hint={warning} isWarning />
           <HintWarning hint={hint} />
         </Typography>}

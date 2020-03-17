@@ -11,7 +11,7 @@ import { last } from "../functions/formHelper";
 
 export default function CheckboxFormik({ fieldData, isSwitch }) {
 
-  const { title, path, disabled, hint, warning } = fieldData;
+  const { title, path, disabled, required, hint, warning } = fieldData;
 
   const [field] = useField(path);
 
@@ -27,7 +27,8 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
             />
         }
         disabled={disabled}
-        label={title}
+        label={required ? title + " *" : title}
+        required={required}
       />
       <HintWarning hint={hint} />
     </div>

@@ -1,7 +1,12 @@
 import * as Yup from "yup";
 import { constante } from "./App.js";
 
-let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
+let getAllFieldsTypeExample = (title, type) => {
+
+  let isObject = type === "object";
+  let isHintWarning = type === "hint";
+  let isYup = type === "yup";
+  let isRequired = type === "required";
 
   let hintWarning = isHintWarning ? {
     warning: "Text warning",
@@ -15,29 +20,30 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       return path + "Hint"
     } else if (isYup) {
       return path + "Verification"
+    } else if (isRequired) {
+      return path + "Required"
     } else {
       return path
     }
   }
-
-  //yup: Yup.number().required(),
-  //yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
-  //yup: isYup && Yup.string().required(),
 
   return [
     {
       title: "Text " + title,
       path: getPath("text"),
       typeField: "text",
+      warning: isRequired && "props required = true will just display an * in the title",
       ...hintWarning,
       yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
+      required: isRequired,
     },
     {
       title: "Switch " + title,
       path: getPath("isSwitch"),
       typeField: "switch",
       warning: isYup && "No verification",
-      ...hintWarning
+      ...hintWarning,
+      required: isRequired,
     },
     {
       title: "Select " + title,
@@ -45,6 +51,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       path: getPath("select"),
       choices: ["Yes", "No"],
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.string().required(),
     },
     {
@@ -53,6 +60,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       typeField: 'richTextEditor',
       isSmallIcons: true,
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.string().required(),
       saveOnEdit: true,
       warning: isYup && "Not return empty string if empty",
@@ -62,6 +70,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       path: getPath('date'),
       typeField: 'date',
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.date().required(),
     },
     {
@@ -75,6 +84,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
           path: getPath("textGroup"),
           yup: isYup && Yup.string().required(),
           ...hintWarning,
+          required: isRequired,
         },
         {
           title: "Group 2",
@@ -86,12 +96,15 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
               path: getPath("textGroup2"),
               yup: isYup && Yup.string().required(),
               ...hintWarning,
+              required: isRequired,
             }
           ],
           ...hintWarning,
+          required: isRequired,
         },
       ],
       ...hintWarning,
+      required: isRequired,
     },
     {
       title: 'Array of text ' + title,
@@ -102,6 +115,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
         typeField: 'text',
       },
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.array().of(Yup.string().required()).required(),
     },
     {
@@ -121,6 +135,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       typeField: 'arrayObject',
       emptyAddText: "Add object",
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.array().of(
         Yup.object().shape({
           streetName: Yup.string().required(),
@@ -138,6 +153,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       typeField: 'displayValue',
       warning: isYup && "Verification triggered anytime",
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.string().required(),
     },
     {
@@ -148,6 +164,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       getOptionLabel: (val) => val.name,
       placeholder: "Search a country",
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.string().required(),
     },
     {
@@ -166,6 +183,7 @@ let getAllFieldsTypeExample = (title, isObject, isHintWarning, isYup) => {
       },
       getOptionLabel: opt => opt,
       ...hintWarning,
+      required: isRequired,
       yup: isYup && Yup.string().required(),
     },
   ]
@@ -637,7 +655,8 @@ export default [
       hint: "For async call on input change (not just 1 time on launch)"
     },
   ],
-  getAllFieldsTypeExample("(in array in object)", true),
-  getAllFieldsTypeExample("(hint and warning)", false, true),
-  getAllFieldsTypeExample("(with verification)", false, false, true),
+  getAllFieldsTypeExample("(in array in object)", "object"),
+  getAllFieldsTypeExample("(hint and warning)", "hint"),
+  getAllFieldsTypeExample("(with verification)", "yup"),
+  getAllFieldsTypeExample("(required)", "required"),
 ]

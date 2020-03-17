@@ -14,7 +14,7 @@ let localValue = "";
 
 export default function AutocompleteFieldFormik({ fieldData }) {
 
-  const { freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning } = fieldData;
+  const { freeSolo, options, getOptionLabel, required, title, path, placeholder, disabled, hint, warning } = fieldData;
 
   const [{ value }, { error }, { setValue }] = useField(path);
 
@@ -48,6 +48,7 @@ export default function AutocompleteFieldFormik({ fieldData }) {
           {...params}
           margin={"dense"}
           error={!!error}
+          required={required}
           helperText={error}
           label={title}
           fullWidth

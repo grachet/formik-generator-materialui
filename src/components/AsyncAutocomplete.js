@@ -10,7 +10,7 @@ import classes from '../index.css'
 
 export default function AsyncAutocomplete({ fieldData, setValue, error, value }) {
 
-  const { path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
+  const { path, required, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
 
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(null);
@@ -68,6 +68,7 @@ export default function AsyncAutocomplete({ fieldData, setValue, error, value })
             error={!!error}
             helperText={error}
             label={title}
+            required={required}
             fullWidth
             variant={disabled ? "filled" : "outlined"}
             placeholder={placeholder}

@@ -12,7 +12,7 @@ export default function ArrayOfObjectFieldFormik(props) {
 
   const { fieldData } = props;
 
-  const { title, path, disabled, emptyAddText, noBorder, hint, warning } = fieldData;
+  const { title, path, required, disabled, emptyAddText, noBorder, hint, warning } = fieldData;
 
   const [{ value }, { error }] = useField(path);
 
@@ -25,7 +25,7 @@ export default function ArrayOfObjectFieldFormik(props) {
           <Typography variant="body2" gutterBottom
             className={!!error ? classes.errorColor : ""}
             color="textSecondary"
-            component={'div'}>{title}
+            component={'div'}>{required ? title + " *" : title}
             <HintWarning hint={warning} isWarning />
             <HintWarning hint={hint} />
           </Typography>}
