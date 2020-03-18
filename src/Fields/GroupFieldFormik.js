@@ -3,10 +3,11 @@ import HintWarning from "../UI/HintWarning"
 import FieldGenerator from "../components/FieldGenerator";
 import { Typography, Grid } from '@material-ui/core';
 import classes from '../index.css'
+import PropTypes from 'prop-types';
 
-export default function GroupFieldFormik({ fieldData }) {
-
-  const { title, subfields, col, hint, warning, disabled } = fieldData;
+function GroupFieldFormik({ fieldData: {
+  title = "", disabled = false, hint = "", warning = "", subfields = [],
+} }) {
 
   return (
     <div className={classes.borderContainer}>
@@ -26,3 +27,16 @@ export default function GroupFieldFormik({ fieldData }) {
     </div>
   )
 }
+
+GroupFieldFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    disabled: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    subfields: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+export default GroupFieldFormik

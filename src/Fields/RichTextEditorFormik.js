@@ -5,10 +5,9 @@ import { Typography, FormHelperText } from '@material-ui/core';
 import classes from '../index.css';
 import MUIRichTextEditor from 'mui-rte';
 import { last } from "../functions/formHelper";
+import PropTypes from 'prop-types';
 
-export default function RichTextEditorFormik({ fieldData }) {
-
-  const { title, path, required, disabled, saveOnEdit, warning, hint, isSmallIcons } = fieldData;
+function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, isSmallIcons = false, saveOnEdit = true } }) {
 
   const [, { initialValue, error }, helpers] = useField(path);
 
@@ -47,3 +46,19 @@ export default function RichTextEditorFormik({ fieldData }) {
     </div>
   )
 }
+
+RichTextEditorFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    isSmallIcons: PropTypes.bool,
+    saveOnEdit: PropTypes.bool,
+  }),
+};
+
+export default RichTextEditorFormik

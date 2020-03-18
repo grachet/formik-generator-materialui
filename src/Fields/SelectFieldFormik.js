@@ -103,13 +103,14 @@ SelectFieldFormik.propTypes = {
     warning: PropTypes.string,
     title: PropTypes.string,
 
-    choices: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.object),
-      PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.string.isRequired,
-        PropTypes.number.isRequired,
-      ])),
-    ]),
+    choices: PropTypes.array
+    // choices: PropTypes.oneOfType([
+    //   PropTypes.arrayOf(PropTypes.object),
+    //   PropTypes.arrayOf(PropTypes.oneOfType([
+    //     PropTypes.string.isRequired,
+    //     PropTypes.number.isRequired,
+    //   ])),
+    // ]),
   }),
 };
 

@@ -6,10 +6,12 @@ import {
 import classes from '../index.css'
 import { useFormikContext } from 'formik';
 import get from 'lodash.get';
+import PropTypes from 'prop-types';
 
-export default function DisplayValueFormik({ fieldData }) {
-
-  const { yup, title, required, multiline, transformation, hint, warning, display } = fieldData;
+function DisplayValueFormik({ fieldData: {
+  title = "", hint = "", warning = "", required = false,
+  yup = null, multiline = false, transformation = (v) => v, display = [], separator = ""
+} }) {
 
   const { values } = useFormikContext();
 
@@ -25,7 +27,7 @@ export default function DisplayValueFormik({ fieldData }) {
     } else {
       return ""
     }
-  }).join(fieldData.separator || "");
+  }).join(separator);
 
   if (transformation) {
     displayedValue = transformation(displayedValue);
@@ -62,3 +64,20 @@ export default function DisplayValueFormik({ fieldData }) {
     </div>
   )
 };
+
+DisplayValueFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    multiline: PropTypes.bool,
+    yup: PropTypes.object,
+    transformation: PropTypes.func,
+    separator: PropTypes.string,
+    display: PropTypes.array
+  }),
+};
+
+export default DisplayValueFormik
