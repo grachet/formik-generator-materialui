@@ -9,12 +9,14 @@ import {
 } from "@material-ui/lab";
 import { last } from "../functions/formHelper";
 import classes from '../index.css'
+import PropTypes from 'prop-types';
 
 let localValue = "";
 
-export default function AutocompleteFieldFormik({ fieldData }) {
-
-  const { freeSolo, options, getOptionLabel, required, title, path, placeholder, disabled, hint, warning } = fieldData;
+function AutocompleteFieldFormik({ fieldData: {
+  title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+  freeSolo = false, options = [], getOptionLabel = (v) => v, placeholder = "Search..."
+} }) {
 
   const [{ value }, { error }, { setValue }] = useField(path);
 
@@ -60,3 +62,21 @@ export default function AutocompleteFieldFormik({ fieldData }) {
     </div>
   )
 };
+
+AutocompleteFieldFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    freeSolo: PropTypes.bool,
+    options: PropTypes.array,
+    getOptionLabel: PropTypes.func,
+    placeholder: PropTypes.string,
+  }),
+};
+
+export default AutocompleteFieldFormik

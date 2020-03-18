@@ -214,13 +214,6 @@ export default [
       path: "text",
       typeField: "text",
     },
-  ],
-  [
-    {
-      title: "Text",
-      path: "text",
-      typeField: "text",
-    },
     {
       title: "Same Text",
       path: "text",
