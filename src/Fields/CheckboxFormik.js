@@ -8,10 +8,10 @@ import {
 import { useField } from 'formik';
 import classes from '../index.css'
 import { last } from "../functions/formHelper";
+import PropTypes from 'prop-types';
 
-export default function CheckboxFormik({ fieldData, isSwitch }) {
-
-  const { title, path, disabled, required, hint, warning } = fieldData;
+function CheckboxFormik({ fieldData: { title = "", path = "",
+  disabled = false, hint = "", warning = "", required = false }, isSwitch }) {
 
   const [field] = useField(path);
 
@@ -34,3 +34,16 @@ export default function CheckboxFormik({ fieldData, isSwitch }) {
     </div>
   )
 };
+
+CheckboxFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};
+
+export default CheckboxFormik

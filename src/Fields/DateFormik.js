@@ -4,10 +4,9 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import { useField } from 'formik';
 import classes from '../index.css'
 import { last } from "../functions/formHelper";
+import PropTypes from 'prop-types';
 
-export default function DateTimeFormik({ fieldData }) {
-
-  const { required, title, hint, openTo, warning, disabled, path } = fieldData;
+function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, openTo = "" } }) {
 
   const [field, { error }, helpers] = useField(path);
 
@@ -38,3 +37,18 @@ export default function DateTimeFormik({ fieldData }) {
     </div>
   )
 };
+
+DateTimeFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    openTo: PropTypes.string,
+  }),
+};
+
+export default DateTimeFormik
