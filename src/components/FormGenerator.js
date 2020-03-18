@@ -9,14 +9,11 @@ import {
 } from '@material-ui/pickers';
 import classes from '../index.css'
 import MomentUtils from '@date-io/moment';
+import PropTypes from 'prop-types';
 
 let validationSchema = {};
 
-export default function FormGenerator({ initialValues, fields, onSubmit, readOnly, formRef, isValidateOnlyOnSubmit }) {
-
-  //  static propTypes = {
-  //   text: PropTypes.string
-  // }
+function FormGenerator({ initialValues, fields, onSubmit, readOnly, formRef, isValidateOnlyOnSubmit }) {
 
   const [validationSchema, setValidationSchema] = useState({})
 
@@ -24,7 +21,6 @@ export default function FormGenerator({ initialValues, fields, onSubmit, readOnl
     setValidationSchema(Yup.object().shape(
       getValidationSchema((fields || []))
     ));
-    console.log("new validationSchema", validationSchema)
   }, [fields])
 
   return (
@@ -58,4 +54,21 @@ export default function FormGenerator({ initialValues, fields, onSubmit, readOnl
   );
 }
 
+FormGenerator.propTypes = {
+  initialValues: PropTypes.object,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSubmit: PropTypes.func,
+  readOnly: PropTypes.bool,
+  formRef: PropTypes.object.isRequired,
+  isValidateOnlyOnSubmit: PropTypes.bool,
+};
 
+FormGenerator.defaultProps = {
+  initialValues: {},
+  fields: [],
+  onSubmit: () => null,
+  readOnly: false,
+  isValidateOnlyOnSubmit: false,
+};
+
+export default FormGenerator

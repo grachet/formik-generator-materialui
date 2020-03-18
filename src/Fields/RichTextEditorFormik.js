@@ -17,7 +17,6 @@ export default function RichTextEditorFormik({ fieldData }) {
   const ref = useRef();
 
   useEffect(() => {
-    console.log("reset")
     setValue(initialValue || null)
   }, [initialValue])
 

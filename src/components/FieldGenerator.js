@@ -39,6 +39,7 @@ export default function FieldGenerator({ fieldData, readOnly }) {
     case "asyncAutocomplete":
       return <AsyncAutocompleteFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "richTextEditor":
+      return null
       return <RichTextEditorFormik fieldData={fieldDataWithReadOnly} />;
     default:
       return null
