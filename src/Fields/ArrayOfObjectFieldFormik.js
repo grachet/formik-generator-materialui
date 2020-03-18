@@ -23,30 +23,27 @@ export default function ArrayOfObjectFieldFormik(props) {
     name={path}
     render={arrayHelpers => (
       <div className={noBorder ? "" : haveError ? classes.errorBorderContainer : classes.borderContainer}>
-        {title &&
-          <Typography variant="body2" gutterBottom
-            className={haveError ? classes.errorColor : ""}
-            color="textSecondary"
-            component={'div'}>{required ? title + " *" : title}
-            <HintWarning hint={warning} isWarning />
-            <HintWarning hint={hint} />
-          </Typography>}
-        {value && value.length > 0 ? (
-          <div>
-            {value.map((arrayValue, index) => (
-              <span key={index}>
-                <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} {...props} value={value} />
-              </span>
-            )
-            )}
-          </div>
-        ) : (
-            <Button
-              disabled={disabled} variant="outlined"
-              onClick={() => arrayHelpers.push({})}>
-              {emptyAddText}
-            </Button>
+        {title && <Typography variant="body2" gutterBottom
+          className={haveError ? classes.errorColor : ""}
+          color="textSecondary"
+          component={'div'}>{required ? title + " *" : title}
+          <HintWarning hint={warning} isWarning />
+          <HintWarning hint={hint} />
+        </Typography>}
+        {value && value.length > 0 ? <div>
+          {value.map((arrayValue, index) => (
+            <span key={index}>
+              <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} {...props} value={value} />
+            </span>
+          )
           )}
+        </div> :
+          <Button
+            disabled={disabled} variant="outlined"
+            onClick={() => arrayHelpers.push({})}>
+            {emptyAddText}
+          </Button>
+        }
         {!!error && !Array.isArray(error) && < FormHelperText error>{error}</FormHelperText>}
       </div>
 
@@ -64,46 +61,50 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
     return obj
   }, {});
 
-  return (
-    <span>
-      <div className={classes.flex + " " + (subfields.length >= 3 && classes.shadowContainer)}>
-        <Grid container spacing={2}>
-          {subfields.map((subfield, i) =>
-            <Grid item key={i} className={classes.flex}
-              sm={12} md={subfield.fullWidth ? 12 : 6}
-              lg={subfield.fullWidth ? 12 : dense ? 4 : 6}>
-              <span className={classes.flexGrow}>
-                <FieldGenerator fieldData={{
-                  ...subfield,
-                  path: path + "[" + index + "]." + subfield.name,
-                  value: value[index][subfield.name]
-                }} readOnly={disabled} />
-              </span>
-            </Grid>)}
-        </Grid>
-        <div className={classes.buttonHint}>
-          <Tooltip title={"Add"}>
-            <IconButton
-              disabled={disabled}
-              onClick={() => arrayHelpers.insert(index + 1, newObject)}
-              color="primary"
-            >
-              <AddIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
-        <div className={classes.buttonHint}>
-          <Tooltip title={"Remove"}>
-            <IconButton
-              disabled={disabled}
-              onClick={() => arrayHelpers.remove(index)}
-              color="primary"
-            >
-              <RemoveIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
+  let fields = subfields.map((subfield, i) =>
+    <Grid key={i} item
+      xs={12}
+      sm={subfield.col || 6}
+    >
+      <div className={classes.flexGrow}>
+        <FieldGenerator
+          fieldData={{
+            ...subfield,
+            path: path + "[" + index + "]." + subfield.name,
+            value: value[index][subfield.name]
+          }}
+          readOnly={disabled}
+        />
       </div>
-    </span>
+    </Grid>)
+
+  return (
+    <div className={classes.flex + " " + (subfields.length >= 3 && classes.shadowContainer)}>
+      <Grid container spacing={2} >
+        {fields}
+      </Grid>
+      <div className={classes.buttonHint}>
+        <Tooltip title={"Add"}>
+          <IconButton
+            disabled={disabled}
+            onClick={() => arrayHelpers.insert(index + 1, newObject)}
+            color="primary"
+          >
+            <AddIcon />
+          </IconButton>
+        </Tooltip>
+      </div>
+      <div className={classes.buttonHint}>
+        <Tooltip title={"Remove"}>
+          <IconButton
+            disabled={disabled}
+            onClick={() => arrayHelpers.remove(index)}
+            color="primary"
+          >
+            <RemoveIcon />
+          </IconButton>
+        </Tooltip>
+      </div>
+    </div>
   )
 };

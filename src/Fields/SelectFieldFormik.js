@@ -19,10 +19,10 @@ export default function SelectFieldFormik({ fieldData }) {
 
   const { title, path, choices, titleChoices, disabled, hint, warning, required } = fieldData;
 
-  const selectRef = useRef(null);
-  const [labelWidth, setLabelWidth] = useState(null);
-
   const [field, { error }] = useField(path);
+
+  const selectRef = useRef(null);
+  const [labelWidth, setLabelWidth] = useState(0);
   let noLabelNotchWidth = title ? title.length * 9 : 0;
 
   useEffect(() => {
@@ -31,6 +31,25 @@ export default function SelectFieldFormik({ fieldData }) {
       setLabelWidth(labelWidth);
     }
   }, [title]);
+
+  let menu = choices.map((choice, i) => {
+    if (!choice && choice !== 0) {
+      return <MenuItem key={i} value={null}>
+        {"-"}
+      </MenuItem>
+    } else if (!choice.category) {
+      return <MenuItem key={i} value={choice}>
+        {(titleChoices && titleChoices[i]) || choice}
+      </MenuItem>
+    } else {
+      return [
+        <MenuItem key={i + "category"} disabled>
+          <em>{choice.category}</em>
+        </MenuItem>,
+        choice.values.map((value, j) => <MenuItem key={j + "" + i} value={value}>{value}</MenuItem>)
+      ]
+    }
+  })
 
   return (
     <div className={classes.flex}>
@@ -44,7 +63,9 @@ export default function SelectFieldFormik({ fieldData }) {
           shrink={!!field.value || (field.value === 0)}
           required={required}
           ref={selectRef}
-          htmlFor={path}>{title}</InputLabel>
+          htmlFor={path}>
+          {title}
+        </InputLabel>
         <Select
           name={field.name}
           value={field.value === 0 ? 0 : field.value || ''}
@@ -67,25 +88,7 @@ export default function SelectFieldFormik({ fieldData }) {
           }}
           label={title}
         >
-          {choices.map((choice, i) => {
-            if (!choice && choice !== 0) {
-              return <MenuItem key={i} value={null}>
-                {"-"}
-              </MenuItem>
-            } else if (!choice.category) {
-              return <MenuItem key={i} value={choice}>
-                {(titleChoices && titleChoices[i]) || choice}
-              </MenuItem>
-            } else {
-              return [
-                <MenuItem key={i + "category"} disabled>
-                  <em>{choice.category}</em>
-                </MenuItem>,
-                choice.values.map((value, j) => <MenuItem key={j + "" + i} value={value}>{value}</MenuItem>)
-              ]
-            }
-          }
-          )}
+          {menu}
         </Select>
         {error && <FormHelperText margin={"dense"} error>{error}</FormHelperText>}
       </FormControl>
