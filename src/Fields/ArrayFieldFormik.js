@@ -14,15 +14,17 @@ export default function ArrayFieldFormik({ fieldData }) {
 
   const [{ value }, { error }] = useField(path);
 
+  let haveError = (!!error) && !(Array.isArray(error) && error.every(v => !v));
+
   return <FieldArray
     validateOnChange={false}
     name={path}
     render={arrayHelpers => (
-      <div className={noBorder ? "" : !!error ? classes.errorBorderContainer : classes.borderContainer}>
+      <div className={noBorder ? "" : haveError ? classes.errorBorderContainer : classes.borderContainer}>
         {title && <Typography variant="body2" gutterBottom
           color="textSecondary"
           component={'div'}
-          className={!!error ? classes.errorColor : ""}
+          className={haveError ? classes.errorColor : ""}
         >{required ? title + " *" : title}
           <HintWarning hint={warning} isWarning />
           <HintWarning hint={hint} />

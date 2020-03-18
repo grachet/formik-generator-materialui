@@ -34,7 +34,7 @@ let getAllFieldsTypeExample = (title, type) => {
       typeField: "text",
       warning: isRequired && "props required = true will just display an * in the title",
       ...hintWarning,
-      yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required(),
+      yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required().nullable(),
       required: isRequired,
     },
     {
@@ -52,7 +52,7 @@ let getAllFieldsTypeExample = (title, type) => {
       choices: ["Yes", "No"],
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().required().nullable(),
     },
     {
       title: "RTE " + title,
@@ -61,7 +61,7 @@ let getAllFieldsTypeExample = (title, type) => {
       isSmallIcons: true,
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().required().nullable(),
       saveOnEdit: true,
       warning: isYup && "Not return empty string if empty",
     },
@@ -71,7 +71,7 @@ let getAllFieldsTypeExample = (title, type) => {
       typeField: 'date',
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.date().required(),
+      yup: isYup && Yup.date().required().nullable(),
     },
     {
       title: "Group",
@@ -82,7 +82,7 @@ let getAllFieldsTypeExample = (title, type) => {
           title: "Text",
           typeField: "text",
           path: getPath("textGroup"),
-          yup: isYup && Yup.string().required(),
+          yup: isYup && Yup.string().required().nullable(),
           ...hintWarning,
           required: isRequired,
         },
@@ -94,7 +94,7 @@ let getAllFieldsTypeExample = (title, type) => {
               title: "Text2",
               typeField: "text",
               path: getPath("textGroup2"),
-              yup: isYup && Yup.string().required(),
+              yup: isYup && Yup.string().required().nullable(),
               ...hintWarning,
               required: isRequired,
             }
@@ -116,7 +116,7 @@ let getAllFieldsTypeExample = (title, type) => {
       },
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.array().of(Yup.string().required()).required(),
+      yup: isYup && Yup.array().of(Yup.string().required()).required().nullable(),
     },
     {
       title: 'Array of objects ' + title,
@@ -138,10 +138,10 @@ let getAllFieldsTypeExample = (title, type) => {
       required: isRequired,
       yup: isYup && Yup.array().of(
         Yup.object().shape({
-          streetName: Yup.string().required(),
-          country: Yup.string().required(),
+          streetName: Yup.string().required().nullable(),
+          country: Yup.string().required().nullable(),
         })
-      ).required(),
+      ).required().nullable(),
     },
     {
       title: 'Display text ' + title,
@@ -154,7 +154,7 @@ let getAllFieldsTypeExample = (title, type) => {
       warning: isYup && "Verification triggered anytime",
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().required().nullable(),
     },
     {
       title: 'Autocomplete ' + title,
@@ -165,7 +165,7 @@ let getAllFieldsTypeExample = (title, type) => {
       placeholder: "Search a country",
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().required().nullable(),
     },
     {
       title: 'Async Autocomplete Free ' + title,
@@ -184,7 +184,7 @@ let getAllFieldsTypeExample = (title, type) => {
       getOptionLabel: opt => opt,
       ...hintWarning,
       required: isRequired,
-      yup: isYup && Yup.string().required(),
+      yup: isYup && Yup.string().required().nullable(),
     },
   ]
 }

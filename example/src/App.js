@@ -67,6 +67,7 @@ export default function App() {
           <span
             className="prmd">
             <Button
+              disabled={readOnly}
               variant={"outlined"}
               onClick={() => setDefaultValues(getDefaultValues(fieldsArray, true))}
             >
@@ -76,6 +77,7 @@ export default function App() {
           <span
             className="prmd">
             <Button
+              disabled={readOnly}
               variant={"outlined"}
               onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
             >
@@ -139,6 +141,7 @@ export default function App() {
       <br />
       <span className="mrmd">
         <Button
+          disabled={readOnly}
           variant={"outlined"}
           onClick={() => setDefaultValues(getDefaultValues(fieldsArray))}
         >
@@ -146,6 +149,7 @@ export default function App() {
           </Button>
       </span>
       <Button
+        disabled={readOnly}
         variant={"outlined"}
         onClick={() => setDefaultValues(getDefaultValues(fieldsArray, true))}
       >
