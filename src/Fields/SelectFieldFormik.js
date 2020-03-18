@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 
 import { last } from "../functions/formHelper";
 
-export default function SelectFieldFormik({ fieldData: { title, path, choices, titleChoices, disabled, hint, warning, required } }) {
+function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, choices = [], titleChoices = [] } }) {
 
   const [field, { error }] = useField(path);
 
@@ -95,3 +95,20 @@ export default function SelectFieldFormik({ fieldData: { title, path, choices, t
     </div>
   )
 };
+
+
+SelectFieldFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    choices: PropTypes.array.isRequired,
+    titleChoices: PropTypes.arrayOf(PropTypes.string),
+  }),
+};
+
+export default SelectFieldFormik

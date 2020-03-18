@@ -8,7 +8,7 @@ import { last } from '../functions/formHelper';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
 
-function TextFieldFormik({ fieldData: { title, path, disabled, hint, warning, required, multiline, isLink } }) {
+function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, multiline = false, isLink = false } }) {
 
   const [field, { error }] = useField(path);
 
@@ -39,20 +39,17 @@ function TextFieldFormik({ fieldData: { title, path, disabled, hint, warning, re
 };
 
 TextFieldFormik.propTypes = {
-  // path: PropTypes.string.isRequired,
-  // disabled: PropTypes.bool,
-  // required: PropTypes.bool,
-  // hint: PropTypes.string,
-  // warning: PropTypes.string,
-  // title: PropTypes.string,
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
 
-  // multiline: PropTypes.bool,
-  // isLink: PropTypes.bool,
-};
-
-TextFieldFormik.defaultProps = {
-  // disabled: false,
-  // required: false,
+    multiline: PropTypes.bool,
+    isLink: PropTypes.bool,
+  }),
 };
 
 export default TextFieldFormik
