@@ -56,22 +56,24 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
 
   const { path, subfields, dense, disabled } = fieldData;
 
+  let needShadow = subfields.reduce((acc, current) => acc + (current.col || 6), 0) > 12
+
   let newObject = subfields.reduce((obj, item) => {
     obj[item.name] = "";
     return obj
   }, {});
 
-  let fields = subfields.map((subfield, i) =>
+  let fields = subfields.map((subfieldData, i) =>
     <Grid key={i} item
       xs={12}
-      sm={subfield.col || 6}
+      sm={subfieldData.col || 6}
     >
       <div className={classes.flexGrow}>
         <FieldGenerator
           fieldData={{
-            ...subfield,
-            path: path + "[" + index + "]." + subfield.name,
-            value: value[index][subfield.name]
+            ...subfieldData,
+            path: path + "[" + index + "]." + subfieldData.name,
+            value: value[index][subfieldData.name]
           }}
           readOnly={disabled}
         />
@@ -79,7 +81,7 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
     </Grid>)
 
   return (
-    <div className={classes.flex + " " + (subfields.length >= 3 && classes.shadowContainer)}>
+    <div className={classes.flex + " " + (needShadow && classes.shadowContainer)}>
       <Grid container spacing={2} >
         {fields}
       </Grid>

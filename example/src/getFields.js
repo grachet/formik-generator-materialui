@@ -76,7 +76,6 @@ let getAllFieldsTypeExample = (title, type) => {
     {
       title: "Group",
       typeField: "group",
-      col: 6,
       subfields: [
         {
           title: "Text",
@@ -85,10 +84,12 @@ let getAllFieldsTypeExample = (title, type) => {
           yup: isYup && Yup.string().required().nullable(),
           ...hintWarning,
           required: isRequired,
+          col: 4
         },
         {
           title: "Group 2",
           typeField: "group",
+          col: 8,
           subfields: [
             {
               title: "Text2",
@@ -339,44 +340,29 @@ export default [
       typeField: "group",
       subfields: [
         {
-          title: "Group.name",
-          typeField: "text",
-          path: "group.name",
-        },
-        {
-          title: "Value not in group object",
-          typeField: "select",
-          path: "notInGroup",
-          choices: ["Me", "You"]
-        },
-      ],
-    },
-    {
-      title: "Group in 3 column",
-      typeField: "group",
-      col: 4,
-      subfields: [
-        {
           title: "col1",
           typeField: "text",
           path: "col1",
+          col: 3
         },
         {
           title: "col2",
           typeField: "text",
           path: "col2",
+          col: 7
         },
         {
           title: "col3",
           typeField: "text",
           path: "col3",
+          col: 9
         },
-      ],
-    },
-    {
-      title: "Group (Array of objects)",
-      typeField: "group",
-      subfields: [
+        {
+          title: "col4",
+          typeField: "text",
+          path: "col4",
+          col: 3
+        },
         {
           title: 'Array of objects',
           path:
@@ -395,7 +381,7 @@ export default [
           typeField: 'arrayObject',
           emptyAddText: "Add object"
         },
-      ],
+      ]
     },
     {
       title: "DisplayField in Group in Group in Group",
@@ -481,8 +467,34 @@ export default [
       emptyAddText: "Add object"
     },
     {
+      title: 'Array of objects (custom column)',
+      path: 'colObject',
+      subfields: [
+        {
+          title: "col1",
+          typeField: "text",
+          path: "col1",
+          col: 2
+        },
+        {
+          title: "col2",
+          typeField: "text",
+          path: "col2",
+          col: 7
+        },
+        {
+          title: "col3",
+          typeField: "text",
+          path: "col3",
+          col: 3
+        }
+      ],
+      typeField: 'arrayObject',
+      emptyAddText: "Add object"
+    },
+    {
       title: 'Array of objects (more than 3 subfields) ',
-      path: 'addressMoreThan3',
+      path: 'addressMoreThan3Fields',
       subfields: [
         {
           title: "Name",

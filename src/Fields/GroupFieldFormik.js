@@ -17,16 +17,12 @@ export default function GroupFieldFormik({ fieldData }) {
         <HintWarning hint={warning} isWarning />
         <HintWarning hint={hint} />
       </Typography>}
-      {!!col && <Grid container spacing={2}>
-        {subfields.map((subfieldData, i) => <Grid key={i} item xs={12} sm={col}>
+      <Grid container spacing={1}>
+        {subfields.map((subfieldData, i) => <Grid key={i} item
+          xs={12} sm={subfieldData.col || 12}>
           <FieldGenerator fieldData={subfieldData} readOnly={disabled} />
         </Grid>)}
-      </Grid>}
-      {!col && subfields.map((subfieldData, i) =>
-        <span key={i}>
-          <FieldGenerator fieldData={subfieldData} readOnly={disabled} />
-        </span>)
-      }
+      </Grid>
     </div>
   )
 }
