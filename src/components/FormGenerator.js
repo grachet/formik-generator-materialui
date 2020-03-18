@@ -65,7 +65,6 @@ FormGenerator.propTypes = {
 
 FormGenerator.defaultProps = {
   initialValues: {},
-  fields: [],
   onSubmit: () => null,
   readOnly: false,
   isValidateOnlyOnSubmit: false,

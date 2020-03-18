@@ -10,8 +10,9 @@ import AutocompleteFieldFormik from "../Fields/AutocompleteFieldFormik";
 import AsyncAutocompleteFieldFormik from '../Fields/AsyncAutocompleteFieldFormik';
 import RichTextEditorFormik from '../Fields/RichTextEditorFormik';
 import GroupFieldFormik from '../Fields/GroupFieldFormik';
+import PropTypes from 'prop-types';
 
-export default function FieldGenerator({ fieldData, readOnly }) {
+function FieldGenerator({ fieldData, readOnly }) {
 
   let fieldDataWithReadOnly = { ...fieldData, disabled: fieldData.disabled || readOnly };
 
@@ -45,5 +46,17 @@ export default function FieldGenerator({ fieldData, readOnly }) {
       return null
   }
 }
+
+FieldGenerator.propTypes = {
+  fieldData: PropTypes.object.isRequired,
+  readOnly: PropTypes.bool,
+};
+
+FieldGenerator.defaultProps = {
+  readOnly: true,
+};
+
+export default FieldGenerator
+
 
 

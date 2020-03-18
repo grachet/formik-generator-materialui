@@ -7,6 +7,7 @@ let getAllFieldsTypeExample = (title, type) => {
   let isHintWarning = type === "hint";
   let isYup = type === "yup";
   let isRequired = type === "required";
+  let isDisabled = type === "disabled";
 
   let hintWarning = isHintWarning ? {
     warning: "Text warning",
@@ -22,6 +23,8 @@ let getAllFieldsTypeExample = (title, type) => {
       return path + "Verification"
     } else if (isRequired) {
       return path + "Required"
+    } else if (isDisabled) {
+      return path + "Disabled"
     } else {
       return path
     }
@@ -36,6 +39,7 @@ let getAllFieldsTypeExample = (title, type) => {
       ...hintWarning,
       yup: isYup && Yup.string().matches(/^[a-zA-Z]{2}[0-9]{3}$/, 'Must be 2 letters + 3 numbers').required().nullable(),
       required: isRequired,
+      disabled: isDisabled,
     },
     {
       title: "Switch " + title,
@@ -44,6 +48,7 @@ let getAllFieldsTypeExample = (title, type) => {
       warning: isYup && "No verification",
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
     },
     {
       title: "Select " + title,
@@ -52,6 +57,7 @@ let getAllFieldsTypeExample = (title, type) => {
       choices: ["Yes", "No"],
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.string().required().nullable(),
     },
     {
@@ -61,6 +67,7 @@ let getAllFieldsTypeExample = (title, type) => {
       isSmallIcons: true,
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.string().required().nullable(),
       saveOnEdit: true,
       warning: isYup && "Not return empty string if empty",
@@ -71,6 +78,7 @@ let getAllFieldsTypeExample = (title, type) => {
       typeField: 'date',
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.date().required().nullable(),
     },
     {
@@ -84,6 +92,7 @@ let getAllFieldsTypeExample = (title, type) => {
           yup: isYup && Yup.string().required().nullable(),
           ...hintWarning,
           required: isRequired,
+          disabled: isDisabled,
           col: 4
         },
         {
@@ -98,14 +107,17 @@ let getAllFieldsTypeExample = (title, type) => {
               yup: isYup && Yup.string().required().nullable(),
               ...hintWarning,
               required: isRequired,
+              disabled: isDisabled,
             }
           ],
           ...hintWarning,
           required: isRequired,
+          disabled: isDisabled,
         },
       ],
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
     },
     {
       title: 'Array of text ' + title,
@@ -117,6 +129,7 @@ let getAllFieldsTypeExample = (title, type) => {
       },
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.array().of(Yup.string().required()).required().nullable(),
     },
     {
@@ -137,6 +150,7 @@ let getAllFieldsTypeExample = (title, type) => {
       emptyAddText: "Add object",
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.array().of(
         Yup.object().shape({
           streetName: Yup.string().required().nullable(),
@@ -155,6 +169,7 @@ let getAllFieldsTypeExample = (title, type) => {
       warning: isYup && "Verification triggered anytime",
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.string().required().nullable(),
     },
     {
@@ -166,6 +181,7 @@ let getAllFieldsTypeExample = (title, type) => {
       placeholder: "Search a country",
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.string().required().nullable(),
     },
     {
@@ -185,6 +201,7 @@ let getAllFieldsTypeExample = (title, type) => {
       getOptionLabel: opt => opt,
       ...hintWarning,
       required: isRequired,
+      disabled: isDisabled,
       yup: isYup && Yup.string().required().nullable(),
     },
   ]
@@ -214,12 +231,6 @@ export default [
       typeField: "text",
       isLink: true
     },
-    {
-      title: "Disabled text",
-      path: "disabledText",
-      typeField: "text",
-      disabled: true
-    },
   ],
   [
     {
@@ -228,23 +239,10 @@ export default [
       typeField: "checkbox",
     },
     {
-      title: "Is checkbox disabled ?",
-      path: "isCheckboxDisabled",
-      typeField: "checkbox",
-      disabled: true
-    },
-    {
       title: "Is switch ?",
       path: "isSwitch",
       typeField: "switch",
     },
-    {
-      title: "Is switch disabled ?",
-      path: "isSwitchDisabled",
-      typeField: "switch",
-      disabled: true
-    },
-
   ],
   [
     {
@@ -259,13 +257,6 @@ export default [
       path: "colorNamed",
       choices: ["#003fff", "#5dff00", "#ff0000"],
       titleChoices: ["blue", "green", "red"]
-    },
-    {
-      title: "Select disabled",
-      typeField: "select",
-      path: "colorNamed",
-      choices: ["#003fff", "#5dff00", "#ff0000"],
-      disabled: true
     },
     {
       title: "Select with null value",
@@ -326,12 +317,6 @@ export default [
       openTo: "year",
       path: 'dateYear',
       typeField: 'date',
-    },
-    {
-      title: 'Date disabled',
-      path: 'dateDisabled',
-      typeField: 'date',
-      disabled: true
     },
   ],
   [
@@ -621,16 +606,7 @@ export default [
       options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
       getOptionLabel: (val) => val.name,
       placeholder: "Search a country",
-    },
-    {
-      title: 'Autocomplete disabled',
-      disabled: true,
-      path: 'countryDisabled',
-      typeField: 'autocomplete',
-      options: [{ name: "France", code: "FR" }, { name: "Spain", code: "ES" }, { name: "Germany", code: "DE" }],
-      getOptionLabel: (val) => val.name,
-      placeholder: "Search a country",
-    },
+    }
   ],
   [
     {
@@ -671,4 +647,5 @@ export default [
   getAllFieldsTypeExample("(hint and warning)", "hint"),
   getAllFieldsTypeExample("(with verification)", "yup"),
   getAllFieldsTypeExample("(required)", "required"),
+  getAllFieldsTypeExample("(disabled)", "disabled"),
 ]
