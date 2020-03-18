@@ -12,12 +12,11 @@ import {
 } from "@material-ui/core";
 import { useField } from 'formik';
 import classes from '../index.css'
+import PropTypes from 'prop-types';
 
 import { last } from "../functions/formHelper";
 
-export default function SelectFieldFormik({ fieldData }) {
-
-  const { title, path, choices, titleChoices, disabled, hint, warning, required } = fieldData;
+export default function SelectFieldFormik({ fieldData: { title, path, choices, titleChoices, disabled, hint, warning, required } }) {
 
   const [field, { error }] = useField(path);
 

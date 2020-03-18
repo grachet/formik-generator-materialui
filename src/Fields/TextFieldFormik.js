@@ -5,11 +5,10 @@ import {
 } from "@material-ui/core";
 import { useField } from 'formik';
 import { last } from '../functions/formHelper';
-import classes from '../index.css'
+import classes from '../index.css';
+import PropTypes from 'prop-types';
 
-export default function TextFieldFormik({ fieldData }) {
-
-  const { title, path, disabled, hint, warning, required, multiline, isLink } = fieldData;
+function TextFieldFormik({ fieldData: { title, path, disabled, hint, warning, required, multiline, isLink } }) {
 
   const [field, { error }] = useField(path);
 
@@ -38,3 +37,22 @@ export default function TextFieldFormik({ fieldData }) {
     </div>
   )
 };
+
+TextFieldFormik.propTypes = {
+  // path: PropTypes.string.isRequired,
+  // disabled: PropTypes.bool,
+  // required: PropTypes.bool,
+  // hint: PropTypes.string,
+  // warning: PropTypes.string,
+  // title: PropTypes.string,
+
+  // multiline: PropTypes.bool,
+  // isLink: PropTypes.bool,
+};
+
+TextFieldFormik.defaultProps = {
+  // disabled: false,
+  // required: false,
+};
+
+export default TextFieldFormik
