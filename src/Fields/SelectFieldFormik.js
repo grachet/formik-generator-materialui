@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 
 import { last } from "../functions/formHelper";
 
-function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, choices = [], titleChoices = [] } }) {
+function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, choices = [] } }) {
 
   const [field, { error }] = useField(path);
 
@@ -36,17 +36,14 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
       return <MenuItem key={i} value={null}>
         {"-"}
       </MenuItem>
-    } else if (!choice.category) {
-      return <MenuItem key={i} value={choice}>
-        {(titleChoices && titleChoices[i]) || choice}
+    } else if (typeof choice === "object") {
+      return <MenuItem key={i} value={choice.value} disabled={choice.disabled}>
+        {choice.title || choice.value}
       </MenuItem>
     } else {
-      return [
-        <MenuItem key={i + "category"} disabled>
-          <em>{choice.category}</em>
-        </MenuItem>,
-        choice.values.map((value, j) => <MenuItem key={j + "" + i} value={value}>{value}</MenuItem>)
-      ]
+      return <MenuItem key={i} value={choice} >
+        {choice}
+      </MenuItem>
     }
   })
 
@@ -106,8 +103,13 @@ SelectFieldFormik.propTypes = {
     warning: PropTypes.string,
     title: PropTypes.string,
 
-    choices: PropTypes.array.isRequired,
-    titleChoices: PropTypes.arrayOf(PropTypes.string),
+    choices: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.object),
+      PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired,
+      ])),
+    ]),
   }),
 };
 

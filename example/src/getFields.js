@@ -253,44 +253,39 @@ export default [
   ],
   [
     {
-      title: "Select (value === displayed)",
+      title: "Select (value === displayed value)",
       typeField: "select",
       path: "color",
       choices: ["#003fff", "#5dff00", "#ff0000"]
     },
     {
-      title: "Select (value !== displayed)",
+      title: "Select (value !== displayed value)",
       typeField: "select",
       path: "colorNamed",
-      choices: ["#003fff", "#5dff00", "#ff0000"],
-      titleChoices: ["blue", "green", "red"]
+      choices: [
+        { value: "#003fff", title: "blue" },
+        { value: "#5dff00", title: "green" },
+        { value: "#ff0000", title: "red" },
+      ],
     },
     {
-      title: "Select with null value",
+      title: "Select with empty value",
       typeField: "select",
-      path: "nullValueSelect",
-      choices: [null, "", 0, "value"]
+      path: "emptyValueSelect",
+      choices: ["", 0, "value"]
     },
     {
       title: "Select with categories",
       typeField: "select",
       path: "categories",
       choices: [
-        {
-          category: 'General',
-          values: [
-            'Fundamentals',
-            'Description',
-          ],
-        },
-        {
-          category: 'Administration',
-          values: [
-            'Installation',
-            'Commissioning',
-          ],
-        }
-      ]
+        { value: "General", disabled: true },
+        { value: "Fundamentals" },
+        { value: "Description" },
+        { value: "Administration", disabled: true },
+        { value: "Installation" },
+        { value: "Commissioning" },
+      ],
     },
   ],
   [
@@ -364,7 +359,8 @@ export default [
               title: "Street",
               name: "streetName",
               typeField: 'text',
-            }, {
+            },
+            {
               title: "Country",
               name: "country",
               choices: ["France", "USA", "Mexico"],
