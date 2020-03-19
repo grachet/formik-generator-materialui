@@ -8,7 +8,7 @@ import {
   Autocomplete,
 } from "@material-ui/lab";
 import { last } from "../functions/formHelper";
-import classes from '../index.css'
+import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 let localValue = "";
@@ -22,7 +22,7 @@ function AutocompleteFieldFormik({ fieldData: {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <Autocomplete
         // defaultValue={}
         // loading={loading}
@@ -58,7 +58,7 @@ function AutocompleteFieldFormik({ fieldData: {
           placeholder={placeholder}
         />)}
       />
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   )
 };

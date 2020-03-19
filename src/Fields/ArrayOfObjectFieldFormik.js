@@ -6,13 +6,11 @@ import RemoveIcon from '@material-ui/icons/RemoveCircle';
 import HintWarning from "../UI/HintWarning"
 import FieldGenerator from "../components/FieldGenerator";
 import { Button, IconButton, Typography, FormHelperText, Tooltip, Grid, Divider } from '@material-ui/core';
-import classes from '../index.css'
+import classes from '../index.css';
+import PropTypes from 'prop-types';
 
-export default function ArrayOfObjectFieldFormik(props) {
-
-  const { fieldData } = props;
-
-  const { title, path, required, disabled, emptyAddText, noBorder, hint, warning } = fieldData;
+function ArrayOfObjectFieldFormik({ fieldData,
+  fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, emptyAddText = "Add item", noBorder = false } }) {
 
   const [{ value }, { error }] = useField(path);
 
@@ -27,13 +25,13 @@ export default function ArrayOfObjectFieldFormik(props) {
           className={haveError ? classes.errorColor : ""}
           color="textSecondary"
           component={'div'}>{required ? title + " *" : title}
-          <HintWarning hint={warning} isWarning />
-          <HintWarning hint={hint} />
+          <HintWarning text={warning} isWarning />
+          <HintWarning text={hint} />
         </Typography>}
         {value && value.length > 0 ? <div>
           {value.map((arrayValue, index) => (
             <span key={index}>
-              <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} {...props} value={value} />
+              <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} fieldData={fieldData} value={value} />
             </span>
           )
           )}
@@ -46,15 +44,13 @@ export default function ArrayOfObjectFieldFormik(props) {
         }
         {!!error && !Array.isArray(error) && < FormHelperText error>{error}</FormHelperText>}
       </div>
-
     )}
   />
 }
 
 
-function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
-
-  const { path, subfields, dense, disabled } = fieldData;
+function RenderFieldsContainer({ arrayHelpers, index, value,
+  fieldData: { path = "", subfields = {}, disabled = false } }) {
 
   let needShadow = subfields.reduce((acc, current) => acc + (current.col || 6), 0) > 12
 
@@ -110,3 +106,20 @@ function RenderFieldsContainer({ arrayHelpers, index, fieldData, value }) {
     </div>
   )
 };
+
+ArrayOfObjectFieldFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    emptyAddText: PropTypes.string,
+    noBorder: PropTypes.bool,
+    subfields: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+export default ArrayOfObjectFieldFormik

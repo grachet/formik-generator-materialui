@@ -11,7 +11,7 @@ import {
   FilledInput,
 } from "@material-ui/core";
 import { useField } from 'formik';
-import classes from '../index.css'
+import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 import { last } from "../functions/formHelper";
@@ -49,7 +49,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <FormControl
         error={!!error}
         variant={disabled ? "filled" : "outlined"}
@@ -88,7 +88,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
         </Select>
         {error && <FormHelperText margin={"dense"} error>{error}</FormHelperText>}
       </FormControl>
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   )
 };

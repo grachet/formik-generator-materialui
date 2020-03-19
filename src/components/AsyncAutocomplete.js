@@ -6,11 +6,13 @@ import {
 import { Autocomplete } from "@material-ui/lab";
 import { last } from "../functions/formHelper";
 import HintWarning from "../UI/HintWarning";
-import classes from '../index.css'
+import classes from '../index.css';
+import PropTypes from 'prop-types';
 
-export default function AsyncAutocomplete({ fieldData, setValue, error, value }) {
-
-  const { path, required, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel } = fieldData;
+function AsyncAutocomplete({ setValue, error, value,
+  fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+    getAsyncOptions = () => ([]), placeholder = "Search...", freeSolo = false, getOptionLabel = (v) => v }
+}) {
 
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState(null);
@@ -35,7 +37,7 @@ export default function AsyncAutocomplete({ fieldData, setValue, error, value })
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <Autocomplete
         // getOptionSelected={fieldData.getOptionSelected}
         getOptionLabel={(option) => getOptionLabel(option) || ""}
@@ -86,7 +88,27 @@ export default function AsyncAutocomplete({ fieldData, setValue, error, value })
           />
         )}
       />
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   );
 }
+
+AsyncAutocomplete.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    getAsyncOptions: PropTypes.func.required,
+    placeholder: PropTypes.string,
+    freeSolo: PropTypes.bool,
+    getOptionLabel: PropTypes.func,
+  }),
+  setValue: PropTypes.func,
+  error: PropTypes.string,
+};
+
+export default AsyncAutocomplete

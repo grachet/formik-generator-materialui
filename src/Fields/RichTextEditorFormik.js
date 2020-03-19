@@ -25,8 +25,8 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = f
         <Typography variant="body2"
           className={!!error ? classes.errorColor : ""}
           color="textSecondary">{required ? title + " *" : title}
-          <HintWarning hint={warning} isWarning />
-          <HintWarning hint={hint} />
+          <HintWarning text={warning} isWarning />
+          <HintWarning text={hint} />
         </Typography>}
       <div className={classes.flex}>
         <MUIRichTextEditor

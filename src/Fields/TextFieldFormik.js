@@ -14,7 +14,7 @@ function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false,
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <TextField
         name={path}
         value={field.value || ''}
@@ -32,8 +32,8 @@ function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false,
           readOnly: disabled
         }}
       />
-      {isLink && <HintWarning hint={field.value || ''} isLink />}
-      <HintWarning hint={hint} />
+      {isLink && <HintWarning text={field.value || ''} isLink />}
+      <HintWarning text={hint} />
     </div>
   )
 };

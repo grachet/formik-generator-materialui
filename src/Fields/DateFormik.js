@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HintWarning from "../UI/HintWarning";
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import { useField } from 'formik';
-import classes from '../index.css'
+import classes from '../index.css';
 import { last } from "../functions/formHelper";
 import PropTypes from 'prop-types';
 
@@ -12,7 +12,7 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <KeyboardDatePicker
         margin={"dense"}
         name={field.name}
@@ -33,7 +33,7 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
         }}
         value={field.value || null}
       />
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   )
 };

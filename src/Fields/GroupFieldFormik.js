@@ -2,7 +2,7 @@ import React from 'react';
 import HintWarning from "../UI/HintWarning"
 import FieldGenerator from "../components/FieldGenerator";
 import { Typography, Grid } from '@material-ui/core';
-import classes from '../index.css'
+import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 function GroupFieldFormik({ fieldData: {
@@ -15,8 +15,8 @@ function GroupFieldFormik({ fieldData: {
         gutterBottom
         color="textSecondary"
         component={'div'}>{title}
-        <HintWarning hint={warning} isWarning />
-        <HintWarning hint={hint} />
+        <HintWarning text={warning} isWarning />
+        <HintWarning text={hint} />
       </Typography>}
       <Grid container spacing={1}>
         {subfields.map((subfieldData, i) => <Grid key={i} item

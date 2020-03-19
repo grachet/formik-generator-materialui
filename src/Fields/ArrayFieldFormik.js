@@ -5,12 +5,12 @@ import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
 import HintWarning from "../UI/HintWarning";
 import FieldGenerator from "../components/FieldGenerator";
-import classes from '../index.css'
+import classes from '../index.css';
 import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-export default function ArrayFieldFormik({ fieldData }) {
-
-  const { title, path, required, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton } = fieldData;
+function ArrayFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+  emptyAddText = "", subfield = {}, noBorder = false, renderRightButton = null } }) {
 
   const [{ value }, { error }] = useField(path);
 
@@ -26,8 +26,8 @@ export default function ArrayFieldFormik({ fieldData }) {
           component={'div'}
           className={haveError ? classes.errorColor : ""}
         >{required ? title + " *" : title}
-          <HintWarning hint={warning} isWarning />
-          <HintWarning hint={hint} />
+          <HintWarning text={warning} isWarning />
+          <HintWarning text={hint} />
         </Typography>}
         {value && value.length > 0 ? (
           <div>
@@ -64,9 +64,9 @@ export default function ArrayFieldFormik({ fieldData }) {
                     </IconButton>
                   </Tooltip>
                 </div>
-                <div className={classes.buttonHint}>
-                  {renderLeftButton && renderLeftButton(index)}
-                </div>
+                {renderRightButton && <div className={classes.buttonHint}>
+                  {renderRightButton}
+                </div>}
               </div>
             )
             )}
@@ -81,3 +81,21 @@ export default function ArrayFieldFormik({ fieldData }) {
     )}
   />
 }
+
+ArrayFieldFormik.propTypes = {
+  fieldData: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    hint: PropTypes.string,
+    warning: PropTypes.string,
+    title: PropTypes.string,
+
+    emptyAddText: PropTypes.string,
+    noBorder: PropTypes.bool,
+    subfield: PropTypes.object,
+    renderRightButton: PropTypes.object
+  }),
+};
+
+export default ArrayFieldFormik

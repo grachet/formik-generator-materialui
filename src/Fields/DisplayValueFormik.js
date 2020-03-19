@@ -3,7 +3,7 @@ import HintWarning from "../UI/HintWarning";
 import {
   TextField,
 } from "@material-ui/core";
-import classes from '../index.css'
+import classes from '../index.css';
 import { useFormikContext } from 'formik';
 import get from 'lodash.get';
 import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ function DisplayValueFormik({ fieldData: {
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <TextField
         className={classes.flexGrow}
         margin={"dense"}
@@ -60,7 +60,7 @@ function DisplayValueFormik({ fieldData: {
         multiline={multiline}
         value={displayedValue}
       />
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   )
 };

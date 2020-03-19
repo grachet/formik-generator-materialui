@@ -6,7 +6,7 @@ import {
   Switch
 } from "@material-ui/core";
 import { useField } from 'formik';
-import classes from '../index.css'
+import classes from '../index.css';
 import { last } from "../functions/formHelper";
 import PropTypes from 'prop-types';
 
@@ -17,7 +17,7 @@ function CheckboxFormik({ fieldData: { title = "", path = "",
 
   return (
     <div className={classes.flex}>
-      <HintWarning hint={warning} isWarning />
+      <HintWarning text={warning} isWarning />
       <FormControlLabel
         control={
           isSwitch ? <Switch
@@ -30,7 +30,7 @@ function CheckboxFormik({ fieldData: { title = "", path = "",
         label={required ? title + " *" : title}
         required={required}
       />
-      <HintWarning hint={hint} />
+      <HintWarning text={hint} />
     </div>
   )
 };

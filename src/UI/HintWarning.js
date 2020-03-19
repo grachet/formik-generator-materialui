@@ -7,17 +7,18 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-import classes from '../index.css'
+import classes from '../index.css';
+import PropTypes from 'prop-types';
 
-export default function HintWarning({ hint, isWarning, isLink, className }) {
+function HintWarning({ text = "", isWarning = false, isLink = false, className = "" }) {
 
-  const upperHint = (typeof hint === "string") && hint.toUpperCase();
+  const upperHint = (typeof text === "string") && text.toUpperCase();
 
   if (upperHint) {
     return <span className={classes.buttonHint + " " + className}>
       <Tooltip title={isLink ? "Go to" : upperHint}>
         <IconButton
-          href={isLink ? hint : null}
+          href={isLink ? text : null}
           target={isLink ? "_blank" : null}
           aria-label={upperHint}
         >
@@ -31,3 +32,12 @@ export default function HintWarning({ hint, isWarning, isLink, className }) {
     return null
   }
 };
+
+HintWarning.propTypes = {
+  text: PropTypes.string,
+  isWarning: PropTypes.bool,
+  isLink: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+export default HintWarning

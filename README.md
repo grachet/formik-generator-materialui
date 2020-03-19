@@ -133,7 +133,7 @@ title, path, disabled, value, emptyAddText, noBorder, hint, warning
 
 "array"
 
- title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderLeftButton
+ title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderRightButton
 
 "autocomplete"
 

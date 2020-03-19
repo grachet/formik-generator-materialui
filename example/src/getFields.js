@@ -1,5 +1,10 @@
+
+
+import React from "react";
 import * as Yup from "yup";
 import { constante } from "./App.js";
+import { IconButton } from "@material-ui/core";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 let getAllFieldsTypeExample = (title, type) => {
 
@@ -419,7 +424,12 @@ export default [
       },
     },
     {
-      title: 'Array of select fields',
+      title: 'Array of select fields (+ custom button)',
+      renderRightButton: <IconButton
+        onClick={() => alert("Custom function")}
+      >
+        <AddShoppingCartIcon />
+      </IconButton>,
       path: 'arrayOfSelect',
       typeField: 'array',
       emptyAddText: "Add select fields",

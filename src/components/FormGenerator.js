@@ -7,13 +7,13 @@ import FormikWithRef from './FormikWithRef';
 import {
   MuiPickersUtilsProvider
 } from '@material-ui/pickers';
-import classes from '../index.css'
+import classes from '../index.css';
 import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
 
 let validationSchema = {};
 
-function FormGenerator({ initialValues, fields, onSubmit, readOnly, formRef, isValidateOnlyOnSubmit }) {
+function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, isValidateOnlyOnSubmit = false }) {
 
   const [validationSchema, setValidationSchema] = useState({})
 
@@ -61,13 +61,6 @@ FormGenerator.propTypes = {
   readOnly: PropTypes.bool,
   formRef: PropTypes.object.isRequired,
   isValidateOnlyOnSubmit: PropTypes.bool,
-};
-
-FormGenerator.defaultProps = {
-  initialValues: {},
-  onSubmit: () => null,
-  readOnly: false,
-  isValidateOnlyOnSubmit: false,
 };
 
 export default FormGenerator
