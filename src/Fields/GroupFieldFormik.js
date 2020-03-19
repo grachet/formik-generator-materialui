@@ -1,13 +1,12 @@
 import React from 'react';
 import HintWarning from "../UI/HintWarning"
-import FieldGenerator from "../components/FieldGenerator";
 import { Typography, Grid } from '@material-ui/core';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 function GroupFieldFormik({ fieldData: {
   title = "", disabled = false, hint = "", warning = "", subfields = [],
-} }) {
+}, FieldGenerator }) {
 
   return (
     <div className={classes.borderContainer}>

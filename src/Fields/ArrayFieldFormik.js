@@ -4,12 +4,11 @@ import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
 import HintWarning from "../UI/HintWarning";
-import FieldGenerator from "../components/FieldGenerator";
 import classes from '../index.css';
 import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-function ArrayFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
   emptyAddText = "", subfield = {}, noBorder = false, renderRightButton = null } }) {
 
   const [{ value }, { error }] = useField(path);

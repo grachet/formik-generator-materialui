@@ -3,13 +3,12 @@ import { FieldArray, useField } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 // import RemoveIcon from '@material-ui/icons/Delete';
-import HintWarning from "../UI/HintWarning"
-import FieldGenerator from "../components/FieldGenerator";
+import HintWarning from "../UI/HintWarning";
 import { Button, IconButton, Typography, FormHelperText, Tooltip, Grid, Divider } from '@material-ui/core';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
 
-function ArrayOfObjectFieldFormik({ fieldData,
+function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
   fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, emptyAddText = "Add item", noBorder = false } }) {
 
   const [{ value }, { error }] = useField(path);

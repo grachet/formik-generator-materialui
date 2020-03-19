@@ -18,7 +18,7 @@ function FieldGenerator({ fieldData, readOnly = true }) {
 
   switch (fieldData.typeField) {
     case "group":
-      return <GroupFieldFormik fieldData={fieldDataWithReadOnly} />;
+      return <GroupFieldFormik fieldData={fieldDataWithReadOnly} FieldGenerator={FieldGenerator} />;
     case "text":
       return <TextFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "select":
@@ -32,9 +32,9 @@ function FieldGenerator({ fieldData, readOnly = true }) {
     case "switch":
       return <CheckboxFormik fieldData={fieldDataWithReadOnly} isSwitch />;
     case "arrayObject":
-      return <ArrayOfObjectFieldFormik fieldData={fieldDataWithReadOnly} />;
+      return <ArrayOfObjectFieldFormik fieldData={fieldDataWithReadOnly} FieldGenerator={FieldGenerator} />;
     case "array":
-      return <ArrayFieldFormik fieldData={fieldDataWithReadOnly} />;
+      return <ArrayFieldFormik fieldData={fieldDataWithReadOnly} FieldGenerator={FieldGenerator} />;
     case "autocomplete":
       return <AutocompleteFieldFormik fieldData={fieldDataWithReadOnly} />;
     case "asyncAutocomplete":

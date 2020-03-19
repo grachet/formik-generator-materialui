@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, Fragment } from 'react'
 import { Grid, Typography, Switch, FormControlLabel, Button, Paper } from "@material-ui/core"
 import "./app.css";
 import { FormGenerator, FormDialogue } from 'formik-generator-materialui'
@@ -36,8 +36,8 @@ function FormDialogueExample() {
   let [open, setOpen] = useState(false);
   let [result, setResult] = useState(null);
 
-  return ([
-    <Grid key="1" item xs={12} sm={6}>
+  return <Fragment>
+    <Grid item xs={12} sm={6}>
       <Paper className="padding">
         <div >
           <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(1)}>Form Dialogue</Button>
@@ -127,8 +127,8 @@ function FormDialogueExample() {
           <ReactJson name={false} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={result} />
         </div>}
       </Paper>
-    </Grid>,
-    <Grid key="2" item xs={12} sm={6}>
+    </Grid>
+    <Grid item xs={12} sm={6}>
       <Paper className="paper padding">
         {"import { FormDialogue } from 'formik-generator-materialui'"}
         <br />
@@ -176,7 +176,7 @@ function FormDialogueExample() {
         <br />
       </Paper>
     </Grid >
-  ])
+  </Fragment>
 }
 
 
