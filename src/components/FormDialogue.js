@@ -32,7 +32,7 @@ function FormDialogue({ onOk = () => null, disableCancelOnOK = false,
             {text}
           </DialogContentText>
           {link &&
-            <Button href={link.url} target="_blank" color="primary" size={"small"} variant={"outlined"}>{link.name}</Button>
+            <Button href={link.url} target="_blank" color="primary" size={"small"} variant={"outlined"}>{link.name || link.url}</Button>
           }
           {component}
           <FormGenerator
@@ -69,7 +69,10 @@ FormDialogue.propTypes = {
   maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', false]),
   open: PropTypes.bool,
   component: PropTypes.object,
-  link: PropTypes.string,
+  link: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string.isRequired,
+  }),
   text: PropTypes.string,
   initialValues: PropTypes.object,
   fields: PropTypes.arrayOf(PropTypes.object),
