@@ -30,7 +30,7 @@ function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
         {value && value.length > 0 ? <div>
           {value.map((arrayValue, index) => (
             <span key={index}>
-              <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} fieldData={fieldData} value={value} />
+              <RenderFieldsContainer arrayHelpers={arrayHelpers} index={index} fieldData={fieldData} value={value} FieldGenerator={FieldGenerator} />
             </span>
           )
           )}
@@ -48,7 +48,7 @@ function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
 }
 
 
-function RenderFieldsContainer({ arrayHelpers, index, value,
+function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
   fieldData: { path = "", subfields = {}, disabled = false } }) {
 
   let needShadow = subfields.reduce((acc, current) => acc + (current.col || 6), 0) > 12

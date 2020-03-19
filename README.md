@@ -90,7 +90,7 @@ function Example {
  - formRef: object.isRequired (to get form functions)
  - isValidateOnlyOnSubmit: bool (less validation, less memory)
 
- ## Usage FormDialogue
+## Usage FormDialogue
 
 ```jsx
 import React, { Component } from 'react'

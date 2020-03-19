@@ -10,7 +10,6 @@ export default (fieldsArray, noValues) => {
 
     let setValue = (obj, item) => {
       switch (item.typeField) {
-        //todo not last
         case "text":
           set(obj, item.path, randomString(10))
           break;
@@ -42,7 +41,7 @@ export default (fieldsArray, noValues) => {
           });
           break;
         case "select":
-          set(obj, item.path, item.choices[0] && item.choices[0].category ? null : randomArrayItem(item.choices))
+          set(obj, item.path, randomArrayItem(item.choices))
           break;
         case "autocomplete":
           set(obj, item.path, item.freeSolo ? randomString(10) : randomArrayItem(item.options))
@@ -55,7 +54,7 @@ export default (fieldsArray, noValues) => {
       }
       return obj
     }
-    return setValue(obj, item)
+    return item.disabled ? obj : setValue(obj, item)
   }, {}))
 }
 
@@ -68,7 +67,8 @@ function randomRTE() {
 }
 
 function randomArrayItem(array) {
-  return array[Math.floor(Math.random() * array.length)]
+  let item = array[Math.floor(Math.random() * array.length)]
+  return item.value || item
 }
 
 function randomBoolean() {
