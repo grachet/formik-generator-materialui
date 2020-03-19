@@ -36,28 +36,84 @@ npm install --save formik @material-ui/core @material-ui/icons prop-types
 -  @date-io/moment: ^1.3.0  (date)
 -  moment: ^2.24.0 (date)
 -  yup: ^0.28.1  (field verification)
--  draft-js: ^0.11.0  (rich text editor)
+-  mui-rte: ^1.14.0  (rich text editor)
 
  ```bash
 npm install --save @material-ui/lab @material-ui/pickers yup draft-js @date-io/moment@1.x moment
 ```
 
-## Usage
+## Usage FormGenerator
 
 ```jsx
 import React, { Component } from 'react'
 import {FormGenerator} from "formik-generator-materialui";
 import * as Yup from "yup";
 
-import MyComponent from 'formik-generator-materialui'
+function Example {
 
-const formRef = useRef(null);
+    const formRef = useRef(null);
 
-class Example extends Component {
-  render () {
     return (
           <div>
-          <FormGenerator
+            <FormGenerator
+              onSubmit={(values) => {
+                console.log(values) // {fullname : "john", ...}
+              }}
+              fields={[
+                {
+                  title: "Full Name",
+                  path: ["fullname"],
+                  typeField: "textfield",
+                  yup: Yup.string().required(),
+                },
+                {...},
+              ]}
+              formRef={formRef}
+              initialValues={{
+                fullname: "john"
+              }}
+              readOnly={false}
+              isValidateOnlyOnSubmit={false}
+            />
+            <button onClick={() => formRef.current.submitForm()} />
+        </div>
+    )
+}
+```
+
+### Props List :
+
+ - initialValues: object (reinitialize form on change)
+ - fields: array of object
+ - onSubmit: func
+ - readOnly: bool
+ - formRef: object.isRequired (to get form functions)
+ - isValidateOnlyOnSubmit: bool (less validation, less memory)
+
+ ## Usage FormDialogue
+
+```jsx
+import React, { Component } from 'react'
+import {FormDialogue} from "formik-generator-materialui";
+import * as Yup from "yup";
+
+function Example {
+
+    let [open, setOpen] = useState(false);
+
+    return (
+          <div>
+            <FormDialogue
+            open={open}
+            onCancel={() => setOpen(false)}
+            onOk={(values) => {
+              console.log(values)
+            }}
+            title={"Your title"}
+            text={"Your text here"}
+            initialValues={{
+                fullname: "john"
+            }}
             fields={[
               {
                 title: "Full Name",
@@ -65,83 +121,164 @@ class Example extends Component {
                 typeField: "textfield",
                 yup: Yup.string().required(),
               },
-              { ...},
+              {...},
             ]}
-            onSubmit={(values) => {
-              console.log(values) // {fullname : "john", ...}
-            }}
-            formRef={formRef}
-            data={{
-              fullname: "john"
-            }}
-            readOnly={false}
           />
-          <button onClick={() => formRef.current.submitForm()} />
+          <button onClick={() => setOpen(true)}>open<button>
         </div>
     )
-  }
 }
 ```
 
-## Props List :
+### Props List :
 
-- data
-- fields
-- onSubmit
-- readOnly
-- formRef
+  - onOk:  function
+  - onCancel:  function
+  - disableCancelOnOK:  bool
+  - okText:  string
+  - title:  string
+  - maxWidth:  'xs', 'sm', 'md', 'lg', 'xl', false
+  - open:  bool
+  - component:  object
+  - link: { name: "string",  url: "string"})
+  - text:  string
+  - readOnly:  bool
+  - isValidateOnlyOnSubmit:  bool
+  - initialValues: object (reinitialize form on change)
+  - fields: array of object
 
 ## Fields Type :
 
-"group"
+### group
 
-title, subfields, col, hint, warning, disabled
+-  disabled: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  subfields: array of objects
 
-"text"
+### text
 
- title, path, disabled, value, hint, warning, required, multiline, link
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  multiline: bool
+-  isLink: bool
 
-"displayValue"
+### displayValue
 
-yup, title, multiline, value, hint, warning
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  multiline: bool
+-  yup: object
+-  transformation: function
+-  separator: string
+-  display: array
 
-"select"
+### select
 
-title, path, choices, titleChoices, disabled, value, hint, warning, required
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  choices: array
 
-"date"
+### date
 
-required, title, hint, value, openTo, warning, disabled, path
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  openTo: string ("year")
 
-"richTextEditor"
+### richTextEditor
 
-title, path, warning, hint
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  isSmallIcons: bool
+-  saveOnEdit: bool
 
-"switch"
+### switch
 
-title, path, disabled, hint, warning
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
 
-"checkbox"
+### checkbox
 
-title, path, disabled, hint, warning
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
 
-"arrayObject"
+### arrayObject
 
-title, path, disabled, value, emptyAddText, noBorder, hint, warning
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  emptyAddText: string
+-  noBorder: bool
+-  subfields: array of objects
 
- path, value, subfields, dense, disabled
+### array
 
-"array"
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  emptyAddText: string
+-  noBorder: bool
+-  subfield: object
+-  renderRightButton: react component (should be material ui IconButton)
 
- title, path, value, emptyAddText, subfield, disabled, hint, warning, noBorder, renderRightButton
+### autocomplete
 
-"autocomplete"
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  freeSolo: bool
+-  options: array
+-  getOptionLabel: function
+-  placeholder: string
 
- freeSolo, options, getOptionLabel, title, path, placeholder, disabled, hint, warning
+### asyncAutocomplete
 
-"asyncAutocomplete"
-
- path, getAsyncOptions, hint, placeholder, disabled, freeSolo, title, warning, getOptionLabel
+-  path: string (Required)
+-  disabled: bool
+-  required: bool
+-  hint: string
+-  warning: string
+-  title: string
+-  freeSolo: bool
+-  getOptionLabel: function
+-  getAsyncOptions: function required
+-  placeholder: string
 
 ## To run in localhost :
 

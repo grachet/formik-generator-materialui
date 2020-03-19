@@ -102,7 +102,7 @@ AsyncAutocomplete.propTypes = {
     warning: PropTypes.string,
     title: PropTypes.string,
 
-    getAsyncOptions: PropTypes.func.required,
+    getAsyncOptions: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     freeSolo: PropTypes.bool,
     getOptionLabel: PropTypes.func,
