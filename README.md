@@ -39,7 +39,7 @@ npm install --save formik @material-ui/core @material-ui/icons prop-types
 -  mui-rte: ^1.14.0  (rich text editor)
 
  ```bash
-npm install --save @material-ui/lab @material-ui/pickers yup draft-js @date-io/moment@1.x moment
+npm install --save @material-ui/lab @material-ui/pickers yup mui-rte @date-io/moment@1.x moment
 ```
 
 ## Usage FormGenerator
