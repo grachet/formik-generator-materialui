@@ -28,6 +28,7 @@ function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false,
         multiline={multiline}
         variant={disabled ? "filled" : "outlined"}
         label={title}
+        InputLabelProps={!title ? { shrink: false } : {}}
         InputProps={{
           readOnly: disabled
         }}

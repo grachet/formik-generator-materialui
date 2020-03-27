@@ -236,6 +236,10 @@ export default [
       typeField: "text",
       isLink: true
     },
+    {
+      path: "noTitle",
+      typeField: "text"
+    },
   ],
   [
     {
@@ -436,6 +440,15 @@ export default [
       subfield: {
         choices: ["Yes", "Two"],
         typeField: 'select',
+      },
+    },
+    {
+      title: 'Array of Rich text editor',
+      path: 'arrayOfRTE',
+      typeField: 'array',
+      emptyAddText: "Add RTE",
+      subfield: {
+        typeField: 'richTextEditor',
       },
     }
   ],
