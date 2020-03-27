@@ -317,7 +317,13 @@ export default [
       typeField: 'date',
     },
     {
-      title: 'Date (openTo year)',
+      title: 'Date (simple = true)',
+      path: 'dateSimple',
+      typeField: 'date',
+      simple: true
+    },
+    {
+      title: 'Date (openTo = year)',
       openTo: "year",
       path: 'dateYear',
       typeField: 'date',

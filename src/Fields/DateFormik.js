@@ -6,7 +6,7 @@ import classes from '../index.css';
 import { last } from "../functions/formHelper";
 import PropTypes from 'prop-types';
 
-function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, openTo = "" } }) {
+function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, openTo = "date", simple = false } }) {
 
   const [field, { error }, helpers] = useField(path);
 
@@ -16,6 +16,8 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
       <KeyboardDatePicker
         margin={"dense"}
         name={field.name}
+        disableToolbar={simple}
+        variant={simple ? "inline" : null}
         openTo={openTo}
         required={required}
         error={!!error}
