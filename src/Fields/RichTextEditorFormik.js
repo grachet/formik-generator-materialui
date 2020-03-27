@@ -5,7 +5,6 @@ import { Typography, FormHelperText } from '@material-ui/core';
 import { Editor } from 'react-draft-wysiwyg';
 import PropTypes from 'prop-types';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
 import classes from '../index.css';
 
 function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false } }) {

@@ -213,31 +213,6 @@ let getAllFieldsTypeExample = (title, type) => {
 export default [
   [
     {
-      title: "Rich text editor",
-      path: "richText",
-      typeField: 'richTextEditor',
-    },
-    {
-      title: "Group",
-      typeField: "group",
-      subfields: [
-        {
-          title: "col1",
-          typeField: "text",
-          path: "col1",
-          col: 3
-        },
-        {
-          title: "Rich text editor",
-          path: "richText",
-          typeField: 'richTextEditor',
-          col: 9
-        }
-      ]
-    },
-  ],
-  [
-    {
       title: "Text",
       path: "text",
       typeField: "text",
