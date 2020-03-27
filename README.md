@@ -63,7 +63,7 @@ function Example {
                 {
                   title: "Full Name",
                   path: ["fullname"],
-                  typeField: "textfield",
+                  typeField: "text",
                   yup: Yup.string().required(),
                 },
                 {...},
@@ -118,7 +118,7 @@ function Example {
               {
                 title: "Full Name",
                 path: ["fullname"],
-                typeField: "textfield",
+                typeField: "text",
                 yup: Yup.string().required(),
               },
               {...},
@@ -179,6 +179,7 @@ function Example {
 -  transformation: function
 -  separator: string
 -  display: array
+-  isLink: bool
 
 ### select
 

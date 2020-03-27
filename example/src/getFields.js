@@ -593,6 +593,15 @@ export default [
       ],
       typeField: 'displayValue'
     },
+    {
+      title: 'Display link value',
+      separator: "",
+      display: [
+        "https://www.npmjs.com/package/formik-generator-materialui",
+      ],
+      isLink: true,
+      typeField: 'displayValue'
+    },
   ],
   [
     {

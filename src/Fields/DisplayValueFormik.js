@@ -9,7 +9,7 @@ import get from 'lodash.get';
 import PropTypes from 'prop-types';
 
 function DisplayValueFormik({ fieldData: {
-  title = "", hint = "", warning = "", required = false,
+  title = "", hint = "", warning = "", required = false, isLink = false,
   yup = null, multiline = false, transformation = (v) => v, display = [], separator = ""
 } }) {
 
@@ -60,6 +60,7 @@ function DisplayValueFormik({ fieldData: {
         multiline={multiline}
         value={displayedValue}
       />
+      {isLink && <HintWarning text={displayedValue || ''} isLink />}
       <HintWarning text={hint} />
     </div>
   )
@@ -76,7 +77,8 @@ DisplayValueFormik.propTypes = {
     yup: PropTypes.object,
     transformation: PropTypes.func,
     separator: PropTypes.string,
-    display: PropTypes.array
+    display: PropTypes.array,
+    isLink: PropTypes.bool
   }),
 };
 
