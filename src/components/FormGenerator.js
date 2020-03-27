@@ -18,8 +18,9 @@ function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null,
   const [validationSchema, setValidationSchema] = useState({})
 
   useEffect(() => {
+    console.log(getValidationSchema(fields));
     setValidationSchema(Yup.object().shape(
-      getValidationSchema((fields || []))
+      getValidationSchema(fields)
     ));
   }, [fields])
 

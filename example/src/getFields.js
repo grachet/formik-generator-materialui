@@ -214,6 +214,14 @@ export default [
   [
     {
       title: "Text",
+      path: "a.text",
+      typeField: "text",
+      yup: Yup.string().required()
+    }
+  ],
+  [
+    {
+      title: "Text",
       path: "text",
       typeField: "text",
     },

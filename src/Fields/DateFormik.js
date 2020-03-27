@@ -24,7 +24,7 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
         error={!!error}
         helperText={error}
         className={classes.flexGrow}
-        clearable
+        // clearable //solve warning
         inputVariant={disabled ? "filled" : "outlined"}
         autoOk
         label={title}
