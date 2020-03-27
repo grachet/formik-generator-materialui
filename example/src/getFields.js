@@ -69,13 +69,11 @@ let getAllFieldsTypeExample = (title, type) => {
       title: "RTE " + title,
       path: getPath("richText"),
       typeField: 'richTextEditor',
-      isSmallIcons: true,
+      warning: !isYup ? "" : "Not return empty string if empty",
       ...hintWarning,
       required: isRequired,
       disabled: isDisabled,
       yup: !isYup ? null : Yup.string().required().nullable(),
-      saveOnEdit: true,
-      warning: !isYup ? "" : "Not return empty string if empty",
     },
     {
       title: 'Date ' + title,
@@ -215,6 +213,31 @@ let getAllFieldsTypeExample = (title, type) => {
 export default [
   [
     {
+      title: "Rich text editor",
+      path: "richText",
+      typeField: 'richTextEditor',
+    },
+    {
+      title: "Group",
+      typeField: "group",
+      subfields: [
+        {
+          title: "col1",
+          typeField: "text",
+          path: "col1",
+          col: 3
+        },
+        {
+          title: "Rich text editor",
+          path: "richText",
+          typeField: 'richTextEditor',
+          col: 9
+        }
+      ]
+    },
+  ],
+  [
+    {
       title: "Text",
       path: "text",
       typeField: "text",
@@ -295,19 +318,6 @@ export default [
       title: "Rich text editor",
       path: "richText",
       typeField: 'richTextEditor',
-      hint: "You must click on save button",
-    },
-    {
-      title: "RTE small icons ",
-      path: "richTextSmall",
-      typeField: 'richTextEditor',
-      isSmallIcons: true
-    },
-    {
-      title: "RTE save on edit ",
-      path: "richTextSaveOnEdit",
-      typeField: 'richTextEditor',
-      saveOnEdit: true
     },
   ],
   [

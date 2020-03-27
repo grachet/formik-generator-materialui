@@ -2,25 +2,18 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useField } from "formik";
 import HintWarning from "../UI/HintWarning";
 import { Typography, FormHelperText } from '@material-ui/core';
-import classes from '../index.css';
-import MUIRichTextEditor from 'mui-rte';
-import { last } from "../functions/formHelper";
+import { Editor } from 'react-draft-wysiwyg';
 import PropTypes from 'prop-types';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, isSmallIcons = false, saveOnEdit = true } }) {
+import classes from '../index.css';
 
-  const [, { initialValue, error }, helpers] = useField(path);
+function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false } }) {
 
-  const [value, setValue] = useState(initialValue || null);
-
-  const ref = useRef();
-
-  useEffect(() => {
-    setValue(initialValue || null)
-  }, [initialValue])
+  const [{ value }, { initialValue, error }, { setValue }] = useField(path);
 
   return (
-    <div className={classes.flexGrow + " " + (!!error ? classes.errorBorderContainer : classes.borderContainer)}>
+    <div className={(!!error ? classes.errorBorderContainer : classes.borderContainer)}>
       {title &&
         <Typography variant="body2"
           className={!!error ? classes.errorColor : ""}
@@ -28,18 +21,14 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = f
           <HintWarning text={warning} isWarning />
           <HintWarning text={hint} />
         </Typography>}
-      <div className={classes.flex}>
-        <MUIRichTextEditor
-          ref={ref}
+      <div>
+        <Editor
+          editorState={value}
+          toolbarClassName={classes.toolbarRTE}
+          editorClassName={disabled ? classes.editorRTEDisabled : classes.editorRTE}
+          onEditorStateChange={setValue}
           readOnly={disabled}
-          toolbarButtonSize={isSmallIcons ? "small" : "medium"}
-          value={value}
-          inlineToolbar={true}
-          label="Start typing..."
-          onSave={(string) => {
-            helpers.setValue(string)
-          }}
-          onChange={(editorState) => saveOnEdit && ref.current.save()}
+          toolbarHidden={disabled}
         />
       </div>
       {!!error && <FormHelperText error>{error}</FormHelperText>}
@@ -55,9 +44,6 @@ RichTextEditorFormik.propTypes = {
     hint: PropTypes.string,
     warning: PropTypes.string,
     title: PropTypes.string,
-
-    isSmallIcons: PropTypes.bool,
-    saveOnEdit: PropTypes.bool,
   }),
 };
 
