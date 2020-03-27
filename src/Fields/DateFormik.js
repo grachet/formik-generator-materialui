@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import HintWarning from "../UI/HintWarning";
-import { KeyboardDatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker, DatePicker } from '@material-ui/pickers';
 import { useField } from 'formik';
 import classes from '../index.css';
-import { last } from "../functions/formHelper";
 import PropTypes from 'prop-types';
 
 function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, openTo = "date", simple = false } }) {
 
   const [field, { error }, helpers] = useField(path);
 
+  let DateComponent = disabled ? DatePicker : KeyboardDatePicker;
+
   return (
     <div className={classes.flex}>
       <HintWarning text={warning} isWarning />
-      <KeyboardDatePicker
+      <DateComponent
         margin={"dense"}
         name={field.name}
         disableToolbar={simple}
@@ -28,7 +29,7 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
         autoOk
         label={title}
         format="MM/DD/YYYY"
-        disabled={disabled}
+        readOnly={disabled}
         placeholder="01/01/2020"
         onChange={value => {
           helpers.setValue((value && value.toDate() || null));
