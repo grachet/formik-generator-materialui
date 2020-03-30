@@ -2,7 +2,8 @@ import React, { useState, Fragment } from 'react'
 import { Grid, Button, Paper } from "@material-ui/core"
 import "./app.css";
 import { FormDialogue } from 'formik-generator-materialui'
-import ReactJson from 'react-json-view'
+import ReactJson from 'react-json-view';
+import * as Yup from "yup";
 
 export default function FormDialogueExample() {
 
@@ -27,12 +28,19 @@ export default function FormDialogueExample() {
           title={"Your title"}
           text={"Your text here"}
           initialValues={{
-            name: "john"
+            user: {
+              name: "john"
+            }
           }}
+          validationSchema={Yup.object().shape({
+            user: Yup.object().shape({
+              name: Yup.string().required().nullable(),
+            }),
+          })}
           fields={[
             {
               title: "Name",
-              path: "name",
+              path: "user.name",
               typeField: "text",
             },
           ]}
@@ -45,16 +53,23 @@ export default function FormDialogueExample() {
           }}
           title={"Large dialogue"}
           initialValues={{
-            name: "mark"
+            user: {
+              name: "mark"
+            }
           }}
           fields={[
             {
               title: "Name",
-              path: "name",
+              path: "user.name",
               typeField: "text",
             },
           ]}
           maxWidth={"lg"}
+          validationSchema={Yup.object().shape({
+            user: Yup.object().shape({
+              name: Yup.string().required().nullable(),
+            }),
+          })}
         />
         <FormDialogue
           open={open === 3}
@@ -64,17 +79,24 @@ export default function FormDialogueExample() {
           }}
           title={"Customize"}
           initialValues={{
-            name: "lucas"
+            user: {
+              name: "lucas"
+            }
           }}
           fields={[
             {
               title: "Name",
-              path: "name",
+              path: "user.name",
               typeField: "text",
             },
           ]}
           component={<div style={{ backgroundColor: "green", margin: "10px 0 10px 0" }}>Custom component</div>}
           okText={"Custom Text"}
+          validationSchema={Yup.object().shape({
+            user: Yup.object().shape({
+              name: Yup.string().required().nullable(),
+            }),
+          })}
           link={{ name: "Link to npmjs.com", url: "https://www.npmjs.com/package/formik-generator-materialui" }}
         />
         <FormDialogue
@@ -85,15 +107,22 @@ export default function FormDialogueExample() {
           }}
           title={"Read Only"}
           initialValues={{
-            name: "lucy"
+            user: {
+              name: "lucy"
+            }
           }}
           fields={[
             {
               title: "Name",
-              path: "name",
+              path: "user.name",
               typeField: "text",
             },
           ]}
+          validationSchema={Yup.object().shape({
+            user: Yup.object().shape({
+              name: Yup.string().required().nullable(),
+            }),
+          })}
           readOnly={true}
         />
         {result && <div style={{ marginTop: 20 }} >
@@ -136,10 +165,20 @@ export default function FormDialogueExample() {
           <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
             src={{
               title: "Name",
-              path: "name",
+              path: "user.name",
               typeField: "text",
             }} />
           {"}"}
+          <br />
+          {"validationSchema={ Yup.object().shape({"}
+          <br />
+          {"    user: Yup.object().shape({"}
+          <br />
+          {"        name: Yup.string().required().nullable(),"}
+          <br />
+          {"   })"}
+          <br />
+          {"})}"}
           <br />
           {"readOnly={false]"}
         </div>

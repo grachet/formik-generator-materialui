@@ -1,7 +1,7 @@
 import React, { useRef, useState, Fragment } from 'react'
 import { Grid, Typography, Switch, FormControlLabel, Button, Paper } from "@material-ui/core"
 import "./app.css";
-import { FormGenerator, FormDialogue } from 'formik-generator-materialui'
+import { FormGenerator } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
 import getDefaultValues from './getDefaultValues';
@@ -129,14 +129,6 @@ export default function App() {
                   <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
                     src={fields} />
                   {"}"}
-                  {!!displayAllProps && <span>
-                    <br />
-                    {"validationSchema = {"}
-                    <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
-                      src={validationSchema} />
-                    {"}"}
-                    <br />
-                  </span>}
                 </div>
                 {"/>"}
                 {!!displayAllProps && <span>

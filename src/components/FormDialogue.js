@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 
 function FormDialogue({ onOk = () => null, disableCancelOnOK = false,
   okText = "Ok", title = "", maxWidth = "sm", open = false, component = null, onCancel = () => null, link = "", text = "",
-  initialValues = {}, fields = [], readOnly = false, isValidateOnlyOnSubmit = false
+  initialValues = {}, fields = [], readOnly = false, isValidateOnlyOnSubmit = false, validationSchema = null
 }) {
 
   const formRef = useRef(null);
@@ -36,6 +36,7 @@ function FormDialogue({ onOk = () => null, disableCancelOnOK = false,
           }
           {component}
           <FormGenerator
+            validationSchema={validationSchema}
             onSubmit={(values) => {
               !disableCancelOnOK && onCancel();
               onOk(values);
@@ -78,6 +79,7 @@ FormDialogue.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object),
   readOnly: PropTypes.bool,
   isValidateOnlyOnSubmit: PropTypes.bool,
+  validationSchema: PropTypes.object,
 };
 
 export default FormDialogue
