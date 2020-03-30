@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'formik';
 import * as Yup from 'yup';
 import FieldGenerator from './FieldGenerator';
-import { getValidationSchema } from '../functions/formHelper'
 import FormikWithRef from './FormikWithRef';
 import {
   MuiPickersUtilsProvider
@@ -11,18 +10,7 @@ import classes from '../index.css';
 import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
 
-let validationSchema = {};
-
-function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, isValidateOnlyOnSubmit = false }) {
-
-  const [validationSchema, setValidationSchema] = useState({})
-
-  useEffect(() => {
-    console.log(getValidationSchema(fields));
-    setValidationSchema(Yup.object().shape(
-      getValidationSchema(fields)
-    ));
-  }, [fields])
+function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, isValidateOnlyOnSubmit = false, validationSchema = null }) {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -62,6 +50,7 @@ FormGenerator.propTypes = {
   readOnly: PropTypes.bool,
   formRef: PropTypes.object.isRequired,
   isValidateOnlyOnSubmit: PropTypes.bool,
+  validationSchema: PropTypes.object,
 };
 
 export default FormGenerator
