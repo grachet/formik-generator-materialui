@@ -52,6 +52,8 @@ function AutocompleteFieldFormik({ fieldData: {
           error={!!error}
           required={required}
           helperText={error}
+          readOnly={disabled}
+          disabled={false}
           label={title}
           fullWidth
           variant={disabled ? "filled" : "outlined"}

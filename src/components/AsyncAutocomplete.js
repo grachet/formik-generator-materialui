@@ -68,6 +68,8 @@ function AsyncAutocomplete({ setValue, error, value,
             {...params}
             margin={"dense"}
             error={!!error}
+            readOnly={disabled}
+            disabled={false}
             helperText={error}
             label={title}
             required={required}
