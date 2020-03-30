@@ -2,17 +2,16 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useField } from "formik";
 import HintWarning from "../UI/HintWarning";
 import { Typography, FormHelperText } from '@material-ui/core';
-import { Editor } from 'react-draft-wysiwyg';
 import PropTypes from 'prop-types';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import classes from '../index.css';
-
+import Editor from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false } }) {
 
-  const [{ value }, { initialValue, error }, { setValue }] = useField(path);
+  const [{ value = "<p>This is the initial content of the editor</p>" }, { error }, { setValue }] = useField(path);
 
   return (
-    <div className={(!!error ? classes.errorBorderContainer : classes.borderContainer)}>
+    <div className={classes.marginContainer}>
       {title &&
         <Typography variant="body2"
           className={!!error ? classes.errorColor : ""}
@@ -22,12 +21,10 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = f
         </Typography>}
       <div>
         <Editor
-          editorState={value}
-          toolbarClassName={classes.toolbarRTE}
-          editorClassName={disabled ? classes.editorRTEDisabled : classes.editorRTE}
-          onEditorStateChange={setValue}
+          theme="snow"
+          value={value}
+          onChange={(value) => setValue(value)}
           readOnly={disabled}
-          toolbarHidden={disabled}
         />
       </div>
       {!!error && <FormHelperText error>{error}</FormHelperText>}

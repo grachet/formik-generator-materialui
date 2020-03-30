@@ -33,6 +33,10 @@ margin : 5px 4px 0px 4px;
     margin:  7px 0px 4px 0px;
   }
 
+  .marginContainer{
+    margin:  7px 0px 4px 0px;
+  }
+
   .warningColor {
     color: #ce8128;
   }
