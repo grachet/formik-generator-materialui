@@ -244,6 +244,7 @@ function Example {
 -  emptyAddText: string
 -  noBorder: bool
 -  subfields: array of objects
+-  withSwap: bool
 
 ### array
 
@@ -257,6 +258,7 @@ function Example {
 -  noBorder: bool
 -  subfield: object
 -  renderRightButton: react component (should be material ui IconButton)
+-  withSwap: bool
 
 ### autocomplete
 

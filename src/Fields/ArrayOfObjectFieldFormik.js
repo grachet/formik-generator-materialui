@@ -130,6 +130,7 @@ ArrayOfObjectFieldFormik.propTypes = {
     emptyAddText: PropTypes.string,
     noBorder: PropTypes.bool,
     subfields: PropTypes.arrayOf(PropTypes.object),
+    withSwap: PropTypes.bool,
   }),
 };
 

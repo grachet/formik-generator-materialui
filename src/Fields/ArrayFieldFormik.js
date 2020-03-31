@@ -102,6 +102,7 @@ ArrayFieldFormik.propTypes = {
     warning: PropTypes.string,
     title: PropTypes.string,
 
+    withSwap: PropTypes.bool,
     emptyAddText: PropTypes.string,
     noBorder: PropTypes.bool,
     subfield: PropTypes.object,
