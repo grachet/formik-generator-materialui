@@ -301,6 +301,7 @@ export default [
         title: "Rich text editor",
         path: "richText",
         typeField: 'richTextEditor',
+        placeHolder: "your placeHolder"
       },
     ]
   },

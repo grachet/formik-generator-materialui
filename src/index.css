@@ -66,3 +66,17 @@ margin : 5px 4px 0px 4px;
     background-color: rgba(0, 0, 0, 0.05);
   }
 
+ .ql-container {
+    min-height: 10em;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fefcfc;
+  }
+
+  .ql-toolbar {
+    background: #eaecec;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom: none;
+  }
+

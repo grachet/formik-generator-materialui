@@ -6,7 +6,7 @@ export default (fieldsArray, noValues) => {
     return fieldsArray.map(a => ({}))
   }
 
-  return fieldsArray.map((fields) => fields.reduce((obj, item) => {
+  return fieldsArray.map((obj) => obj.fields.reduce((obj, item) => {
 
     let setValue = (obj, item) => {
       switch (item.typeField) {
@@ -63,7 +63,7 @@ function randomDate(start = new Date(2012, 0, 1), end = new Date()) {
 }
 
 function randomRTE() {
-  return "{\"blocks\":[{\"key\":\"cfbbd\",\"text\":\"" + randomString(20) + "\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}"
+  return "<p>" + randomString(20) + "</p>"
 }
 
 function randomArrayItem(array) {

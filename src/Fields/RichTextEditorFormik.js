@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 import classes from '../index.css';
 import Editor from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-function RichTextEditorFormik({ fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false } }) {
 
-  const [{ value = "<p>This is the initial content of the editor</p>" }, { error }, { setValue }] = useField(path);
+function RichTextEditorFormik({ fieldData: { title = "", placeHolder = "...", path = "", readOnly = false, hint = "", warning = "", required = false } }) {
+
+  const [{ value = "" }, { error }, { setValue }] = useField(path);
+
 
   return (
     <div className={classes.marginContainer}>
@@ -22,9 +24,13 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", readOnly = f
       <div>
         <Editor
           theme="snow"
+          placeholder={placeHolder}
           value={value}
           onChange={(value) => setValue(value)}
           readOnly={readOnly}
+        // modules={readOnly && {
+        //   toolbar: false,
+        // }}
         />
       </div>
       {!!error && <FormHelperText error>{error}</FormHelperText>}
@@ -40,6 +46,7 @@ RichTextEditorFormik.propTypes = {
     hint: PropTypes.string,
     warning: PropTypes.string,
     title: PropTypes.string,
+    placeHolder: PropTypes.string,
   }),
 };
 
