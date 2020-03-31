@@ -7,9 +7,10 @@ import HintWarning from "../UI/HintWarning";
 import { Button, IconButton, Typography, FormHelperText, Tooltip, Grid, Divider } from '@material-ui/core';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
+import ArrowDropDownCircleIcon from '@material-ui/icons/ArrowDropDownCircle';
 
 function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
-  fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, emptyAddText = "Add item", noBorder = false } }) {
+  fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, emptyAddText = "Add", noBorder = false } }) {
 
   const [{ value }, { error }] = useField(path);
 
@@ -49,7 +50,7 @@ function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
 
 
 function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
-  fieldData: { path = "", subfields = {}, readOnly = false } }) {
+  fieldData: { path = "", withSwap = false, subfields = {}, readOnly = false } }) {
 
   let needShadow = subfields.reduce((acc, current) => acc + (current.col || 6), 0) > 12
 
@@ -80,6 +81,17 @@ function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
       <Grid container spacing={2} >
         {fields}
       </Grid>
+      {withSwap && value.length > 1 && <div className={classes.buttonHint}>
+        <Tooltip title={"Swap down"}>
+          <IconButton
+            disabled={readOnly}
+            onClick={() => arrayHelpers.swap(index, (value.length === index + 1) ? 0 : index + 1)}
+            color="primary"
+          >
+            <ArrowDropDownCircleIcon />
+          </IconButton>
+        </Tooltip>
+      </div>}
       <div className={classes.buttonHint}>
         <Tooltip title={"Add"}>
           <IconButton

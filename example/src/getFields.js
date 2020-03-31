@@ -496,6 +496,15 @@ export default [
         subfield: {
           typeField: 'richTextEditor',
         },
+      },
+      {
+        title: 'Array (withSwap = true)',
+        path: 'arraySwap',
+        typeField: 'array',
+        subfield: {
+          typeField: 'text',
+        },
+        withSwap: true
       }
     ]
   },
@@ -525,19 +534,19 @@ export default [
           {
             title: "col1",
             typeField: "text",
-            path: "col1",
+            name: "col1",
             col: 2
           },
           {
             title: "col2",
             typeField: "text",
-            path: "col2",
+            name: "col2",
             col: 7
           },
           {
             title: "col3",
             typeField: "text",
-            path: "col3",
+            name: "col3",
             col: 3
           }
         ],
@@ -573,7 +582,26 @@ export default [
           }],
         typeField: 'arrayObject',
         emptyAddText: "Add object"
-      }
+      },
+      {
+        title: 'Array of objects (withSwap = true)',
+        path: 'colSwap',
+        subfields: [
+          {
+            title: "col1",
+            typeField: "text",
+            name: "col1"
+          },
+          {
+            title: "col2",
+            typeField: "text",
+            name: "col2"
+          },
+        ],
+        typeField: 'arrayObject',
+        emptyAddText: "Add object",
+        withSwap: true
+      },
     ]
   },
   {

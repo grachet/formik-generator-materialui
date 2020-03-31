@@ -2,14 +2,14 @@ import React from 'react';
 import { FieldArray, useField } from 'formik';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
-// import RemoveIcon from '@material-ui/icons/Delete';
 import HintWarning from "../UI/HintWarning";
 import classes from '../index.css';
 import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import ArrowDropDownCircleIcon from '@material-ui/icons/ArrowDropDownCircle';
 
 function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false,
-  emptyAddText = "", subfield = {}, noBorder = false, renderRightButton = null } }) {
+  emptyAddText = "Add", subfield = {}, noBorder = false, withSwap = false, renderRightButton = null } }) {
 
   const [{ value }, { error }] = useField(path);
 
@@ -41,6 +41,17 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
                     }}
                     readOnly={readOnly} />
                 </span>
+                {withSwap && value.length > 1 && <div className={classes.buttonHint}>
+                  <Tooltip title={"Swap down"}>
+                    <IconButton
+                      disabled={readOnly}
+                      onClick={() => arrayHelpers.swap(index, (value.length === index + 1) ? 0 : index + 1)}
+                      color="primary"
+                    >
+                      <ArrowDropDownCircleIcon />
+                    </IconButton>
+                  </Tooltip>
+                </div>}
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>
                     <IconButton
@@ -74,9 +85,10 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
             <Button variant="outlined" disabled={readOnly} onClick={() => arrayHelpers.push('')}>
               {emptyAddText}
             </Button>
-          )}
+          )
+        }
         {!!error && !Array.isArray(error) && < FormHelperText error>{error}</FormHelperText>}
-      </ div>
+      </ div >
     )}
   />
 }
