@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import classes from '../index.css';
 import Editor from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false } }) {
+function RichTextEditorFormik({ fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false } }) {
 
   const [{ value = "<p>This is the initial content of the editor</p>" }, { error }, { setValue }] = useField(path);
 
@@ -24,7 +24,7 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = f
           theme="snow"
           value={value}
           onChange={(value) => setValue(value)}
-          readOnly={disabled}
+          readOnly={readOnly}
         />
       </div>
       {!!error && <FormHelperText error>{error}</FormHelperText>}
@@ -35,7 +35,7 @@ function RichTextEditorFormik({ fieldData: { title = "", path = "", disabled = f
 RichTextEditorFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

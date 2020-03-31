@@ -5,7 +5,7 @@ import { FormDialogue } from 'formik-generator-materialui'
 import ReactJson from 'react-json-view';
 import * as Yup from "yup";
 
-export default function FormDialogueExample() {
+export default function FormDialogueExample({ readOnly }) {
 
   let [open, setOpen] = useState(false);
   let [result, setResult] = useState(null);
@@ -17,9 +17,10 @@ export default function FormDialogueExample() {
           <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(1)}>Form Dialogue</Button>
           <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(2)}>Form Dialogue Large</Button>
           <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(3)}>Form Dialogue Custom</Button>
-          <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(4)}>Form Dialogue Readonly</Button>
+          <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(4)}>Form Dialogue ReadOnly</Button>
         </div>
         <FormDialogue
+          readOnly={readOnly}
           open={open === 1}
           onCancel={() => setOpen(false)}
           onOk={(values) => {
@@ -46,6 +47,7 @@ export default function FormDialogueExample() {
           ]}
         />
         <FormDialogue
+          readOnly={readOnly}
           open={open === 2}
           onCancel={() => setOpen(false)}
           onOk={(values) => {
@@ -72,6 +74,7 @@ export default function FormDialogueExample() {
           })}
         />
         <FormDialogue
+          readOnly={readOnly}
           open={open === 3}
           onCancel={() => setOpen(false)}
           onOk={(values) => {
@@ -100,6 +103,7 @@ export default function FormDialogueExample() {
           link={{ name: "Link to npmjs.com", url: "https://www.npmjs.com/package/formik-generator-materialui" }}
         />
         <FormDialogue
+          readOnly={readOnly}
           open={open === 4}
           onCancel={() => setOpen(false)}
           onOk={(values) => {

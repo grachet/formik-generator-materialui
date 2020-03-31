@@ -9,7 +9,7 @@ import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
-  fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, emptyAddText = "Add item", noBorder = false } }) {
+  fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, emptyAddText = "Add item", noBorder = false } }) {
 
   const [{ value }, { error }] = useField(path);
 
@@ -36,7 +36,7 @@ function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
           )}
         </div> :
           <Button
-            disabled={disabled} variant="outlined"
+            disabled={readOnly} variant="outlined"
             onClick={() => arrayHelpers.push({})}>
             {emptyAddText}
           </Button>
@@ -49,7 +49,7 @@ function ArrayOfObjectFieldFormik({ FieldGenerator, fieldData,
 
 
 function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
-  fieldData: { path = "", subfields = {}, disabled = false } }) {
+  fieldData: { path = "", subfields = {}, readOnly = false } }) {
 
   let needShadow = subfields.reduce((acc, current) => acc + (current.col || 6), 0) > 12
 
@@ -70,7 +70,7 @@ function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
             path: path + "[" + index + "]." + subfieldData.name,
             value: value[index][subfieldData.name]
           }}
-          readOnly={disabled}
+          readOnly={readOnly}
         />
       </div>
     </Grid>)
@@ -83,7 +83,7 @@ function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
       <div className={classes.buttonHint}>
         <Tooltip title={"Add"}>
           <IconButton
-            disabled={disabled}
+            disabled={readOnly}
             onClick={() => arrayHelpers.insert(index + 1, newObject)}
             color="primary"
           >
@@ -94,7 +94,7 @@ function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
       <div className={classes.buttonHint}>
         <Tooltip title={"Remove"}>
           <IconButton
-            disabled={disabled}
+            disabled={readOnly}
             onClick={() => arrayHelpers.remove(index)}
             color="primary"
           >
@@ -109,7 +109,7 @@ function RenderFieldsContainer({ FieldGenerator, arrayHelpers, index, value,
 ArrayOfObjectFieldFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

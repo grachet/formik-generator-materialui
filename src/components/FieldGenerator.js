@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 
 function FieldGenerator({ fieldData, readOnly = true }) {
 
-  let fieldDataWithReadOnly = { ...fieldData, disabled: fieldData.disabled || readOnly };
+  let fieldDataWithReadOnly = { ...fieldData, readOnly: fieldData.readOnly || readOnly };
 
   switch (fieldData.typeField) {
     case "group":

@@ -8,7 +8,7 @@ import { last } from '../functions/formHelper';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
 
-function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, multiline = false, isLink = false } }) {
+function TextFieldFormik({ fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, multiline = false, isLink = false } }) {
 
   const [field, { error }] = useField(path);
 
@@ -26,11 +26,11 @@ function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false,
         className={classes.flexGrow}
         margin={"dense"}
         multiline={multiline}
-        variant={disabled ? "filled" : "outlined"}
+        variant={readOnly ? "filled" : "outlined"}
         label={title}
         InputLabelProps={!title ? { shrink: false } : {}}
         InputProps={{
-          readOnly: disabled
+          readOnly
         }}
       />
       {isLink && <HintWarning text={field.value || ''} isLink />}
@@ -42,7 +42,7 @@ function TextFieldFormik({ fieldData: { title = "", path = "", disabled = false,
 TextFieldFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

@@ -10,7 +10,7 @@ let getAllFieldsTypeExample = (title, type) => {
 
   let isHintWarning = type === "hint";
   let isYupObject = type === "yupObject";
-  let isRequiredDisabled = type === "requiredDisabled";
+  let isRequiredReadOnly = type === "requiredReadOnly";
 
   let hintWarning = isHintWarning ? {
     warning: "Text warning",
@@ -22,8 +22,8 @@ let getAllFieldsTypeExample = (title, type) => {
       return path + "Hint"
     } else if (isYupObject) {
       return "validation.0." + path
-    } else if (isRequiredDisabled) {
-      return path + "RequiredDisabled"
+    } else if (isRequiredReadOnly) {
+      return path + "RequiredReadOnly"
     } else {
       return path
     }
@@ -56,10 +56,10 @@ let getAllFieldsTypeExample = (title, type) => {
         title: "Text " + title,
         path: getPath("text"),
         typeField: "text",
-        warning: !isRequiredDisabled ? "" : "props required = true will just display an * in the title",
+        warning: !isRequiredReadOnly ? "" : "props required = true will just display an * in the title",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: "Switch " + title,
@@ -67,8 +67,8 @@ let getAllFieldsTypeExample = (title, type) => {
         typeField: "switch",
         warning: !isYupObject ? "" : "No verification",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: "Select " + title,
@@ -76,8 +76,8 @@ let getAllFieldsTypeExample = (title, type) => {
         path: getPath("select"),
         choices: ["Yes", "No"],
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: "RTE " + title,
@@ -85,16 +85,16 @@ let getAllFieldsTypeExample = (title, type) => {
         typeField: 'richTextEditor',
         warning: !isYupObject ? "" : "Not return empty string if empty",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Date ' + title,
         path: getPath('date'),
         typeField: 'date',
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: "Group",
@@ -105,8 +105,8 @@ let getAllFieldsTypeExample = (title, type) => {
             typeField: "text",
             path: getPath("textGroup"),
             ...hintWarning,
-            required: isRequiredDisabled,
-            disabled: isRequiredDisabled,
+            required: isRequiredReadOnly,
+            readOnly: isRequiredReadOnly,
             col: 4
           },
           {
@@ -119,18 +119,18 @@ let getAllFieldsTypeExample = (title, type) => {
                 typeField: "text",
                 path: getPath("textGroup2"),
                 ...hintWarning,
-                required: isRequiredDisabled,
-                disabled: isRequiredDisabled,
+                required: isRequiredReadOnly,
+                readOnly: isRequiredReadOnly,
               }
             ],
             ...hintWarning,
-            required: isRequiredDisabled,
-            disabled: isRequiredDisabled,
+            required: isRequiredReadOnly,
+            readOnly: isRequiredReadOnly,
           },
         ],
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Array of text ' + title,
@@ -141,8 +141,8 @@ let getAllFieldsTypeExample = (title, type) => {
           typeField: 'text',
         },
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Array of objects ' + title,
@@ -161,8 +161,8 @@ let getAllFieldsTypeExample = (title, type) => {
         typeField: 'arrayObject',
         emptyAddText: "Add object",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Display text ' + title,
@@ -174,8 +174,8 @@ let getAllFieldsTypeExample = (title, type) => {
         typeField: 'displayValue',
         warning: !isYupObject ? "" : "Verification directly on field description and triggered anytime",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Autocomplete ' + title,
@@ -185,8 +185,8 @@ let getAllFieldsTypeExample = (title, type) => {
         getOptionLabel: (val) => val.name,
         placeholder: "Search a country",
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
       {
         title: 'Async Autocomplete Free ' + title,
@@ -204,8 +204,8 @@ let getAllFieldsTypeExample = (title, type) => {
         },
         getOptionLabel: opt => opt,
         ...hintWarning,
-        required: isRequiredDisabled,
-        disabled: isRequiredDisabled,
+        required: isRequiredReadOnly,
+        readOnly: isRequiredReadOnly,
       },
     ]
   }
@@ -285,10 +285,10 @@ export default [
         typeField: "select",
         path: "categories",
         choices: [
-          { value: "General", disabled: true },
+          { value: "General", readOnly: true },
           { value: "Fundamentals" },
           { value: "Description" },
-          { value: "Administration", disabled: true },
+          { value: "Administration", readOnly: true },
           { value: "Installation" },
           { value: "Commissioning" },
         ],
@@ -687,5 +687,5 @@ export default [
   },
   getAllFieldsTypeExample("(with verification in object)", "yupObject"),
   getAllFieldsTypeExample("(hint and warning)", "hint"),
-  getAllFieldsTypeExample("(required + disabled)", "requiredDisabled"),
+  getAllFieldsTypeExample("(required + readOnly)", "requiredReadOnly"),
 ]

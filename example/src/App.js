@@ -92,7 +92,7 @@ export default function App() {
         </span>
       </div>
       <Grid container spacing={6}>
-        <FormDialogueExample />
+        <FormDialogueExample readOnly={readOnly} />
         {fieldsArray.map(({ fields, validationSchema }, i) => {
 
           return <Fragment key={i}>

@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 let localValue = "";
 
 function AutocompleteFieldFormik({ fieldData: {
-  title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+  title = "", path = "", readOnly = false, hint = "", warning = "", required = false,
   freeSolo = false, options = [], getOptionLabel = (v) => v, placeholder = "Search..."
 } }) {
 
@@ -27,7 +27,7 @@ function AutocompleteFieldFormik({ fieldData: {
         // defaultValue={}
         // loading={loading}
         className={classes.flexGrow}
-        disabled={disabled}
+        disabled={readOnly}
         options={options || []}
         getOptionLabel={(option) => getOptionLabel(option) || ""}
         value={value || ""}
@@ -52,11 +52,11 @@ function AutocompleteFieldFormik({ fieldData: {
           error={!!error}
           required={required}
           helperText={error}
-          readOnly={disabled}
+          readOnly={readOnly}
           disabled={false}
           label={title}
           fullWidth
-          variant={disabled ? "filled" : "outlined"}
+          variant={readOnly ? "filled" : "outlined"}
           placeholder={placeholder}
         />)}
       />
@@ -68,7 +68,7 @@ function AutocompleteFieldFormik({ fieldData: {
 AutocompleteFieldFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

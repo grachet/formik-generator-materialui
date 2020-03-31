@@ -1,6 +1,6 @@
 {
   "name": "formik-generator-materialui",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "description": " A form generator who use React, Material UI and Formik as dependenties",
   "author": "grachet",
   "license": "MIT",

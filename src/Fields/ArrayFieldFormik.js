@@ -8,7 +8,7 @@ import classes from '../index.css';
 import { Button, IconButton, Typography, FormHelperText, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false,
   emptyAddText = "", subfield = {}, noBorder = false, renderRightButton = null } }) {
 
   const [{ value }, { error }] = useField(path);
@@ -39,12 +39,12 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
                       ...subfield,
                       value: arrayValue
                     }}
-                    readOnly={disabled} />
+                    readOnly={readOnly} />
                 </span>
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Add"}>
                     <IconButton
-                      disabled={disabled}
+                      disabled={readOnly}
                       onClick={() => arrayHelpers.insert(index + 1, '')}
                       color="primary"
                     >
@@ -55,7 +55,7 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
                 <div className={classes.buttonHint}>
                   <Tooltip title={"Remove"}>
                     <IconButton
-                      disabled={disabled}
+                      disabled={readOnly}
                       onClick={() => arrayHelpers.remove(index)}
                       color="primary"
                     >
@@ -71,7 +71,7 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
             )}
           </div>
         ) : (
-            <Button variant="outlined" disabled={disabled} onClick={() => arrayHelpers.push('')}>
+            <Button variant="outlined" disabled={readOnly} onClick={() => arrayHelpers.push('')}>
               {emptyAddText}
             </Button>
           )}
@@ -84,7 +84,7 @@ function ArrayFieldFormik({ FieldGenerator, fieldData: { title = "", path = "", 
 ArrayFieldFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

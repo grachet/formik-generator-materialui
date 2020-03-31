@@ -11,7 +11,7 @@ import { last } from "../functions/formHelper";
 import PropTypes from 'prop-types';
 
 function CheckboxFormik({ fieldData: { title = "", path = "",
-  disabled = false, hint = "", warning = "", required = false }, isSwitch }) {
+  readOnly = false, hint = "", warning = "", required = false }, isSwitch }) {
 
   const [field] = useField(path);
 
@@ -26,7 +26,7 @@ function CheckboxFormik({ fieldData: { title = "", path = "",
               checked={!!field.value} name={path} onChange={field.onChange}
             />
         }
-        disabled={disabled}
+        disabled={readOnly}
         label={required ? title + " *" : title}
         required={required}
       />
@@ -38,7 +38,7 @@ function CheckboxFormik({ fieldData: { title = "", path = "",
 CheckboxFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

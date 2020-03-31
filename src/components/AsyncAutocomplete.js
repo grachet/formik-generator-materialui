@@ -10,7 +10,7 @@ import classes from '../index.css';
 import PropTypes from 'prop-types';
 
 function AsyncAutocomplete({ setValue, error, value,
-  fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false,
+  fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false,
     getAsyncOptions = () => ([]), placeholder = "Search...", freeSolo = false, getOptionLabel = (v) => v }
 }) {
 
@@ -62,19 +62,19 @@ function AsyncAutocomplete({ setValue, error, value,
         filterOptions={(options, { inputValue }) => options}
         value={value || ""}
         className={classes.flexGrow}
-        disabled={disabled}
+        disabled={readOnly}
         renderInput={params => (
           <TextField
             {...params}
             margin={"dense"}
             error={!!error}
-            readOnly={disabled}
+            readOnly={readOnly}
             disabled={false}
             helperText={error}
             label={title}
             required={required}
             fullWidth
-            variant={disabled ? "filled" : "outlined"}
+            variant={readOnly ? "filled" : "outlined"}
             placeholder={placeholder}
             InputProps={{
               ...params.InputProps,
@@ -98,7 +98,7 @@ function AsyncAutocomplete({ setValue, error, value,
 AsyncAutocomplete.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

@@ -54,7 +54,7 @@ export default (fieldsArray, noValues) => {
       }
       return obj
     }
-    return item.disabled ? obj : setValue(obj, item)
+    return item.readOnly ? obj : setValue(obj, item)
   }, {}))
 }
 

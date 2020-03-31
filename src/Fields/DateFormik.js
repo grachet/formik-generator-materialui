@@ -5,11 +5,11 @@ import { useField } from 'formik';
 import classes from '../index.css';
 import PropTypes from 'prop-types';
 
-function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, openTo = "date", simple = false } }) {
+function DateTimeFormik({ fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, openTo = "date", simple = false } }) {
 
   const [field, { error }, helpers] = useField(path);
 
-  let DateComponent = disabled ? DatePicker : KeyboardDatePicker;
+  let DateComponent = readOnly ? DatePicker : KeyboardDatePicker;
 
   return (
     <div className={classes.flex}>
@@ -25,11 +25,11 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
         helperText={error}
         className={classes.flexGrow}
         // clearable //solve warning
-        inputVariant={disabled ? "filled" : "outlined"}
+        inputVariant={readOnly ? "filled" : "outlined"}
         autoOk
         label={title}
         format="MM/DD/YYYY"
-        readOnly={disabled}
+        readOnly={readOnly}
         placeholder="01/01/2020"
         onChange={value => {
           helpers.setValue((value && value.toDate() || null));
@@ -44,7 +44,7 @@ function DateTimeFormik({ fieldData: { title = "", path = "", disabled = false, 
 DateTimeFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,

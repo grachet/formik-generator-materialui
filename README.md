@@ -152,7 +152,7 @@ function Example {
 
 ### group
 
--  disabled: bool
+-  readOnly: bool
 -  hint: string
 -  warning: string
 -  title: string
@@ -161,7 +161,7 @@ function Example {
 ### text
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -185,7 +185,7 @@ function Example {
 ### select
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -195,7 +195,7 @@ function Example {
 ### date
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -205,7 +205,7 @@ function Example {
 ### richTextEditor
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -214,7 +214,7 @@ function Example {
 ### switch
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -223,7 +223,7 @@ function Example {
 ### checkbox
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -232,7 +232,7 @@ function Example {
 ### arrayObject
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -244,7 +244,7 @@ function Example {
 ### array
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -257,7 +257,7 @@ function Example {
 ### autocomplete
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string
@@ -270,7 +270,7 @@ function Example {
 ### asyncAutocomplete
 
 -  path: string (Required)
--  disabled: bool
+-  readOnly: bool
 -  required: bool
 -  hint: string
 -  warning: string

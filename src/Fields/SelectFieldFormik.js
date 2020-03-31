@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 
 import { last } from "../functions/formHelper";
 
-function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = false, hint = "", warning = "", required = false, choices = [] } }) {
+function SelectFieldFormik({ fieldData: { title = "", path = "", readOnly = false, hint = "", warning = "", required = false, choices = [] } }) {
 
   const [field, { error }] = useField(path);
 
@@ -37,7 +37,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
         {"-"}
       </MenuItem>
     } else if (typeof choice === "object") {
-      return <MenuItem key={i} value={choice.value} disabled={choice.disabled}>
+      return <MenuItem key={i} value={choice.value} disabled={choice.readOnly}>
         {choice.title || choice.value}
       </MenuItem>
     } else {
@@ -52,7 +52,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
       <HintWarning text={warning} isWarning />
       <FormControl
         error={!!error}
-        variant={disabled ? "filled" : "outlined"}
+        variant={readOnly ? "filled" : "outlined"}
         margin={"dense"}
         className={classes.flexGrow}>
         <InputLabel
@@ -66,7 +66,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
           name={field.name}
           value={field.value === 0 ? 0 : field.value || ''}
           onChange={field.onChange}
-          input={disabled ?
+          input={readOnly ?
             <FilledInput
               readOnly={true}
             />
@@ -97,7 +97,7 @@ function SelectFieldFormik({ fieldData: { title = "", path = "", disabled = fals
 SelectFieldFormik.propTypes = {
   fieldData: PropTypes.shape({
     path: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     hint: PropTypes.string,
     warning: PropTypes.string,
