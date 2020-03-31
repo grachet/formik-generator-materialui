@@ -11,7 +11,6 @@ function RichTextEditorFormik({ fieldData: { title = "", placeHolder = "...", pa
 
   const [{ value = "" }, { error }, { setValue }] = useField(path);
 
-
   return (
     <div className={classes.marginContainer}>
       {title &&
@@ -21,16 +20,17 @@ function RichTextEditorFormik({ fieldData: { title = "", placeHolder = "...", pa
           <HintWarning text={warning} isWarning />
           <HintWarning text={hint} />
         </Typography>}
-      <div>
+      <div className={(error ? classes.editorRTEError : "") + " " + (readOnly ? classes.editorRTEReadOnly : "")}>
         <Editor
           theme="snow"
           placeholder={placeHolder}
           value={value}
           onChange={(value) => setValue(value)}
           readOnly={readOnly}
-        // modules={readOnly && {
-        //   toolbar: false,
+        // classes={{
+
         // }}
+        // className={readOnly ? classes.editorRTEReadOnly : classes.editorRTE}
         />
       </div>
       {!!error && <FormHelperText error>{error}</FormHelperText>}

@@ -127,7 +127,6 @@ export default function FormDialogueExample({ readOnly }) {
               name: Yup.string().required().nullable(),
             }),
           })}
-          readOnly={true}
         />
         {result && <div style={{ marginTop: 20 }} >
           <ReactJson name={false} displayDataTypes={false} displayObjectSize={false} theme="monokai" src={result} />

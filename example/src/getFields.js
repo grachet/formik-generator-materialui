@@ -212,6 +212,46 @@ let getAllFieldsTypeExample = (title, type) => {
 }
 
 export default [
+  // {
+  //   fields: [
+  //     {
+  //       title: "Rich text editor",
+  //       path: "richText",
+  //       typeField: 'richTextEditor',
+  //       placeHolder: "your placeHolder"
+  //     },
+  //     {
+  //       title: "Text",
+  //       path: "text",
+  //       typeField: "text",
+  //     },
+  //     {
+  //       title: "Rich text editor",
+  //       path: "richText2",
+  //       typeField: 'richTextEditor',
+  //       placeHolder: "your placeHolder",
+  //       hint: "d",
+  //       warning: "d"
+  //     },
+  //     {
+  //       title: "Text",
+  //       path: "text",
+  //       typeField: "text",
+  //     },
+  //     {
+  //       title: "Rich text editor",
+  //       path: "richText3",
+  //       typeField: 'richTextEditor',
+  //       placeHolder: "your placeHolder",
+  //       readOnly: true
+  //     },
+  //   ],
+  //   validationSchema: Yup.object().shape({
+  //     richText: Yup.string().required().nullable(),
+  //     richText2: Yup.string().required().nullable(),
+  //     richText3: Yup.string().required().nullable(),
+  //   })
+  // },
   {
     fields: [
       {

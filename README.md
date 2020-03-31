@@ -36,11 +36,10 @@ npm install --save formik @material-ui/core @material-ui/icons prop-types
 -  @date-io/moment: ^1.3.0  (date)
 -  moment: ^2.24.0 (date)
 -  yup: ^0.28.1  (field verification)
--  react-draft-wysiwyg: ^0.11.5  (rich text editor)
--  draft-js: ^1.14.0  (rich text editor)
+-  react-quill: ^2.0.0-beta.1 (RTE)
 
  ```bash
-npm install --save @material-ui/lab @material-ui/pickers yup react-draft-wysiwyg draft-js @date-io/moment@1.x moment
+npm install --save @material-ui/lab @material-ui/pickers yup  react-quill@beta  @date-io/moment@1.x moment
 ```
 
 ## Usage FormGenerator
@@ -64,8 +63,7 @@ function Example {
                 {
                   title: "Full Name",
                   path: ["fullname"],
-                  typeField: "text",
-                  yup: Yup.string().required(),
+                  typeField: "text"
                 },
                 {...},
               ]}
@@ -73,6 +71,9 @@ function Example {
               initialValues={{
                 fullname: "john"
               }}
+              validationSchema={Yup.object().shape({
+                fullname: Yup.string().required(),
+              })}
               readOnly={false}
               isValidateOnlyOnSubmit={false}
             />
@@ -115,12 +116,14 @@ function Example {
             initialValues={{
                 fullname: "john"
             }}
+            validationSchema={Yup.object().shape({
+                fullname: Yup.string().required(),
+            })}
             fields={[
               {
                 title: "Full Name",
                 path: ["fullname"],
                 typeField: "text",
-                yup: Yup.string().required(),
               },
               {...},
             ]}
@@ -210,6 +213,7 @@ function Example {
 -  hint: string
 -  warning: string
 -  title: string
+-  placeholder: string
 
 ### switch
 
