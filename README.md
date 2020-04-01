@@ -90,7 +90,9 @@ function Example {
  - onSubmit: func
  - readOnly: bool
  - formRef: object.isRequired (to get form functions)
- - isValidateOnlyOnSubmit: bool (less validation, less memory)
+ - validateOnBlur: bool (less validation, less memory) default true
+ - validateOnChange: bool (less validation, less memory) default true
+ - validateOnMount: bool (less validation, less memory)
 
 ## Usage FormDialogue
 
@@ -147,9 +149,11 @@ function Example {
   - link: { name: "string",  url: "string"})
   - text:  string
   - readOnly:  bool
-  - isValidateOnlyOnSubmit:  bool
   - initialValues: object (reinitialize form on change)
   - fields: array of object
+  - validateOnBlur: bool (less validation, less memory) default true
+  - validateOnChange: bool (less validation, less memory) default true
+  - validateOnMount: bool (less validation, less memory)
 
 ## Fields Type :
 

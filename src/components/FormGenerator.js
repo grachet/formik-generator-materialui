@@ -10,15 +10,15 @@ import classes from '../index.css';
 import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
 
-function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, isValidateOnlyOnSubmit = false, validationSchema = null }) {
+function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, validateOnBlur = true, validateOnChange = true, validateOnMount = true, validationSchema = null }) {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <FormikWithRef
         ref={formRef}
-        validateOnBlur={!isValidateOnlyOnSubmit}
-        validateOnChange={!isValidateOnlyOnSubmit}
-        // validateOnMount={!isValidateOnlyOnSubmit}
+        validateOnBlur={validateOnBlur}
+        validateOnChange={validateOnChange}
+        validateOnMount={validateOnMount}
         enableReinitialize
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
@@ -49,7 +49,9 @@ FormGenerator.propTypes = {
   onSubmit: PropTypes.func,
   readOnly: PropTypes.bool,
   formRef: PropTypes.object.isRequired,
-  isValidateOnlyOnSubmit: PropTypes.bool,
+  validateOnBlur: PropTypes.bool,
+  validateOnChange: PropTypes.bool,
+  validateOnMount: PropTypes.bool,
   validationSchema: PropTypes.object,
 };
 
