@@ -20,6 +20,7 @@ export default function FormDialogueExample({ readOnly }) {
           <Button style={{ margin: 5 }} variant={"outlined"} onClick={() => setOpen(4)}>Form Dialogue ReadOnly</Button>
         </div>
         <FormDialogue
+          onError={(error) => console.log("error", error)}
           readOnly={readOnly}
           open={open === 1}
           onCancel={() => setOpen(false)}
