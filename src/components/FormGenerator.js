@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Form } from 'formik';
 import * as Yup from 'yup';
 import FieldGenerator from './FieldGenerator';
@@ -9,8 +9,10 @@ import {
 import classes from '../index.css';
 import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
+import { ErrorListener } from './ErrorListener';
 
-function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, readOnly = false, formRef = null, validateOnBlur = true, validateOnChange = true, validateOnMount = true, validationSchema = null }) {
+function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, onError = () => null, readOnly = false, formRef = null,
+  validateOnBlur = true, validateOnChange = true, validateOnMount = true, validationSchema = null, shouldTriggerErrors = null }) {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -29,6 +31,7 @@ function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null,
       >
         {({ values, ...formFunction }) => (
           <Form>
+            {!!onError && <ErrorListener onError={onError} shouldTriggerErrors={shouldTriggerErrors} />}
             {fields && fields.map((field, i) => <div key={i} className={classes.noCollapse}>
               <FieldGenerator
                 readOnly={readOnly}
@@ -53,6 +56,8 @@ FormGenerator.propTypes = {
   validateOnChange: PropTypes.bool,
   validateOnMount: PropTypes.bool,
   validationSchema: PropTypes.object,
+  onError: PropTypes.func,
+  shouldTriggerErrors: PropTypes.func,
 };
 
 export default FormGenerator

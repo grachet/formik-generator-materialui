@@ -15,6 +15,7 @@ export function Rows({ fields, readOnly, initialValues, validationSchema }) {
 
   return <div>
     <FormGenerator
+      onError={(error) => console.log("error", error)}
       readOnly={readOnly}
       formRef={formRef}
       initialValues={initialValues}

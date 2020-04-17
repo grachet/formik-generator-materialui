@@ -93,6 +93,7 @@ function Example {
  - validateOnBlur: bool (less validation, less memory) default true
  - validateOnChange: bool (less validation, less memory) default true
  - validateOnMount: bool (less validation, less memory)
+ - onError: func
 
 ## Usage FormDialogue
 
