@@ -14,7 +14,7 @@ function FormDialogue({ onOk = () => null, disableCancelOnOK = false,
   okText = "Ok", title = "", maxWidth = "sm", open = false, component = null, onCancel = () => null, link = "", text = "",
   initialValues = {}, fields = [], readOnly = false, validationSchema = null,
   validateOnBlur = true, validateOnChange = true, validateOnMount = false,
-  onError = () => null, shouldTriggerErrors = null
+  onError = null, shouldTriggerErrors = null, onSubmitWithError = null
 }) {
 
   const formRef = useRef(null);
@@ -52,6 +52,7 @@ function FormDialogue({ onOk = () => null, disableCancelOnOK = false,
             validateOnMount={validateOnMount}
             onError={onError}
             shouldTriggerErrors={shouldTriggerErrors}
+            onSubmitWithError={onSubmitWithError}
           />
         </DialogContent>
         <DialogActions>
@@ -90,6 +91,7 @@ FormDialogue.propTypes = {
   validateOnMount: PropTypes.bool,
   validationSchema: PropTypes.object,
   shouldTriggerErrors: PropTypes.func,
+  onSubmitWithError: PropTypes.func,
 };
 
 export default FormDialogue

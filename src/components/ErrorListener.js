@@ -4,7 +4,7 @@ import isequal from 'lodash.isequal';
 
 const defaultShouldTriggerErrors = (previousErrors, formik) => !isequal(previousErrors, formik.errors);
 
-export const ErrorListener = ({ onError, shouldTriggerErrors }) => {
+export default function ErrorListener({ onError, shouldTriggerErrors }) {
 
   shouldTriggerErrors = shouldTriggerErrors || defaultShouldTriggerErrors;
 

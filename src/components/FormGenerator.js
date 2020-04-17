@@ -9,10 +9,12 @@ import {
 import classes from '../index.css';
 import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
-import { ErrorListener } from './ErrorListener';
+import ErrorListener from './ErrorListener';
+import SubmitListener from './SubmitListener';
 
-function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, onError = () => null, readOnly = false, formRef = null,
-  validateOnBlur = true, validateOnChange = true, validateOnMount = true, validationSchema = null, shouldTriggerErrors = null }) {
+function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, onError = null, readOnly = false, formRef = null,
+  validateOnBlur = true, validateOnChange = true, validateOnMount = true, onSubmitWithError = null,
+  validationSchema = null, shouldTriggerErrors = null }) {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -32,6 +34,7 @@ function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null,
         {({ values, ...formFunction }) => (
           <Form>
             {!!onError && <ErrorListener onError={onError} shouldTriggerErrors={shouldTriggerErrors} />}
+            {!!onSubmitWithError && <SubmitListener onSubmitWithError={onSubmitWithError} />}
             {fields && fields.map((field, i) => <div key={i} className={classes.noCollapse}>
               <FieldGenerator
                 readOnly={readOnly}
@@ -58,6 +61,7 @@ FormGenerator.propTypes = {
   validationSchema: PropTypes.object,
   onError: PropTypes.func,
   shouldTriggerErrors: PropTypes.func,
+  onSubmitWithError: PropTypes.func,
 };
 
 export default FormGenerator
