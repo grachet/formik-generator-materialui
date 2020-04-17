@@ -94,6 +94,8 @@ function Example {
  - validateOnChange: bool (less validation, less memory) default true
  - validateOnMount: bool (less validation, less memory)
  - onError: func
+ - shouldTriggerErrors: func
+
 
 ## Usage FormDialogue
 
@@ -155,6 +157,7 @@ function Example {
   - validateOnBlur: bool (less validation, less memory) default true
   - validateOnChange: bool (less validation, less memory) default true
   - validateOnMount: bool (less validation, less memory)
+  - shouldTriggerErrors: func
 
 ## Fields Type :
 

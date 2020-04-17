@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import isequal from 'lodash.isequal';
 
-const defaultShouldTriggerErrors = (errors, nextErrors) => !isequal(errors, nextErrors);
+const defaultShouldTriggerErrors = (previousErrors, formik) => !isequal(previousErrors, formik.errors);
 
 export const ErrorListener = ({ onError, shouldTriggerErrors }) => {
 
@@ -12,11 +12,11 @@ export const ErrorListener = ({ onError, shouldTriggerErrors }) => {
   const [errors, updateErrors] = useState(formik.errors);
 
   useEffect(() => {
-    if (shouldTriggerErrors(errors, formik.errors)) {
+    if (shouldTriggerErrors(errors, formik)) {
       onError(formik.errors);
       updateErrors(errors);
     }
   }, [formik.errors]);
 
-  return "uhiuhiu";
+  return null;
 }
