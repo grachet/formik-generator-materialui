@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { isEmptyObject } from "../functions/formHelper"
 
 export default function SubmitListener({ onSubmitWithError }) {
 

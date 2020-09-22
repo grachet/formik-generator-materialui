@@ -16,8 +16,8 @@ function DisplayValueFormik({ fieldData: {
   const { values } = useFormikContext();
 
   let displayedValue = display.map(displayItem => {
-    if (displayItem && displayItem.path) {
-      let newValue = get(values, displayItem.path);
+    if (displayItem && (!!displayItem.path || displayItem.path === "")) {
+      let newValue = displayItem.path === "" ? values : get(values, displayItem.path);
       if (displayItem.transformation) {
         newValue = displayItem.transformation(newValue);
       }

@@ -693,6 +693,18 @@ export default [
         isLink: true,
         typeField: 'displayValue'
       },
+      {
+        title: "Display all",
+        typeField: 'displayValue',
+        display: [
+          {
+            path: "",
+            transformation: (value) => {
+              return JSON.stringify(value)
+            },
+          },
+        ],
+      },
     ]
   },
   {
