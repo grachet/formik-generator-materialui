@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import ErrorListener from './ErrorListener';
 import SubmitListener from './SubmitListener';
 
-function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null, onError = null, readOnly = false, formRef = null,
+function FormGenerator({ initialValues = {}, fields = [], getFields = null, onSubmit = () => null, onError = null, readOnly = false, formRef = null,
   validateOnBlur = true, validateOnChange = true, validateOnMount = true, onSubmitWithError = null,
   validationSchema = null, shouldTriggerErrors = null }) {
 
@@ -35,7 +35,7 @@ function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null,
           <Form>
             {!!onError && <ErrorListener onError={onError} shouldTriggerErrors={shouldTriggerErrors} />}
             {!!onSubmitWithError && <SubmitListener onSubmitWithError={onSubmitWithError} />}
-            {fields && fields.map((field, i) => <div key={i} className={classes.noCollapse}>
+            { (!!getFields ? getFields(values) : fields).map((field, i) => <div key={i} className={classes.noCollapse}>
               <FieldGenerator
                 readOnly={readOnly}
                 formFunction={formFunction}
@@ -51,7 +51,8 @@ function FormGenerator({ initialValues = {}, fields = [], onSubmit = () => null,
 
 FormGenerator.propTypes = {
   initialValues: PropTypes.object,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object),
+  getFields: PropTypes.func,
   onSubmit: PropTypes.func,
   readOnly: PropTypes.bool,
   formRef: PropTypes.object.isRequired,

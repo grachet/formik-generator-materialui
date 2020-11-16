@@ -307,6 +307,7 @@ function Example {
 
 ## To publish to NPM :
 
+- new version in package.json
 - npm login
 - npm publish
 

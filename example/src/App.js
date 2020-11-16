@@ -6,6 +6,7 @@ import ReactJson from 'react-json-view'
 import fieldsArray from './getFields'
 import getDefaultValues from './getDefaultValues';
 import FormDialogueExample from './FormDialogueExample';
+import GetFieldsExample from './GetFieldsExample';
 
 export function Rows({ fields, readOnly, initialValues, validationSchema }) {
 
@@ -119,11 +120,9 @@ export default function App() {
                   {!!displayAllProps && <span>
                     {"formRef={formRef}"}
                     <br />
-                    {"initialValues={"}
+                    {"initialValues="}
                     <ReactJson name={false} collapsed={1} displayDataTypes={false} displayObjectSize={false} theme="monokai"
                       src={initialValues[i]} />
-                    {"}"}
-                    <br />
                     {"onSubmit={(val) => console.log(val)}"}
                     <br />
                   </span>}
@@ -143,6 +142,7 @@ export default function App() {
           </Fragment>
         })
         }
+        <GetFieldsExample readOnly={readOnly} displayAllProps={displayAllProps} />
       </Grid>
       <br />
       <span className="mrmd">
