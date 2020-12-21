@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import isequal from 'lodash.isequal';
+import { useEffect, useState } from 'react';
+import useIsMounted from '../functions/useIsMounted';
 
 const defaultShouldTriggerErrors = (previousErrors, formik) => !isequal(previousErrors, formik.errors);
 
@@ -10,11 +11,14 @@ export default function ErrorListener({ onError, shouldTriggerErrors }) {
 
   const formik = useFormikContext();
   const [errors, updateErrors] = useState(formik.errors);
+  const isMounted = useIsMounted();
 
   useEffect(() => {
     if (shouldTriggerErrors(errors, formik)) {
       onError(formik.errors);
-      updateErrors(errors);
+      if (isMounted.current) {
+        updateErrors(errors);
+      }
     }
   }, [formik.errors]);
 

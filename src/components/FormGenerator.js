@@ -1,19 +1,21 @@
-import React from 'react';
-import { Form } from 'formik';
-import * as Yup from 'yup';
-import FieldGenerator from './FieldGenerator';
-import FormikWithRef from './FormikWithRef';
+import MomentUtils from '@date-io/moment';
 import {
   MuiPickersUtilsProvider
 } from '@material-ui/pickers';
-import classes from '../index.css';
-import MomentUtils from '@date-io/moment';
+import { Form } from 'formik';
 import PropTypes from 'prop-types';
+import React from 'react';
+import useIsMounted from '../functions/useIsMounted';
+import classes from '../index.css';
 import ErrorListener from './ErrorListener';
+import FieldGenerator from './FieldGenerator';
+import FormikWithRef from './FormikWithRef';
 import SubmitListener from './SubmitListener';
 function FormGenerator({ initialValues = {}, fields = [], getFields = null, onSubmit = () => null, onError = null, readOnly = false, formRef = null,
   validateOnBlur = true, validateOnChange = true, validateOnMount = true, onSubmitWithError = null,
   validationSchema = null, shouldTriggerErrors = null }) {
+
+  const isMounted = useIsMounted();
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -26,7 +28,9 @@ function FormGenerator({ initialValues = {}, fields = [], getFields = null, onSu
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
           onSubmit(values);
-          setSubmitting(false);
+          if (isMounted.current) {
+            setSubmitting(false);
+          }
         }}
         validationSchema={validationSchema}
       >
