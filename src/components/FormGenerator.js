@@ -11,7 +11,6 @@ import MomentUtils from '@date-io/moment';
 import PropTypes from 'prop-types';
 import ErrorListener from './ErrorListener';
 import SubmitListener from './SubmitListener';
-
 function FormGenerator({ initialValues = {}, fields = [], getFields = null, onSubmit = () => null, onError = null, readOnly = false, formRef = null,
   validateOnBlur = true, validateOnChange = true, validateOnMount = true, onSubmitWithError = null,
   validationSchema = null, shouldTriggerErrors = null }) {

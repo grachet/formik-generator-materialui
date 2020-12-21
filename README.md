@@ -86,7 +86,8 @@ function Example {
 ### Props List :
 
  - initialValues: object (reinitialize form on change)
- - fields: array of object
+ - fields: array of objects
+ - getFields: function with form values who return fields props (replace fields props) : (formValues) => [{},...]
  - onSubmit: func
  - readOnly: bool
  - formRef: object.isRequired (to get form functions)
