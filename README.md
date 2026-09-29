@@ -4,10 +4,6 @@
 
 [![NPM](https://img.shields.io/npm/v/formik-generator-materialui.svg)](https://www.npmjs.com/package/formik-generator-materialui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## ONLINE DEMO !!
-
-<a href="https://grachet.github.io/formik-generator-materialui/" target="_blank">https://grachet.github.io/formik-generator-materialui/</a>
-
 ## Install
 
 ```bash
@@ -304,7 +300,6 @@ function Example {
 ## To publish to github pages :
 
 - npm run deploy
-- go to https://grachet.github.io/formik-generator-materialui
 
 ## To publish to NPM :
 
